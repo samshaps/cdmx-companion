@@ -7,13 +7,13 @@ export function getGoogleMapsUrl(address) {
 }
 
 export function getUberUrl(addressLine1, addressLine2, lat, lng) {
-  const drop = JSON.stringify({
-    addressLine1,
-    addressLine2,
-    source: 'SEARCH',
-    latitude: lat,
-    longitude: lng,
-    provider: 'uber_places',
+  const address = `${addressLine1}, ${addressLine2}`
+  const params = new URLSearchParams({
+    action: 'setPickup',
+    'pickup': 'my_location',
+    'dropoff[formatted_address]': address,
+    'dropoff[latitude]': lat,
+    'dropoff[longitude]': lng,
   })
-  return `https://m.uber.com/go/home?drop%5B0%5D=${encodeURIComponent(drop)}&effect=`
+  return `https://m.uber.com/ul/?${params.toString()}`
 }
