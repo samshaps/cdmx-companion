@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-terracotta: #C2572B;
+  --color-teal: #1A535C;
+  --color-cream: #FFF5E6;
+  --color-marigold: #E8A838;
+  --color-charcoal: #2D2D2D;
+  --color-light-teal: #4ECDC4;
+  --color-warm-gray: #F0EBE3;
+  --radius-card: 16px;
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
+  --tap-target-min: 44px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

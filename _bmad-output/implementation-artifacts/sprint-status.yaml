@@ -1,0 +1,84 @@
+# generated: 2026-04-08
+# last_updated: 2026-04-08
+# project: cdmx-companion
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-04-08
+last_updated: 2026-04-08
+project: cdmx-companion
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # Epic 1: App Foundation & Onboarding
+  epic-1: in-progress
+  1-1-project-scaffold-and-design-system: review
+  1-2-bottom-tab-navigation: backlog
+  1-3-pwa-configuration-and-deployment: backlog
+  1-4-ios-safari-onboarding-overlay: backlog
+  1-5-toast-system-and-shared-interactions: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Home Base
+  epic-2: backlog
+  2-1-airbnb-card-with-photo-and-details: backlog
+  2-2-uber-and-maps-navigation-buttons: backlog
+  2-3-wifi-card-with-tap-to-copy: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Interactive Itinerary
+  epic-3: backlog
+  3-1-day-selector-and-event-cards: backlog
+  3-2-today-auto-select-and-now-next-indicators: backlog
+  3-3-event-navigation-and-personal-notes: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Phrase Book
+  epic-4: backlog
+  4-1-phrase-book-with-category-tabs: backlog
+  4-2-tap-to-hear-pronunciation: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Currency Converter
+  epic-5: backlog
+  5-1-bidirectional-converter-with-live-rate: backlog
+  5-2-quick-amount-buttons-and-offline-fallback: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Nearby Places (Explore)
+  epic-6: backlog
+  6-1-place-cards-with-category-filter: backlog
+  6-2-geolocation-distance-sort-and-navigation: backlog
+  epic-6-retrospective: optional

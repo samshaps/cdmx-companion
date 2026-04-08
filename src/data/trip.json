@@ -1,0 +1,733 @@
+{
+  "trip": {
+    "name": "La Familia CDMX",
+    "dates": {
+      "start": "2026-05-14",
+      "end": "2026-05-18"
+    },
+    "airbnb": {
+      "name": "Casa Roma - Charming Courtyard Apartment",
+      "address": "Calle Orizaba 142, Roma Norte, Cuauhtémoc, 06700 CDMX",
+      "lat": 19.4178,
+      "lng": -99.1634,
+      "photo": "/images/airbnb.jpg",
+      "wifi": {
+        "network": "CasaRoma_Guest",
+        "password": "bienvenidos2026"
+      },
+      "checkIn": "3:00 PM",
+      "checkOut": "11:00 AM"
+    }
+  },
+  "itinerary": [
+    {
+      "date": "2026-05-14",
+      "dayTitle": "Arrival Day",
+      "events": [
+        {
+          "time": "12:30",
+          "name": "Land at MEX Airport",
+          "category": "transit",
+          "lat": 19.4363,
+          "lng": -99.0721,
+          "notes": "Terminal 1. Grab pesos at the ATM in arrivals — better rate than the exchange booth.",
+          "personalNote": ""
+        },
+        {
+          "time": "14:00",
+          "name": "Uber to Airbnb",
+          "category": "transit",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "~45 min ride depending on traffic. Use the Uber pickup zone outside Terminal 1.",
+          "personalNote": "Dad — don't try to haggle with the taxi guys, just use the app"
+        },
+        {
+          "time": "15:00",
+          "name": "Check in & settle",
+          "category": "free",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "Host Maria will meet us. Drop bags, freshen up.",
+          "personalNote": "Mom — the courtyard is gorgeous, you'll love it"
+        },
+        {
+          "time": "17:00",
+          "name": "Walk around Roma Norte",
+          "category": "activity",
+          "lat": 19.4195,
+          "lng": -99.1617,
+          "notes": "Casual stroll through the neighborhood. Beautiful Art Deco buildings and tree-lined streets.",
+          "personalNote": ""
+        },
+        {
+          "time": "19:30",
+          "name": "Dinner at Contramar",
+          "category": "meal",
+          "lat": 19.4180,
+          "lng": -99.1680,
+          "notes": "Iconic seafood spot. Get the tuna tostadas and the red/green grilled fish.",
+          "personalNote": "Get there right at 7:30 — it fills up fast"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-15",
+      "dayTitle": "Historic Center & Culture",
+      "events": [
+        {
+          "time": "09:00",
+          "name": "Breakfast at Café El Popular",
+          "category": "meal",
+          "lat": 19.4328,
+          "lng": -99.1396,
+          "notes": "Classic CDMX diner. Open 24hrs. Chilaquiles are the move.",
+          "personalNote": ""
+        },
+        {
+          "time": "10:30",
+          "name": "Palacio de Bellas Artes",
+          "category": "activity",
+          "lat": 19.4352,
+          "lng": -99.1413,
+          "notes": "Stunning Art Nouveau/Deco palace. See the Diego Rivera and Orozco murals inside.",
+          "personalNote": "Mom — the stained glass curtain is unreal"
+        },
+        {
+          "time": "12:30",
+          "name": "Walk through Alameda Central",
+          "category": "activity",
+          "lat": 19.4359,
+          "lng": -99.1441,
+          "notes": "Oldest public park in the Americas. Nice shaded walk.",
+          "personalNote": ""
+        },
+        {
+          "time": "13:30",
+          "name": "Lunch at El Huequito",
+          "category": "meal",
+          "lat": 19.4335,
+          "lng": -99.1399,
+          "notes": "OG tacos al pastor since 1959. Order at the counter.",
+          "personalNote": ""
+        },
+        {
+          "time": "15:00",
+          "name": "Templo Mayor Museum",
+          "category": "activity",
+          "lat": 19.4349,
+          "lng": -99.1316,
+          "notes": "Aztec ruins right next to the Zócalo. The museum is small but fascinating.",
+          "personalNote": "Dad — you're gonna nerd out here"
+        },
+        {
+          "time": "18:00",
+          "name": "Mezcal tasting at Bósforo",
+          "category": "activity",
+          "lat": 19.4340,
+          "lng": -99.1379,
+          "notes": "Tiny mezcal bar in Centro. Ask the bartender to guide you through a flight.",
+          "personalNote": ""
+        },
+        {
+          "time": "20:00",
+          "name": "Dinner at Azul Histórico",
+          "category": "meal",
+          "lat": 19.4341,
+          "lng": -99.1360,
+          "notes": "Beautiful courtyard restaurant in a colonial mansion. Traditional Oaxacan cuisine.",
+          "personalNote": ""
+        }
+      ]
+    },
+    {
+      "date": "2026-05-16",
+      "dayTitle": "Coyoacán & Frida",
+      "events": [
+        {
+          "time": "09:00",
+          "name": "Breakfast at the Airbnb",
+          "category": "meal",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "Grab pastries from Panadería Rosetta the night before, make coffee at the apartment.",
+          "personalNote": ""
+        },
+        {
+          "time": "10:30",
+          "name": "Frida Kahlo Museum (Casa Azul)",
+          "category": "activity",
+          "lat": 19.3555,
+          "lng": -99.1627,
+          "notes": "Tickets pre-purchased! Arrive 15 min early. No large bags allowed.",
+          "personalNote": "Mom — bring tissues, it's emotional"
+        },
+        {
+          "time": "13:00",
+          "name": "Lunch at Los Danzantes",
+          "category": "meal",
+          "lat": 19.3497,
+          "lng": -99.1622,
+          "notes": "Beautiful garden restaurant right off the Coyoacán plaza. Great mole.",
+          "personalNote": ""
+        },
+        {
+          "time": "14:30",
+          "name": "Wander Coyoacán Market & Plaza",
+          "category": "activity",
+          "lat": 19.3500,
+          "lng": -99.1617,
+          "notes": "Browse the artisan market, get ice cream, soak in the village vibe.",
+          "personalNote": ""
+        },
+        {
+          "time": "17:00",
+          "name": "Uber back to Roma Norte",
+          "category": "transit",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "~30 min ride. Rest up at the apartment before dinner.",
+          "personalNote": ""
+        },
+        {
+          "time": "20:00",
+          "name": "Dinner at Pujol",
+          "category": "meal",
+          "lat": 19.4323,
+          "lng": -99.1894,
+          "notes": "World-famous tasting menu. Smart casual dress code. Reservation confirmed.",
+          "personalNote": "This is the splurge meal — worth every peso"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-17",
+      "dayTitle": "Markets & Neighborhoods",
+      "events": [
+        {
+          "time": "09:30",
+          "name": "Breakfast at Lalo!",
+          "category": "meal",
+          "lat": 19.4130,
+          "lng": -99.1670,
+          "notes": "Trendy brunch spot in Condesa. The ricotta hotcakes are insane.",
+          "personalNote": ""
+        },
+        {
+          "time": "11:00",
+          "name": "Mercado Roma",
+          "category": "activity",
+          "lat": 19.4120,
+          "lng": -99.1640,
+          "notes": "Upscale food hall. Great for browsing and snacking. Good coffee upstairs.",
+          "personalNote": ""
+        },
+        {
+          "time": "13:00",
+          "name": "Walk through Condesa & Parque México",
+          "category": "activity",
+          "lat": 19.4113,
+          "lng": -99.1715,
+          "notes": "Beautiful Art Deco neighborhood. The park has a great running/walking loop.",
+          "personalNote": ""
+        },
+        {
+          "time": "15:00",
+          "name": "Free time / siesta",
+          "category": "free",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "Recharge at the apartment or explore on your own. Check the Explore tab for nearby spots!",
+          "personalNote": ""
+        },
+        {
+          "time": "18:00",
+          "name": "Rooftop drinks at Supra",
+          "category": "activity",
+          "lat": 19.4210,
+          "lng": -99.1560,
+          "notes": "Great views of the city. Mezcal cocktails.",
+          "personalNote": ""
+        },
+        {
+          "time": "20:30",
+          "name": "Dinner at Máximo Bistrot",
+          "category": "meal",
+          "lat": 19.4170,
+          "lng": -99.1620,
+          "notes": "Farm-to-table Mexican bistro. Small menu that changes daily. Reservations made.",
+          "personalNote": ""
+        }
+      ]
+    },
+    {
+      "date": "2026-05-18",
+      "dayTitle": "Departure Day",
+      "events": [
+        {
+          "time": "08:30",
+          "name": "Breakfast at Panadería Rosetta",
+          "category": "meal",
+          "lat": 19.4200,
+          "lng": -99.1614,
+          "notes": "Best bakery in the city. Get the guava roll and a cortado.",
+          "personalNote": "Last breakfast — make it count!"
+        },
+        {
+          "time": "10:00",
+          "name": "Last walk & souvenir shopping",
+          "category": "activity",
+          "lat": 19.4195,
+          "lng": -99.1617,
+          "notes": "Hit the shops on Álvaro Obregón. Great ceramics and textiles.",
+          "personalNote": ""
+        },
+        {
+          "time": "11:00",
+          "name": "Check out of Airbnb",
+          "category": "transit",
+          "lat": 19.4178,
+          "lng": -99.1634,
+          "notes": "Leave keys on the kitchen counter per Maria's instructions.",
+          "personalNote": ""
+        },
+        {
+          "time": "11:30",
+          "name": "Uber to MEX Airport",
+          "category": "transit",
+          "lat": 19.4363,
+          "lng": -99.0721,
+          "notes": "Allow extra time — Monday traffic can be rough. Terminal 1.",
+          "personalNote": ""
+        },
+        {
+          "time": "14:30",
+          "name": "Flight home",
+          "category": "transit",
+          "lat": 19.4363,
+          "lng": -99.0721,
+          "notes": "¡Hasta luego, CDMX! 🇲🇽",
+          "personalNote": ""
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "name": "Contramar",
+      "category": "eat",
+      "lat": 19.4180,
+      "lng": -99.1680,
+      "address": "Calle de Durango 200, Roma Nte.",
+      "note": "Best tuna tostadas in CDMX. Get there by 1pm or expect a wait."
+    },
+    {
+      "name": "El Huequito",
+      "category": "eat",
+      "lat": 19.4335,
+      "lng": -99.1399,
+      "address": "Av. Juárez, Centro Histórico",
+      "note": "OG tacos al pastor since 1959. Order at the counter, eat standing up."
+    },
+    {
+      "name": "Pujol",
+      "category": "eat",
+      "lat": 19.4323,
+      "lng": -99.1894,
+      "address": "Tennyson 133, Polanco",
+      "note": "World #12 restaurant. The mole madre (1000+ days old) is a must. Book weeks ahead."
+    },
+    {
+      "name": "Los Danzantes",
+      "category": "eat",
+      "lat": 19.3497,
+      "lng": -99.1622,
+      "address": "Jardín Centenario 12, Coyoacán",
+      "note": "Garden courtyard dining. Great mole and mezcal selection."
+    },
+    {
+      "name": "Máximo Bistrot",
+      "category": "eat",
+      "lat": 19.4170,
+      "lng": -99.1620,
+      "address": "Tonalá 133, Roma Nte.",
+      "note": "Farm-to-table, daily changing menu. Small and intimate. Reserve."
+    },
+    {
+      "name": "Lalo!",
+      "category": "eat",
+      "lat": 19.4130,
+      "lng": -99.1670,
+      "address": "Zacatecas 173, Roma Nte.",
+      "note": "Best brunch in the city. Ricotta hotcakes are legendary. Expect a line on weekends."
+    },
+    {
+      "name": "Panadería Rosetta",
+      "category": "eat",
+      "lat": 19.4200,
+      "lng": -99.1614,
+      "address": "Colima 179, Roma Nte.",
+      "note": "Bakery from the Rosetta chef. Guava roll, olive bread, cortado. Go early."
+    },
+    {
+      "name": "Taquería Orinoco",
+      "category": "eat",
+      "lat": 19.4188,
+      "lng": -99.1608,
+      "address": "Insurgentes Sur 253, Roma Nte.",
+      "note": "Monterrey-style tacos. The chicharrón prensado is a must-try."
+    },
+    {
+      "name": "Café El Popular",
+      "category": "eat",
+      "lat": 19.4328,
+      "lng": -99.1396,
+      "address": "Av. 5 de Mayo 52, Centro Histórico",
+      "note": "Classic 24hr diner. Cheap, authentic, no-frills chilaquiles."
+    },
+    {
+      "name": "Rosetta",
+      "category": "eat",
+      "lat": 19.4194,
+      "lng": -99.1614,
+      "address": "Colima 166, Roma Nte.",
+      "note": "Italian-Mexican fine dining in a gorgeous mansion. The pasta is incredible."
+    },
+    {
+      "name": "El Vilsito",
+      "category": "eat",
+      "lat": 19.4037,
+      "lng": -99.1667,
+      "address": "Petén 248, Narvarte",
+      "note": "Auto mechanic by day, taco stand by night. Seriously. Best late-night tacos."
+    },
+    {
+      "name": "Eno",
+      "category": "eat",
+      "lat": 19.4193,
+      "lng": -99.1625,
+      "address": "Orizaba 87, Roma Nte.",
+      "note": "Upscale deli and wine bar. Great charcuterie and sandwiches for a light meal."
+    },
+    {
+      "name": "Azul Histórico",
+      "category": "eat",
+      "lat": 19.4341,
+      "lng": -99.1360,
+      "address": "Isabel la Católica 30, Centro Histórico",
+      "note": "Courtyard restaurant in a colonial mansion. Traditional Oaxacan cuisine."
+    },
+    {
+      "name": "Baltra Bar",
+      "category": "drink",
+      "lat": 19.4130,
+      "lng": -99.1650,
+      "address": "Iztaccíhuatl 36D, Roma Sur",
+      "note": "Incredible mezcal cocktails. Try the smoked pineapple."
+    },
+    {
+      "name": "Bósforo",
+      "category": "drink",
+      "lat": 19.4340,
+      "lng": -99.1379,
+      "address": "Luis Moya 31, Centro Histórico",
+      "note": "Tiny mezcal bar. Let the bartender guide you through a flight."
+    },
+    {
+      "name": "Limantour",
+      "category": "drink",
+      "lat": 19.4195,
+      "lng": -99.1617,
+      "address": "Álvaro Obregón 106, Roma Nte.",
+      "note": "World's 50 Best Bars list. Creative cocktails, great vibe."
+    },
+    {
+      "name": "Supra",
+      "category": "drink",
+      "lat": 19.4210,
+      "lng": -99.1560,
+      "address": "Av. Chapultepec, Roma Nte.",
+      "note": "Rooftop bar. Great sunset views and mezcal cocktails."
+    },
+    {
+      "name": "Café Avellaneda",
+      "category": "drink",
+      "lat": 19.3498,
+      "lng": -99.1606,
+      "address": "Higuera 40-C, Coyoacán",
+      "note": "Best specialty coffee in Coyoacán. Single-origin Mexican beans."
+    },
+    {
+      "name": "Departamento",
+      "category": "drink",
+      "lat": 19.4125,
+      "lng": -99.1700,
+      "address": "Edinburgo 67, Condesa",
+      "note": "Cozy neighborhood coffee shop. Great for a quiet afternoon cortado."
+    },
+    {
+      "name": "Palacio de Bellas Artes",
+      "category": "see",
+      "lat": 19.4352,
+      "lng": -99.1413,
+      "address": "Av. Juárez, Centro Histórico",
+      "note": "Art Nouveau/Deco masterpiece. Rivera and Orozco murals inside. Free on Sundays."
+    },
+    {
+      "name": "Frida Kahlo Museum (Casa Azul)",
+      "category": "see",
+      "lat": 19.3555,
+      "lng": -99.1627,
+      "address": "Londres 247, Coyoacán",
+      "note": "Frida's actual home. Buy tickets online in advance — they sell out."
+    },
+    {
+      "name": "Templo Mayor Museum",
+      "category": "see",
+      "lat": 19.4349,
+      "lng": -99.1316,
+      "address": "Seminario 8, Centro Histórico",
+      "note": "Aztec ruins in the heart of the city. Small but mind-blowing."
+    },
+    {
+      "name": "Museo Nacional de Antropología",
+      "category": "see",
+      "lat": 19.4260,
+      "lng": -99.1862,
+      "address": "Av. Paseo de la Reforma, Chapultepec",
+      "note": "World-class museum. The Aztec Sun Stone alone is worth the visit. Allow 3+ hours."
+    },
+    {
+      "name": "Chapultepec Castle",
+      "category": "see",
+      "lat": 19.4205,
+      "lng": -99.1817,
+      "address": "Bosque de Chapultepec, Chapultepec",
+      "note": "Castle on a hill with panoramic city views. Great murals inside."
+    },
+    {
+      "name": "Soumaya Museum",
+      "category": "see",
+      "lat": 19.4405,
+      "lng": -99.2043,
+      "address": "Blvd. Miguel de Cervantes Saavedra, Polanco",
+      "note": "Free admission! Wild building. Huge Rodin collection. The top floor view is great."
+    },
+    {
+      "name": "Parque México",
+      "category": "see",
+      "lat": 19.4113,
+      "lng": -99.1715,
+      "address": "Av. México, Condesa",
+      "note": "Beautiful Art Deco park in Condesa. Great for a morning walk or afternoon rest."
+    },
+    {
+      "name": "Mercado Roma",
+      "category": "see",
+      "lat": 19.4120,
+      "lng": -99.1640,
+      "address": "Querétaro 225, Roma Nte.",
+      "note": "Upscale food hall. Great for browsing and snacking. Good coffee upstairs."
+    },
+    {
+      "name": "Coyoacán Market",
+      "category": "shop",
+      "lat": 19.3500,
+      "lng": -99.1617,
+      "address": "Ignacio Allende 38, Coyoacán",
+      "note": "Artisan market with great crafts and textiles. Bargain respectfully."
+    },
+    {
+      "name": "La Ciudadela Market",
+      "category": "shop",
+      "lat": 19.4288,
+      "lng": -99.1459,
+      "address": "Balderas, Centro Histórico",
+      "note": "Best spot for souvenirs. Huge variety of folk art, ceramics, textiles. Fixed prices mostly."
+    },
+    {
+      "name": "FONART",
+      "category": "shop",
+      "lat": 19.4269,
+      "lng": -99.1678,
+      "address": "Av. Paseo de la Reforma 116, Juárez",
+      "note": "Government-run folk art store. Fair trade, high quality, fixed prices."
+    }
+  ],
+  "phrases": [
+    {
+      "category": "greetings",
+      "english": "Hello / Good morning",
+      "spanish": "Hola / Buenos días",
+      "phonetic": "OH-lah / BWEH-nos DEE-ahs"
+    },
+    {
+      "category": "greetings",
+      "english": "Good afternoon",
+      "spanish": "Buenas tardes",
+      "phonetic": "BWEH-nahs TAR-des"
+    },
+    {
+      "category": "greetings",
+      "english": "Good night",
+      "spanish": "Buenas noches",
+      "phonetic": "BWEH-nahs NO-ches"
+    },
+    {
+      "category": "greetings",
+      "english": "Please",
+      "spanish": "Por favor",
+      "phonetic": "por fah-VOR"
+    },
+    {
+      "category": "greetings",
+      "english": "Thank you (very much)",
+      "spanish": "Muchas gracias",
+      "phonetic": "MOO-chas GRAH-see-ahs"
+    },
+    {
+      "category": "greetings",
+      "english": "Excuse me / Sorry",
+      "spanish": "Disculpe / Perdón",
+      "phonetic": "dees-KOOL-peh / pair-DON"
+    },
+    {
+      "category": "greetings",
+      "english": "You're welcome",
+      "spanish": "De nada",
+      "phonetic": "deh NAH-dah"
+    },
+    {
+      "category": "restaurant",
+      "english": "A table for four, please",
+      "spanish": "Una mesa para cuatro, por favor",
+      "phonetic": "OO-nah MEH-sah PAH-rah KWAH-troh, por fah-VOR"
+    },
+    {
+      "category": "restaurant",
+      "english": "Can I see the menu?",
+      "spanish": "¿Me puede dar la carta?",
+      "phonetic": "meh PWEH-deh dar la KAR-tah"
+    },
+    {
+      "category": "restaurant",
+      "english": "Can I have the check, please?",
+      "spanish": "¿Me trae la cuenta, por favor?",
+      "phonetic": "meh TRA-eh la KWEN-tah, por fah-VOR"
+    },
+    {
+      "category": "restaurant",
+      "english": "Water, no ice please",
+      "spanish": "Agua sin hielo, por favor",
+      "phonetic": "AH-gwah seen YEH-lo, por fah-VOR"
+    },
+    {
+      "category": "restaurant",
+      "english": "This is delicious!",
+      "spanish": "¡Está delicioso!",
+      "phonetic": "eh-STAH deh-lee-see-OH-so"
+    },
+    {
+      "category": "restaurant",
+      "english": "No spicy, please",
+      "spanish": "Sin picante, por favor",
+      "phonetic": "seen pee-KAHN-teh, por fah-VOR"
+    },
+    {
+      "category": "restaurant",
+      "english": "What do you recommend?",
+      "spanish": "¿Qué me recomienda?",
+      "phonetic": "keh meh reh-koh-mee-EN-dah"
+    },
+    {
+      "category": "directions",
+      "english": "Where is...?",
+      "spanish": "¿Dónde está...?",
+      "phonetic": "DON-deh eh-STAH"
+    },
+    {
+      "category": "directions",
+      "english": "How far is it?",
+      "spanish": "¿Qué tan lejos está?",
+      "phonetic": "keh tahn LEH-hos eh-STAH"
+    },
+    {
+      "category": "directions",
+      "english": "To the right / To the left",
+      "spanish": "A la derecha / A la izquierda",
+      "phonetic": "ah la deh-REH-chah / ah la ees-kee-AIR-dah"
+    },
+    {
+      "category": "directions",
+      "english": "Straight ahead",
+      "spanish": "Derecho / Todo recto",
+      "phonetic": "deh-REH-cho / TOH-do REK-to"
+    },
+    {
+      "category": "directions",
+      "english": "Can you take me to this address?",
+      "spanish": "¿Me puede llevar a esta dirección?",
+      "phonetic": "meh PWEH-deh yeh-VAR ah ES-tah dee-rek-see-ON"
+    },
+    {
+      "category": "shopping",
+      "english": "How much does this cost?",
+      "spanish": "¿Cuánto cuesta?",
+      "phonetic": "KWAHN-to KWES-tah"
+    },
+    {
+      "category": "shopping",
+      "english": "Too expensive",
+      "spanish": "Muy caro",
+      "phonetic": "mooy KAH-ro"
+    },
+    {
+      "category": "shopping",
+      "english": "Can you give me a better price?",
+      "spanish": "¿Me puede dar mejor precio?",
+      "phonetic": "meh PWEH-deh dar meh-HOR PREH-see-oh"
+    },
+    {
+      "category": "shopping",
+      "english": "I'll take it",
+      "spanish": "Me lo llevo",
+      "phonetic": "meh lo YEH-vo"
+    },
+    {
+      "category": "shopping",
+      "english": "Do you accept credit cards?",
+      "spanish": "¿Aceptan tarjetas de crédito?",
+      "phonetic": "ah-SEP-tahn tar-HEH-tahs deh KREH-dee-to"
+    },
+    {
+      "category": "emergency",
+      "english": "I need help",
+      "spanish": "Necesito ayuda",
+      "phonetic": "neh-seh-SEE-to ah-YOO-dah"
+    },
+    {
+      "category": "emergency",
+      "english": "Call a doctor / ambulance",
+      "spanish": "Llame a un doctor / una ambulancia",
+      "phonetic": "YAH-meh ah oon dok-TOR / OO-nah ahm-boo-LAHN-see-ah"
+    },
+    {
+      "category": "emergency",
+      "english": "Where is the nearest hospital?",
+      "spanish": "¿Dónde está el hospital más cercano?",
+      "phonetic": "DON-deh eh-STAH el os-pee-TAHL mahs ser-KAH-no"
+    },
+    {
+      "category": "emergency",
+      "english": "I am allergic to...",
+      "spanish": "Soy alérgico/a a...",
+      "phonetic": "soy ah-LAIR-hee-ko/ah ah..."
+    },
+    {
+      "category": "emergency",
+      "english": "Where is the bathroom?",
+      "spanish": "¿Dónde está el baño?",
+      "phonetic": "DON-deh eh-STAH el BAH-nyo"
+    }
+  ]
+}
