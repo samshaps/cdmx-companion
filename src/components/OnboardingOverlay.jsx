@@ -32,22 +32,30 @@ export function OnboardingOverlay() {
             <li className="flex gap-3">
               <span className="font-bold text-teal shrink-0">1.</span>
               <span>
-                Tap the <strong>Share</strong> button{' '}
-                <span className="text-teal">↑</span> at the bottom of Safari
+                Tap the <strong>ellipsis</strong> button{' '}
+                <span className="text-teal">⋯</span> in the bottom toolbar
               </span>
             </li>
             <li className="flex gap-3">
               <span className="font-bold text-teal shrink-0">2.</span>
               <span>
-                Scroll down and tap{' '}
-                <strong>&ldquo;Add to Home Screen&rdquo;</strong>{' '}
-                <span className="text-teal">＋</span>
+                Tap <strong>&ldquo;Share&rdquo;</strong>{' '}
+                <span className="text-teal">↑</span>
               </span>
             </li>
             <li className="flex gap-3">
               <span className="font-bold text-teal shrink-0">3.</span>
               <span>
-                Tap <strong>&ldquo;Add&rdquo;</strong> in the top right
+                Tap <strong>&ldquo;More&rdquo;</strong>{' '}
+                <span className="text-teal">⋯</span> at the end of the row
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="font-bold text-teal shrink-0">4.</span>
+              <span>
+                Tap{' '}
+                <strong>&ldquo;Add to Home Screen&rdquo;</strong>{' '}
+                <span className="text-teal">＋</span>
               </span>
             </li>
           </ol>
