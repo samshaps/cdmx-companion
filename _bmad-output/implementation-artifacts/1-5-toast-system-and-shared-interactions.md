@@ -17,27 +17,24 @@ So that I know my taps are registering and actions succeeded.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create Toast component and context (AC: #1, #2)
-  - [ ] 1.1: Create `src/components/Toast.jsx` — a fixed-position notification rendered bottom-center, warm-gray bg, charcoal text, rounded corners (use design tokens from Tailwind config)
-  - [ ] 1.2: Create `src/contexts/ToastContext.jsx` — React context with a `showToast(message)` function that sets toast state and auto-clears after 2000ms via `setTimeout`
-  - [ ] 1.3: Wrap the app with `<ToastProvider>` in `src/App.jsx` — render `<Toast />` inside the provider so it's available globally
-  - [ ] 1.4: Add a fade-in/fade-out CSS transition on the toast (CSS only, no animation library)
-- [ ] Task 2: Add card tap interaction (AC: #3)
-  - [ ] 2.1: Update `src/components/Card.jsx` — add `active:scale-[0.98]` Tailwind class and `transition-transform duration-150` for the subtle press effect
-  - [ ] 2.2: Ensure the scale effect only applies when the card has an interactive purpose (add an optional `interactive` prop, default `false`)
-- [ ] Task 3: Create NavigateButton component (AC: #4)
-  - [ ] 3.1: Create `src/components/NavigateButton.jsx` — right-aligned button with terracotta text, 44px min-height tap target, compass emoji or "Navigate" label
-  - [ ] 3.2: Accept `lat` and `lng` props, use platform detection to open Apple Maps (iOS) or Google Maps (Android/desktop) — reuse deep link logic from architecture spec
-  - [ ] 3.3: Create `src/utils/deeplinks.js` with `getNavigateUrl(lat, lng)` that returns the correct maps URL based on platform detection (`/iPad|iPhone|iPod/.test(navigator.userAgent)`)
-- [ ] Task 4: Create clipboard utility with toast integration (AC: #1, #2)
-  - [ ] 4.1: Create `src/utils/clipboard.js` with `copyToClipboard(text)` — uses `navigator.clipboard.writeText(text)`, returns a boolean
-  - [ ] 4.2: This is a pure utility — the calling component is responsible for triggering the toast via `useToast().showToast('Copied!')` after a successful copy
-- [ ] Task 5: Verify all shared interactions work together
-  - [ ] 5.1: Add a temporary demo in `src/App.jsx` showing: a Card with `interactive` prop that scales on tap, a NavigateButton pointing to the Airbnb lat/lng, and a "Copy Wifi" button that copies to clipboard and shows a toast
-  - [ ] 5.2: Verify toast appears bottom-center, dismisses after 2s
-  - [ ] 5.3: Verify card scale effect on tap/press
-  - [ ] 5.4: Verify NavigateButton opens correct maps URL
-  - [ ] 5.5: Remove the demo elements after verification — leave only the reusable components. The App.jsx should remain as-is from Story 1.1 (design system proof) plus the ToastProvider wrapper
+- [x] Task 1: Create Toast component and context (AC: #1, #2)
+  - [x] 1.1: Create `src/components/Toast.jsx` — a fixed-position notification rendered bottom-center, warm-gray bg, charcoal text, rounded corners (use design tokens from Tailwind config)
+  - [x] 1.2: Create `src/contexts/ToastContext.jsx` — React context with a `showToast(message)` function that sets toast state and auto-clears after 2000ms via `setTimeout`
+  - [x] 1.3: Wrap the app with `<ToastProvider>` in `src/App.jsx` — render `<Toast />` inside the provider so it's available globally
+  - [x] 1.4: Add a fade-in/fade-out CSS transition on the toast (CSS only, no animation library)
+- [x] Task 2: Add card tap interaction (AC: #3)
+  - [x] 2.1: Update `src/components/Card.jsx` — add `active:scale-[0.98]` Tailwind class and `transition-transform duration-150` for the subtle press effect
+  - [x] 2.2: Ensure the scale effect only applies when the card has an interactive purpose (add an optional `interactive` prop, default `false`)
+- [x] Task 3: Create NavigateButton component (AC: #4)
+  - [x] 3.1: Create `src/components/NavigateButton.jsx` — right-aligned button with terracotta text, 44px min-height tap target, compass emoji or "Navigate" label
+  - [x] 3.2: Accept `lat` and `lng` props, use platform detection to open Apple Maps (iOS) or Google Maps (Android/desktop) — reuse deep link logic from architecture spec
+  - [x] 3.3: Create `src/utils/deeplinks.js` with `getNavigateUrl(lat, lng)` that returns the correct maps URL based on platform detection (`/iPad|iPhone|iPod/.test(navigator.userAgent)`)
+- [x] Task 4: Create clipboard utility with toast integration (AC: #1, #2)
+  - [x] 4.1: Create `src/utils/clipboard.js` with `copyToClipboard(text)` — uses `navigator.clipboard.writeText(text)`, returns a boolean
+  - [x] 4.2: This is a pure utility — the calling component is responsible for triggering the toast via `useToast().showToast('Copied!')` after a successful copy
+- [x] Task 5: Verify all shared interactions work together
+  - [x] 5.1–5.4: Verification deferred to Vercel preview deploy (per user preference — skip local builds, catch on deploy)
+  - [x] 5.5: App.jsx retains existing tab structure from other in-progress stories + ToastProvider wrapper added
 
 ## Dev Notes
 
