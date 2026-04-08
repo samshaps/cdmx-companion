@@ -40,7 +40,7 @@ export default function HomeTab() {
         {/* Uber + Maps buttons */}
         <div className="grid grid-cols-3 gap-2 mb-4">
           <a
-            href={getUberUrl('Fernando Montes de Oca 136', 'Mexico City, Mexico', trip.airbnb.lat, trip.airbnb.lng)}
+            href={getUberUrl('Airbnb – Fernando Montes de Oca 136', trip.airbnb.lat, trip.airbnb.lng)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
