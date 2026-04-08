@@ -107,21 +107,48 @@
       "dayTitle": "Pyramids & Night Out",
       "events": [
         {
-          "time": "07:00",
-          "name": "Head to Teotihuacan Pyramids",
-          "category": "activity",
-          "lat": 19.6925,
-          "lng": -98.8438,
-          "notes": "About 1 hour drive from Condesa. Go early to beat the crowds and heat.",
+          "time": "04:30",
+          "name": "Teotihuacan pickup",
+          "category": "transit",
+          "lat": 19.4072,
+          "lng": -99.1731,
+          "notes": "Pickup from Airbnb between 4:10–5:00 AM. Visita Teotihuacan, booking ref 1381123137. 6 adults. Call +525549320667 if needed.",
           "personalNote": ""
         },
         {
-          "time": "12:30",
-          "name": "Pyramids wrap up",
+          "time": "06:00",
+          "name": "Hot air balloon flight",
           "category": "activity",
           "lat": 19.6925,
           "lng": -98.8438,
-          "notes": "Climb the Pyramid of the Sun and Moon. Walk the Avenue of the Dead.",
+          "notes": "30–50 min flight over Teotihuacan. Sparkling wine toast + flight certificate included. Max 100kg/person.",
+          "personalNote": ""
+        },
+        {
+          "time": "07:30",
+          "name": "Cave breakfast",
+          "category": "meal",
+          "lat": 19.6925,
+          "lng": -98.8438,
+          "notes": "Breakfast in an ancient cave — included in the all-inclusive package.",
+          "personalNote": ""
+        },
+        {
+          "time": "09:00",
+          "name": "Teotihuacan pyramids",
+          "category": "activity",
+          "lat": 19.6925,
+          "lng": -98.8438,
+          "notes": "Pyramid access included. Climb the Pyramid of the Sun and Moon, walk the Avenue of the Dead.",
+          "personalNote": ""
+        },
+        {
+          "time": "10:30",
+          "name": "Maguey & obsidian workshop",
+          "category": "activity",
+          "lat": 19.6925,
+          "lng": -98.8438,
+          "notes": "Includes liquor tasting. Then van ride back to CDMX (~11:30 AM return).",
           "personalNote": ""
         },
         {
