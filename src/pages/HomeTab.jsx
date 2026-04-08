@@ -6,6 +6,7 @@ import tripData from '../data/trip.json'
 
 export default function HomeTab() {
   const { trip } = tripData
+  const manual = trip.airbnb.houseManual
 
   return (
     <div className="pb-8">
@@ -71,6 +72,80 @@ export default function HomeTab() {
             <div className="text-right">
               <p className="text-xs text-charcoal/50 uppercase tracking-wide">Check-out</p>
               <p className="text-charcoal font-bold">{trip.airbnb.checkOut}</p>
+            </div>
+          </div>
+        </Card>
+
+        {/* House Manual */}
+        <h2 className="font-display text-lg font-bold text-charcoal mt-6 mb-3">
+          House Manual
+        </h2>
+
+        {/* Building & Access */}
+        <Card>
+          <h3 className="text-sm font-bold text-charcoal mb-2">Building & Access</h3>
+          <p className="text-sm text-charcoal/80 mb-1">
+            <span className="font-semibold">Building:</span> {manual.buildingName}
+          </p>
+          <p className="text-sm text-charcoal/80 mb-1">
+            <span className="font-semibold">Unit:</span> {manual.unit}
+          </p>
+          <p className="text-sm text-charcoal/80 mb-1">
+            <span className="font-semibold">Door code:</span>{' '}
+            <span className="font-mono font-bold text-teal">{manual.doorCode}</span>
+          </p>
+          <p className="text-xs text-charcoal/60 mt-1">{manual.lockNote}</p>
+        </Card>
+
+        {/* Entrances */}
+        <Card>
+          <h3 className="text-sm font-bold text-charcoal mb-2">Getting There</h3>
+          <div className="mb-2">
+            <p className="text-xs text-charcoal/50 uppercase tracking-wide mb-1">On Foot</p>
+            <p className="text-sm text-charcoal/80">{manual.entrances.pedestrian}</p>
+            <p className="text-xs text-charcoal/60 mt-1">{manual.directions.pedestrian}</p>
+          </div>
+          <div>
+            <p className="text-xs text-charcoal/50 uppercase tracking-wide mb-1">By Car</p>
+            <p className="text-sm text-charcoal/80">{manual.entrances.vehicle}</p>
+            <p className="text-xs text-charcoal/60 mt-1">{manual.directions.vehicle}</p>
+          </div>
+        </Card>
+
+        {/* Amenities */}
+        <Card>
+          <h3 className="text-sm font-bold text-charcoal mb-2">Amenities</h3>
+          <div className="space-y-2">
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Jacuzzi</p>
+              <p className="text-sm text-charcoal/80">{manual.amenities.jacuzzi}</p>
+            </div>
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Patio Umbrella Lights</p>
+              <p className="text-sm text-charcoal/80">{manual.amenities.patioUmbrella}</p>
+            </div>
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Extra Bedding</p>
+              <p className="text-sm text-charcoal/80">{manual.amenities.extraBedding}</p>
+            </div>
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Gym</p>
+              <p className="text-sm text-charcoal/80">{manual.amenities.gym}</p>
+            </div>
+          </div>
+        </Card>
+
+        {/* Cleaning & Trash */}
+        <Card>
+          <h3 className="text-sm font-bold text-charcoal mb-2">Good to Know</h3>
+          <div className="space-y-2">
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Extra Cleaning</p>
+              <p className="text-sm text-charcoal/80">{manual.cleaning}</p>
+            </div>
+            <div>
+              <p className="text-xs text-charcoal/50 uppercase tracking-wide">Trash</p>
+              <p className="text-sm text-charcoal/80">{manual.trash}</p>
             </div>
           </div>
         </Card>

@@ -7,16 +7,38 @@
     },
     "airbnb": {
       "name": "Epic Penthouse | Private Rooftop | Condesa",
-      "address": "La Condesa, near Parque España, CDMX",
-      "lat": 19.4133,
-      "lng": -99.1724,
+      "address": "Fernando Montes de Oca 136, Condesa, 06140, Mexico City",
+      "lat": 19.4072,
+      "lng": -99.1731,
       "photo": "/images/airbnb.jpg",
       "wifi": {
         "network": "CHECK_HOST_MESSAGE",
         "password": "CHECK_HOST_MESSAGE"
       },
       "checkIn": "3:00 PM",
-      "checkOut": "10:00 AM"
+      "checkOut": "10:00 AM",
+      "houseManual": {
+        "buildingName": "Condominio Pelotari",
+        "unit": "Apartment 501, Tower A",
+        "entrances": {
+          "pedestrian": "Fernando Montes de Oca 136",
+          "vehicle": "Zamora 129 (3 parking spaces — contact host to arrange)"
+        },
+        "directions": {
+          "pedestrian": "At main entrance, take the ramp on your right for luggage. Walk straight to the wall, turn left, then right toward the elevator. Take elevator to 5th floor, turn right, walk to end of hallway — Apt 501.",
+          "vehicle": "After parking, take the first elevator on your left to the 5th floor. Turn right, proceed to end of hallway — Apt 501."
+        },
+        "doorCode": "3030",
+        "lockNote": "Inside, manually bolt the door. To lock from outside, press the access button on the keypad.",
+        "amenities": {
+          "jacuzzi": "Set temperature to 37–38°C. Overhead lights: switch on the power outlet. No sunscreen in the jacuzzi.",
+          "patioUmbrella": "Lit by a solar-charged battery — use the switch on its side.",
+          "extraBedding": "Floor mattresses under queen beds (2 per room). Extra blankets in room closets.",
+          "gym": "S floor, open 6 AM – 10 PM daily."
+        },
+        "cleaning": "Extra cleaning available at 800 pesos/session, paid directly to the cleaning team.",
+        "trash": "Dispose on S floor, in the garbage repository next to the car entrance ramp."
+      }
     }
   },
   "itinerary": [
@@ -37,9 +59,9 @@
           "time": "14:00",
           "name": "Check in at Airbnb",
           "category": "transit",
-          "lat": 19.4133,
-          "lng": -99.1724,
-          "notes": "Penthouse in Condesa near Parque España. Check-in after 3 PM. Host: Juan Pablo.",
+          "lat": 19.4072,
+          "lng": -99.1731,
+          "notes": "Condominio Pelotari, Apt 501 Tower A. Door code: 3030. Check-in after 3 PM.",
           "personalNote": ""
         },
         {
@@ -241,8 +263,8 @@
           "time": "10:00",
           "name": "Free morning",
           "category": "free",
-          "lat": 19.4133,
-          "lng": -99.1724,
+          "lat": 19.4072,
+          "lng": -99.1731,
           "notes": "Sleep in, grab coffee, walk the neighborhood one last time. Check the Explore tab for nearby spots!",
           "personalNote": ""
         },
@@ -250,8 +272,8 @@
           "time": "19:00",
           "name": "Dinner: TBD",
           "category": "meal",
-          "lat": 19.4133,
-          "lng": -99.1724,
+          "lat": 19.4072,
+          "lng": -99.1731,
           "notes": "Last dinner — pick a favorite from the trip or try somewhere new.",
           "personalNote": ""
         },
@@ -259,8 +281,8 @@
           "time": "21:00",
           "name": "Bars: TBD",
           "category": "activity",
-          "lat": 19.4133,
-          "lng": -99.1724,
+          "lat": 19.4072,
+          "lng": -99.1731,
           "notes": "Last night out. Check the Explore tab for options.",
           "personalNote": ""
         }

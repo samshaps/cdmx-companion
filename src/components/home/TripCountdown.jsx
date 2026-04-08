@@ -14,14 +14,9 @@ export function TripCountdown() {
   const totalDays = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1
   const msPerDay = 1000 * 60 * 60 * 24
 
-  // Pre-trip
+  // Pre-trip — show nothing
   if (todayDate < startDate) {
-    const daysAway = Math.ceil((startDate - todayDate) / msPerDay)
-    return (
-      <span className="text-marigold font-bold">
-        {daysAway} {daysAway === 1 ? 'day' : 'days'} away!
-      </span>
-    )
+    return null
   }
 
   // During trip
