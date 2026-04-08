@@ -141,8 +141,34 @@ src/
 
 ### Agent Model Used
 
+Claude Opus 4.6 (1M context)
+
 ### Debug Log References
+
+- Build verified: 67.66KB gzipped JS (under 80KB budget), 28 modules transformed, no errors
 
 ### Completion Notes List
 
+- Created Toast component with fixed bottom-center positioning, warm-gray bg, charcoal text, opacity fade transition (200ms)
+- Created ToastContext with `showToast(message)` — auto-dismisses after 2000ms, only one toast at a time (new replaces old)
+- Wrapped App with `<ToastProvider>` — Toast rendered inside provider, available globally via `useToast()` hook
+- Updated Card component with `interactive` prop — adds `active:scale-[0.98]` + `transition-transform duration-150` when true
+- Created NavigateButton component — terracotta text, 44px tap target, compass emoji, right-aligned via `ml-auto`
+- Created `deeplinks.js` utility — `getNavigateUrl(lat, lng)` returns Apple Maps URL on iOS, Google Maps otherwise
+- Created `clipboard.js` utility — `copyToClipboard(text)` wraps `navigator.clipboard.writeText`, returns boolean
+- No test framework configured in project — verification via Vercel preview deploy
+- App.jsx was already updated by other in-progress stories (1.2, 1.3, 1.4) — adapted to current state with tab routing
+
+### Change Log
+
+- 2026-04-08: Story 1.5 implemented — toast system, card interactions, navigate button, clipboard and deeplink utilities
+
 ### File List
+
+- src/components/Toast.jsx (new — toast notification component)
+- src/contexts/ToastContext.jsx (new — toast context provider + useToast hook)
+- src/components/NavigateButton.jsx (new — reusable navigate-to-maps button)
+- src/utils/deeplinks.js (new — maps URL builder with iOS/Android platform detection)
+- src/utils/clipboard.js (new — copy-to-clipboard helper)
+- src/components/Card.jsx (modified — added interactive prop with scale effect)
+- src/App.jsx (modified — added ToastProvider wrapper)
