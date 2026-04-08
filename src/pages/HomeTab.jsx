@@ -1,5 +1,6 @@
 import { Card } from '../components/Card'
 import { TripCountdown } from '../components/home/TripCountdown'
+import { WifiCard } from '../components/home/WifiCard'
 import { getNavigateUrl, getUberUrl } from '../utils/deeplinks'
 import tripData from '../data/trip.json'
 
@@ -53,6 +54,11 @@ export default function HomeTab() {
           >
             Open in Maps
           </a>
+        </div>
+
+        {/* Wifi card */}
+        <div className="mb-4">
+          <WifiCard />
         </div>
 
         {/* Check-in / Check-out card */}

@@ -1,6 +1,6 @@
 # Story 2.3: Wifi Card with Tap-to-Copy
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -15,17 +15,17 @@ So that I can connect without typing a long password or asking again.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create WifiCard component (AC: #1)
-  - [ ] 1.1: Create `src/components/home/WifiCard.jsx` — displays wifi network name and password using a `Card` component wrapper
-  - [ ] 1.2: Show network name with a wifi emoji prefix and label
-  - [ ] 1.3: Show password with a "Copy" button inline — button should be clearly tappable (44px target)
-  - [ ] 1.4: Password should be visible (not masked) — the whole point is easy access
-- [ ] Task 2: Wire up clipboard + toast integration (AC: #2)
-  - [ ] 2.1: Import `copyToClipboard` from `src/utils/clipboard.js` and `useToast` from `src/contexts/ToastContext.jsx`
-  - [ ] 2.2: On Copy button tap: call `copyToClipboard(password)`, on success call `showToast('Copied!')`
-  - [ ] 2.3: Handle clipboard failure gracefully (some browsers may block clipboard in non-HTTPS or non-secure context) — no error toast needed, just don't crash
-- [ ] Task 3: Add WifiCard to HomeTab (AC: #1)
-  - [ ] 3.1: Import and render `WifiCard` in `src/pages/HomeTab.jsx` below the Uber/Maps buttons section
+- [x] Task 1: Create WifiCard component (AC: #1)
+  - [x] 1.1: Create `src/components/home/WifiCard.jsx` — displays wifi network name and password using a `Card` component wrapper
+  - [x] 1.2: Show network name with a wifi emoji prefix and label
+  - [x] 1.3: Show password with a "Copy" button inline — button should be clearly tappable (44px target)
+  - [x] 1.4: Password should be visible (not masked) — the whole point is easy access
+- [x] Task 2: Wire up clipboard + toast integration (AC: #2)
+  - [x] 2.1: Import `copyToClipboard` from `src/utils/clipboard.js` and `useToast` from `src/contexts/ToastContext.jsx`
+  - [x] 2.2: On Copy button tap: call `copyToClipboard(password)`, on success call `showToast('Copied!')`
+  - [x] 2.3: Handle clipboard failure gracefully (some browsers may block clipboard in non-HTTPS or non-secure context) — no error toast needed, just don't crash
+- [x] Task 3: Add WifiCard to HomeTab (AC: #1)
+  - [x] 3.1: Import and render `WifiCard` in `src/pages/HomeTab.jsx` below the Uber/Maps buttons section
 
 ## Dev Notes
 
@@ -116,8 +116,24 @@ src/
 
 ### Agent Model Used
 
+Claude Opus 4.6 (1M context)
+
 ### Debug Log References
+
+- No test framework configured — verification via Vercel preview deploy
 
 ### Completion Notes List
 
+- Created WifiCard component with network name, visible password, and Copy button (44px tap target, terracotta text)
+- Integrated existing `copyToClipboard` utility and `useToast` hook — Copy triggers "Copied!" toast on success
+- Clipboard failure handled gracefully (async/await with boolean check, no crash on failure)
+- Added WifiCard to HomeTab between Uber/Maps buttons and check-in/out card per UX wireframe
+
+### Change Log
+
+- 2026-04-08: Story 2.3 implemented — Wifi card with tap-to-copy password and toast feedback
+
 ### File List
+
+- src/components/home/WifiCard.jsx (new — wifi network + password + copy button component)
+- src/pages/HomeTab.jsx (modified — added WifiCard import and render)

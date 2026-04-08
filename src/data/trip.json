@@ -2,30 +2,30 @@
   "trip": {
     "name": "La Familia CDMX",
     "dates": {
-      "start": "2026-05-14",
-      "end": "2026-05-18"
+      "start": "2026-04-09",
+      "end": "2026-04-13"
     },
     "airbnb": {
-      "name": "Casa Roma - Charming Courtyard Apartment",
-      "address": "Calle Orizaba 142, Roma Norte, Cuauhtémoc, 06700 CDMX",
-      "lat": 19.4178,
-      "lng": -99.1634,
+      "name": "Epic Penthouse | Private Rooftop | Condesa",
+      "address": "La Condesa, near Parque España, CDMX",
+      "lat": 19.4133,
+      "lng": -99.1724,
       "photo": "/images/airbnb.jpg",
       "wifi": {
-        "network": "CasaRoma_Guest",
-        "password": "bienvenidos2026"
+        "network": "CHECK_HOST_MESSAGE",
+        "password": "CHECK_HOST_MESSAGE"
       },
       "checkIn": "3:00 PM",
-      "checkOut": "11:00 AM"
+      "checkOut": "10:00 AM"
     }
   },
   "itinerary": [
     {
-      "date": "2026-05-14",
+      "date": "2026-04-09",
       "dayTitle": "Arrival Day",
       "events": [
         {
-          "time": "12:30",
+          "time": "12:00",
           "name": "Land at MEX Airport",
           "category": "transit",
           "lat": 19.4363,
@@ -35,278 +35,233 @@
         },
         {
           "time": "14:00",
-          "name": "Uber to Airbnb",
+          "name": "Check in at Airbnb",
           "category": "transit",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "~45 min ride depending on traffic. Use the Uber pickup zone outside Terminal 1.",
-          "personalNote": "Dad — don't try to haggle with the taxi guys, just use the app"
-        },
-        {
-          "time": "15:00",
-          "name": "Check in & settle",
-          "category": "free",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "Host Maria will meet us. Drop bags, freshen up.",
-          "personalNote": "Mom — the courtyard is gorgeous, you'll love it"
-        },
-        {
-          "time": "17:00",
-          "name": "Walk around Roma Norte",
-          "category": "activity",
-          "lat": 19.4195,
-          "lng": -99.1617,
-          "notes": "Casual stroll through the neighborhood. Beautiful Art Deco buildings and tree-lined streets.",
+          "lat": 19.4133,
+          "lng": -99.1724,
+          "notes": "Penthouse in Condesa near Parque España. Check-in after 3 PM. Host: Juan Pablo.",
           "personalNote": ""
         },
         {
-          "time": "19:30",
-          "name": "Dinner at Contramar",
+          "time": "15:00",
+          "name": "Lunch: Chilpa or Ojo de Agua",
           "category": "meal",
-          "lat": 19.4180,
-          "lng": -99.1680,
-          "notes": "Iconic seafood spot. Get the tuna tostadas and the red/green grilled fish.",
-          "personalNote": "Get there right at 7:30 — it fills up fast"
+          "lat": 19.4119,
+          "lng": -99.1710,
+          "notes": "Chilpa is a cozy spot for traditional Mexican dishes. Ojo de Agua has healthy bowls and juices.",
+          "personalNote": ""
+        },
+        {
+          "time": "16:30",
+          "name": "Parque Mexico loop, shopping, churros",
+          "category": "activity",
+          "lat": 19.4113,
+          "lng": -99.1715,
+          "notes": "Walk the Art Deco park loop, browse shops on Tamaulipas, grab churros from a street vendor.",
+          "personalNote": ""
+        },
+        {
+          "time": "19:00",
+          "name": "Dinner: Tacos la Chula",
+          "category": "meal",
+          "lat": 19.4140,
+          "lng": -99.1700,
+          "notes": "Great casual taco spot in the neighborhood.",
+          "personalNote": ""
+        },
+        {
+          "time": "21:00",
+          "name": "Handshake Speakeasy",
+          "category": "activity",
+          "lat": 19.4210,
+          "lng": -99.1564,
+          "notes": "World-famous speakeasy. Reservation booked for 9 PM.",
+          "personalNote": "Reservation confirmed 9pm"
         }
       ]
     },
     {
-      "date": "2026-05-15",
-      "dayTitle": "Historic Center & Culture",
+      "date": "2026-04-10",
+      "dayTitle": "Pyramids & Night Out",
       "events": [
         {
-          "time": "09:00",
-          "name": "Breakfast at Café El Popular",
-          "category": "meal",
-          "lat": 19.4328,
-          "lng": -99.1396,
-          "notes": "Classic CDMX diner. Open 24hrs. Chilaquiles are the move.",
+          "time": "07:00",
+          "name": "Head to Teotihuacan Pyramids",
+          "category": "activity",
+          "lat": 19.6925,
+          "lng": -98.8438,
+          "notes": "About 1 hour drive from Condesa. Go early to beat the crowds and heat.",
           "personalNote": ""
         },
         {
-          "time": "10:30",
-          "name": "Palacio de Bellas Artes",
+          "time": "12:30",
+          "name": "Pyramids wrap up",
           "category": "activity",
-          "lat": 19.4352,
-          "lng": -99.1413,
-          "notes": "Stunning Art Nouveau/Deco palace. See the Diego Rivera and Orozco murals inside.",
-          "personalNote": "Mom — the stained glass curtain is unreal"
+          "lat": 19.6925,
+          "lng": -98.8438,
+          "notes": "Climb the Pyramid of the Sun and Moon. Walk the Avenue of the Dead.",
+          "personalNote": ""
         },
         {
-          "time": "12:30",
-          "name": "Walk through Alameda Central",
+          "time": "14:00",
+          "name": "Lunch: Taco tour",
+          "category": "meal",
+          "lat": 19.4188,
+          "lng": -99.1608,
+          "notes": "Hit Pescadita, Orinoco, and Califa for a proper CDMX taco crawl.",
+          "personalNote": ""
+        },
+        {
+          "time": "19:00",
+          "name": "Dinner: Cuerno",
+          "category": "meal",
+          "lat": 19.4326,
+          "lng": -99.1919,
+          "notes": "Restaurant on Av. Presidente Masaryk in Polanco.",
+          "personalNote": "Reservation confirmed 7pm"
+        },
+        {
+          "time": "22:00",
+          "name": "Limantour",
           "category": "activity",
-          "lat": 19.4359,
-          "lng": -99.1441,
-          "notes": "Oldest public park in the Americas. Nice shaded walk.",
+          "lat": 19.4195,
+          "lng": -99.1617,
+          "notes": "World's 50 Best Bars list. Creative cocktails, great vibe.",
+          "personalNote": "Reservation booked 10pm"
+        }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "dayTitle": "San Angel, Frida & Contramar",
+      "events": [
+        {
+          "time": "09:30",
+          "name": "Brunch: San Angel Inn",
+          "category": "meal",
+          "lat": 19.3468,
+          "lng": -99.1919,
+          "notes": "Historic hacienda restaurant in San Angel. Beautiful courtyard setting.",
+          "personalNote": "Reservation booked 9:30am"
+        },
+        {
+          "time": "11:00",
+          "name": "Bazar Sabado",
+          "category": "activity",
+          "lat": 19.3462,
+          "lng": -99.1936,
+          "notes": "Famous Saturday artisan market in Plaza San Jacinto, San Angel. Great crafts and folk art.",
           "personalNote": ""
         },
         {
           "time": "13:30",
-          "name": "Lunch at El Huequito",
-          "category": "meal",
-          "lat": 19.4335,
-          "lng": -99.1399,
-          "notes": "OG tacos al pastor since 1959. Order at the counter.",
-          "personalNote": ""
-        },
-        {
-          "time": "15:00",
-          "name": "Templo Mayor Museum",
-          "category": "activity",
-          "lat": 19.4349,
-          "lng": -99.1316,
-          "notes": "Aztec ruins right next to the Zócalo. The museum is small but fascinating.",
-          "personalNote": "Dad — you're gonna nerd out here"
-        },
-        {
-          "time": "18:00",
-          "name": "Mezcal tasting at Bósforo",
-          "category": "activity",
-          "lat": 19.4340,
-          "lng": -99.1379,
-          "notes": "Tiny mezcal bar in Centro. Ask the bartender to guide you through a flight.",
-          "personalNote": ""
-        },
-        {
-          "time": "20:00",
-          "name": "Dinner at Azul Histórico",
-          "category": "meal",
-          "lat": 19.4341,
-          "lng": -99.1360,
-          "notes": "Beautiful courtyard restaurant in a colonial mansion. Traditional Oaxacan cuisine.",
-          "personalNote": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-05-16",
-      "dayTitle": "Coyoacán & Frida",
-      "events": [
-        {
-          "time": "09:00",
-          "name": "Breakfast at the Airbnb",
-          "category": "meal",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "Grab pastries from Panadería Rosetta the night before, make coffee at the apartment.",
-          "personalNote": ""
-        },
-        {
-          "time": "10:30",
           "name": "Frida Kahlo Museum (Casa Azul)",
           "category": "activity",
           "lat": 19.3555,
           "lng": -99.1627,
-          "notes": "Tickets pre-purchased! Arrive 15 min early. No large bags allowed.",
-          "personalNote": "Mom — bring tissues, it's emotional"
+          "notes": "Frida's actual home in Coyoacán. Tickets pre-purchased for 1:30 PM. No large bags allowed.",
+          "personalNote": "Tickets purchased 1:30pm"
         },
         {
-          "time": "13:00",
-          "name": "Lunch at Los Danzantes",
+          "time": "19:00",
+          "name": "Dinner: Contramar",
           "category": "meal",
-          "lat": 19.3497,
-          "lng": -99.1622,
-          "notes": "Beautiful garden restaurant right off the Coyoacán plaza. Great mole.",
-          "personalNote": ""
+          "lat": 19.4180,
+          "lng": -99.1680,
+          "notes": "Iconic seafood spot. Get the tuna tostadas and the red/green grilled fish.",
+          "personalNote": "Reservation confirmed 7pm"
         },
         {
-          "time": "14:30",
-          "name": "Wander Coyoacán Market & Plaza",
+          "time": "21:00",
+          "name": "Librería Valladolid",
           "category": "activity",
-          "lat": 19.3500,
-          "lng": -99.1617,
-          "notes": "Browse the artisan market, get ice cream, soak in the village vibe.",
-          "personalNote": ""
-        },
-        {
-          "time": "17:00",
-          "name": "Uber back to Roma Norte",
-          "category": "transit",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "~30 min ride. Rest up at the apartment before dinner.",
-          "personalNote": ""
-        },
-        {
-          "time": "20:00",
-          "name": "Dinner at Pujol",
-          "category": "meal",
-          "lat": 19.4323,
-          "lng": -99.1894,
-          "notes": "World-famous tasting menu. Smart casual dress code. Reservation confirmed.",
-          "personalNote": "This is the splurge meal — worth every peso"
+          "lat": 19.4190,
+          "lng": -99.1625,
+          "notes": "Hidden speakeasy behind a bookshelf. Great cocktails in Roma Norte.",
+          "personalNote": "Reservation confirmed 9pm"
         }
       ]
     },
     {
-      "date": "2026-05-17",
-      "dayTitle": "Markets & Neighborhoods",
+      "date": "2026-04-12",
+      "dayTitle": "Centro & Xochimilco",
       "events": [
         {
           "time": "09:30",
-          "name": "Breakfast at Lalo!",
+          "name": "Brunch: Casa de los Azulejos",
           "category": "meal",
-          "lat": 19.4130,
-          "lng": -99.1670,
-          "notes": "Trendy brunch spot in Condesa. The ricotta hotcakes are insane.",
+          "lat": 19.4349,
+          "lng": -99.1404,
+          "notes": "Stunning tiled 18th-century palace in Centro. Now a Sanborns restaurant. Beautiful courtyard.",
           "personalNote": ""
         },
         {
           "time": "11:00",
-          "name": "Mercado Roma",
-          "category": "activity",
-          "lat": 19.4120,
-          "lng": -99.1640,
-          "notes": "Upscale food hall. Great for browsing and snacking. Good coffee upstairs.",
-          "personalNote": ""
-        },
-        {
-          "time": "13:00",
-          "name": "Walk through Condesa & Parque México",
-          "category": "activity",
-          "lat": 19.4113,
-          "lng": -99.1715,
-          "notes": "Beautiful Art Deco neighborhood. The park has a great running/walking loop.",
-          "personalNote": ""
-        },
-        {
-          "time": "15:00",
-          "name": "Free time / siesta",
-          "category": "free",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "Recharge at the apartment or explore on your own. Check the Explore tab for nearby spots!",
-          "personalNote": ""
-        },
-        {
-          "time": "18:00",
-          "name": "Rooftop drinks at Supra",
-          "category": "activity",
-          "lat": 19.4210,
-          "lng": -99.1560,
-          "notes": "Great views of the city. Mezcal cocktails.",
-          "personalNote": ""
-        },
-        {
-          "time": "20:30",
-          "name": "Dinner at Máximo Bistrot",
-          "category": "meal",
-          "lat": 19.4170,
-          "lng": -99.1620,
-          "notes": "Farm-to-table Mexican bistro. Small menu that changes daily. Reservations made.",
-          "personalNote": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-05-18",
-      "dayTitle": "Departure Day",
-      "events": [
-        {
-          "time": "08:30",
-          "name": "Breakfast at Panadería Rosetta",
+          "name": "Panaderia Rosetta / La Esquina",
           "category": "meal",
           "lat": 19.4200,
           "lng": -99.1614,
-          "notes": "Best bakery in the city. Get the guava roll and a cortado.",
-          "personalNote": "Last breakfast — make it count!"
-        },
-        {
-          "time": "10:00",
-          "name": "Last walk & souvenir shopping",
-          "category": "activity",
-          "lat": 19.4195,
-          "lng": -99.1617,
-          "notes": "Hit the shops on Álvaro Obregón. Great ceramics and textiles.",
-          "personalNote": ""
-        },
-        {
-          "time": "11:00",
-          "name": "Check out of Airbnb",
-          "category": "transit",
-          "lat": 19.4178,
-          "lng": -99.1634,
-          "notes": "Leave keys on the kitchen counter per Maria's instructions.",
+          "notes": "Best bakery in the city. Grab guava rolls and a cortado.",
           "personalNote": ""
         },
         {
           "time": "11:30",
-          "name": "Uber to MEX Airport",
-          "category": "transit",
-          "lat": 19.4363,
-          "lng": -99.0721,
-          "notes": "Allow extra time — Monday traffic can be rough. Terminal 1.",
+          "name": "Diego Rivera murals & Zocalo",
+          "category": "activity",
+          "lat": 19.4326,
+          "lng": -99.1332,
+          "notes": "See the famous murals at Palacio Nacional. Walk the massive Zocalo plaza in Centro Historico.",
           "personalNote": ""
         },
         {
-          "time": "14:30",
-          "name": "Flight home",
-          "category": "transit",
-          "lat": 19.4363,
-          "lng": -99.0721,
-          "notes": "¡Hasta luego, CDMX! 🇲🇽",
+          "time": "14:00",
+          "name": "Xochimilco",
+          "category": "activity",
+          "lat": 19.2577,
+          "lng": -99.1040,
+          "notes": "Colorful trajinera boats on ancient Aztec canals. About 45 min south of Centro.",
+          "personalNote": ""
+        },
+        {
+          "time": "20:00",
+          "name": "Dinner: Huset",
+          "category": "meal",
+          "lat": 19.4138,
+          "lng": -99.1684,
+          "notes": "Nordic-Mexican restaurant in Condesa.",
+          "personalNote": "Reservation booked 8pm"
+        }
+      ]
+    },
+    {
+      "date": "2026-04-13",
+      "dayTitle": "Last Day",
+      "events": [
+        {
+          "time": "10:00",
+          "name": "Free morning",
+          "category": "free",
+          "lat": 19.4133,
+          "lng": -99.1724,
+          "notes": "Sleep in, grab coffee, walk the neighborhood one last time. Check the Explore tab for nearby spots!",
+          "personalNote": ""
+        },
+        {
+          "time": "19:00",
+          "name": "Dinner: TBD",
+          "category": "meal",
+          "lat": 19.4133,
+          "lng": -99.1724,
+          "notes": "Last dinner — pick a favorite from the trip or try somewhere new.",
+          "personalNote": ""
+        },
+        {
+          "time": "21:00",
+          "name": "Bars: TBD",
+          "category": "activity",
+          "lat": 19.4133,
+          "lng": -99.1724,
+          "notes": "Last night out. Check the Explore tab for options.",
           "personalNote": ""
         }
       ]
@@ -314,60 +269,196 @@
   ],
   "places": [
     {
-      "name": "Contramar",
+      "name": "Campobaja",
       "category": "eat",
-      "lat": 19.4180,
-      "lng": -99.1680,
-      "address": "Calle de Durango 200, Roma Nte.",
-      "note": "Best tuna tostadas in CDMX. Get there by 1pm or expect a wait."
+      "lat": 19.4191,
+      "lng": -99.1637,
+      "address": "Roma Nte.",
+      "note": "Per Sharon — highly recommended. Friend went a couple weeks ago and loved it."
     },
     {
-      "name": "El Huequito",
+      "name": "Las Gorditas del Guero",
+      "category": "eat",
+      "lat": 19.4198,
+      "lng": -99.1580,
+      "address": "Roma Nte.",
+      "note": "Sharon saw it in Bon Appétit."
+    },
+    {
+      "name": "Voraz",
+      "category": "eat",
+      "lat": 19.4185,
+      "lng": -99.1595,
+      "address": "Roma Nte.",
+      "note": "Sharon saw this in Bon Appétit."
+    },
+    {
+      "name": "Expendio de Maiz",
+      "category": "eat",
+      "lat": 19.4170,
+      "lng": -99.1590,
+      "address": "Roma Nte.",
+      "note": "Buzin and Julia said would be fun with our parents. Corn-based Mexican cuisine."
+    },
+    {
+      "name": "La Única CDMX",
       "category": "eat",
       "lat": 19.4335,
-      "lng": -99.1399,
-      "address": "Av. Juárez, Centro Histórico",
-      "note": "OG tacos al pastor since 1959. Order at the counter, eat standing up."
+      "lng": -99.1380,
+      "address": "Centro Histórico",
+      "note": "Jason Golnick said it is good."
     },
     {
-      "name": "Pujol",
+      "name": "Esquina Común",
       "category": "eat",
-      "lat": 19.4323,
-      "lng": -99.1894,
-      "address": "Tennyson 133, Polanco",
-      "note": "World #12 restaurant. The mole madre (1000+ days old) is a must. Book weeks ahead."
+      "lat": 19.4160,
+      "lng": -99.1645,
+      "address": "Roma Nte.",
+      "note": "Reddit says amazing. Must contact to book."
     },
     {
-      "name": "Los Danzantes",
+      "name": "Cariñito Tacos",
       "category": "eat",
-      "lat": 19.3497,
-      "lng": -99.1622,
-      "address": "Jardín Centenario 12, Coyoacán",
-      "note": "Garden courtyard dining. Great mole and mezcal selection."
+      "lat": 19.4100,
+      "lng": -99.1750,
+      "address": "Condesa",
+      "note": "Reddit says insanely good."
     },
     {
-      "name": "Máximo Bistrot",
+      "name": "La Esquina Del Chilaquil",
+      "category": "eat",
+      "lat": 19.4192,
+      "lng": -99.1712,
+      "address": "Condesa",
+      "note": "Chilaquiles sandwiches."
+    },
+    {
+      "name": "Tacos La Chula",
+      "category": "eat",
+      "lat": 19.4140,
+      "lng": -99.1700,
+      "address": "Condesa",
+      "note": "Excellent cheap tacos near the Airbnb."
+    },
+    {
+      "name": "Tizne Tacomotora",
+      "category": "eat",
+      "lat": 19.4202,
+      "lng": -99.1623,
+      "address": "Roma Nte.",
+      "note": "Jeff says barbecued tacos."
+    },
+    {
+      "name": "Ojo de Agua",
+      "category": "eat",
+      "lat": 19.4125,
+      "lng": -99.1718,
+      "address": "Condesa",
+      "note": "Healthy and delicious bowls and juices."
+    },
+    {
+      "name": "El Pescadito Roma",
+      "category": "eat",
+      "lat": 19.4193,
+      "lng": -99.1635,
+      "address": "Roma Nte.",
+      "note": "Fish tacos. Part of the taco tour."
+    },
+    {
+      "name": "Jenni's Street Quesadillas",
+      "category": "eat",
+      "lat": 19.4186,
+      "lng": -99.1640,
+      "address": "Roma Nte.",
+      "note": "Venkat loves this spot."
+    },
+    {
+      "name": "Café La Blanca",
+      "category": "eat",
+      "lat": 19.4340,
+      "lng": -99.1395,
+      "address": "Centro Histórico",
+      "note": "Locally recommended. OG Mexican diner."
+    },
+    {
+      "name": "Tortería Los Güeros",
+      "category": "eat",
+      "lat": 19.4165,
+      "lng": -99.1660,
+      "address": "Roma Nte.",
+      "note": "All tortas all the time."
+    },
+    {
+      "name": "Taquería El Califa",
+      "category": "eat",
+      "lat": 19.4175,
+      "lng": -99.1620,
+      "address": "Roma Nte.",
+      "note": "ADR recommends. Classic CDMX taquería."
+    },
+    {
+      "name": "El Parnita",
+      "category": "eat",
+      "lat": 19.4194,
+      "lng": -99.1616,
+      "address": "Roma Nte.",
+      "note": "MJ recommends."
+    },
+    {
+      "name": "Maximo",
       "category": "eat",
       "lat": 19.4170,
       "lng": -99.1620,
       "address": "Tonalá 133, Roma Nte.",
-      "note": "Farm-to-table, daily changing menu. Small and intimate. Reserve."
+      "note": "MJ recommends. Farm-to-table, daily changing menu."
     },
     {
-      "name": "Lalo!",
+      "name": "El Habanerito",
       "category": "eat",
-      "lat": 19.4130,
-      "lng": -99.1670,
-      "address": "Zacatecas 173, Roma Nte.",
-      "note": "Best brunch in the city. Ricotta hotcakes are legendary. Expect a line on weekends."
+      "lat": 19.4190,
+      "lng": -99.1630,
+      "address": "Roma Nte.",
+      "note": "Good casual spot in Roma."
     },
     {
-      "name": "Panadería Rosetta",
+      "name": "Fonda Margarita",
       "category": "eat",
-      "lat": 19.4200,
-      "lng": -99.1614,
-      "address": "Colima 179, Roma Nte.",
-      "note": "Bakery from the Rosetta chef. Guava roll, olive bread, cortado. Go early."
+      "lat": 19.4095,
+      "lng": -99.1755,
+      "address": "Condesa",
+      "note": "Huge line, authentic Mexican breakfast. Worth the wait."
+    },
+    {
+      "name": "Mercado de San Juan",
+      "category": "eat",
+      "lat": 19.4308,
+      "lng": -99.1430,
+      "address": "Centro Histórico",
+      "note": "Famous food market. Great for exotic meats and fresh seafood."
+    },
+    {
+      "name": "Birria Estilo Jalisco",
+      "category": "eat",
+      "lat": 19.4189,
+      "lng": -99.1642,
+      "address": "Roma Nte.",
+      "note": "Must-do street tacos. Birria done right."
+    },
+    {
+      "name": "Churrería El Moro",
+      "category": "eat",
+      "lat": 19.4332,
+      "lng": -99.1400,
+      "address": "Centro Histórico",
+      "note": "Best churros in town. Been around forever."
+    },
+    {
+      "name": "Los Cocuyos",
+      "category": "eat",
+      "lat": 19.4335,
+      "lng": -99.1370,
+      "address": "Centro Histórico",
+      "note": "Late night street tacos in Centro."
     },
     {
       "name": "Taquería Orinoco",
@@ -375,63 +466,159 @@
       "lat": 19.4188,
       "lng": -99.1608,
       "address": "Insurgentes Sur 253, Roma Nte.",
-      "note": "Monterrey-style tacos. The chicharrón prensado is a must-try."
+      "note": "Everyone recommends. Monterrey-style tacos, chicharrón prensado is a must."
     },
     {
-      "name": "Café El Popular",
+      "name": "Contramar",
       "category": "eat",
-      "lat": 19.4328,
-      "lng": -99.1396,
-      "address": "Av. 5 de Mayo 52, Centro Histórico",
-      "note": "Classic 24hr diner. Cheap, authentic, no-frills chilaquiles."
+      "lat": 19.4180,
+      "lng": -99.1680,
+      "address": "Calle de Durango 200, Roma Nte.",
+      "note": "Iconic seafood. Tuna tostadas and the red/green grilled fish are must-orders."
     },
     {
-      "name": "Rosetta",
+      "name": "Huset",
       "category": "eat",
-      "lat": 19.4194,
+      "lat": 19.4138,
+      "lng": -99.1684,
+      "address": "Condesa",
+      "note": "Nordic-Mexican restaurant."
+    },
+    {
+      "name": "Entremar",
+      "category": "eat",
+      "lat": 19.4320,
+      "lng": -99.1910,
+      "address": "Polanco",
+      "note": "Seafood spot."
+    },
+    {
+      "name": "Chilpa",
+      "category": "eat",
+      "lat": 19.4119,
+      "lng": -99.1710,
+      "address": "Condesa",
+      "note": "Cozy spot for traditional Mexican dishes."
+    },
+    {
+      "name": "Cafe De Tacuba",
+      "category": "eat",
+      "lat": 19.4355,
+      "lng": -99.1385,
+      "address": "Centro Histórico",
+      "note": "Historic restaurant. Operating since 1912."
+    },
+    {
+      "name": "Em",
+      "category": "eat",
+      "lat": 19.4210,
+      "lng": -99.1570,
+      "address": "Juárez",
+      "note": "Fine dining spot."
+    },
+    {
+      "name": "Galanga",
+      "category": "eat",
+      "lat": 19.4187,
+      "lng": -99.1648,
+      "address": "Roma Nte.",
+      "note": "Thai food in Roma."
+    },
+    {
+      "name": "Pujol",
+      "category": "eat",
+      "lat": 19.4323,
+      "lng": -99.1894,
+      "address": "Tennyson 133, Polanco",
+      "note": "World-famous tasting menu. The mole madre is legendary."
+    },
+    {
+      "name": "Quintonil",
+      "category": "eat",
+      "lat": 19.4310,
+      "lng": -99.1905,
+      "address": "Newton 55, Polanco",
+      "note": "World's 50 Best. Modern Mexican fine dining."
+    },
+    {
+      "name": "Forte",
+      "category": "eat",
+      "lat": 19.4183,
+      "lng": -99.1632,
+      "address": "Roma Nte.",
+      "note": "Good restaurant in Roma."
+    },
+    {
+      "name": "Panadería Rosetta",
+      "category": "eat",
+      "lat": 19.4200,
       "lng": -99.1614,
-      "address": "Colima 166, Roma Nte.",
-      "note": "Italian-Mexican fine dining in a gorgeous mansion. The pasta is incredible."
+      "address": "Colima 179, Roma Nte.",
+      "note": "MJ recommends. Guava roll is what they're known for but the corn ricotta muffin is even better."
     },
     {
-      "name": "El Vilsito",
+      "name": "Lalo!",
       "category": "eat",
-      "lat": 19.4037,
-      "lng": -99.1667,
-      "address": "Petén 248, Narvarte",
-      "note": "Auto mechanic by day, taco stand by night. Seriously. Best late-night tacos."
-    },
-    {
-      "name": "Eno",
-      "category": "eat",
-      "lat": 19.4193,
-      "lng": -99.1625,
-      "address": "Orizaba 87, Roma Nte.",
-      "note": "Upscale deli and wine bar. Great charcuterie and sandwiches for a light meal."
-    },
-    {
-      "name": "Azul Histórico",
-      "category": "eat",
-      "lat": 19.4341,
-      "lng": -99.1360,
-      "address": "Isabel la Católica 30, Centro Histórico",
-      "note": "Courtyard restaurant in a colonial mansion. Traditional Oaxacan cuisine."
-    },
-    {
-      "name": "Baltra Bar",
-      "category": "drink",
       "lat": 19.4130,
-      "lng": -99.1650,
-      "address": "Iztaccíhuatl 36D, Roma Sur",
-      "note": "Incredible mezcal cocktails. Try the smoked pineapple."
+      "lng": -99.1670,
+      "address": "Zacatecas 173, Roma Nte.",
+      "note": "Great brunch. Expect a line on weekends."
     },
     {
-      "name": "Bósforo",
+      "name": "Lardo",
+      "category": "eat",
+      "lat": 19.4145,
+      "lng": -99.1690,
+      "address": "Condesa",
+      "note": "Good restaurant in Condesa."
+    },
+    {
+      "name": "Cuerno",
+      "category": "eat",
+      "lat": 19.4326,
+      "lng": -99.1919,
+      "address": "Av. Presidente Masaryk, Polanco",
+      "note": "Restaurant on Masaryk in Polanco."
+    },
+    {
+      "name": "San Angel Inn",
+      "category": "eat",
+      "lat": 19.3468,
+      "lng": -99.1919,
+      "address": "Diego Rivera 50, San Ángel",
+      "note": "Historic hacienda restaurant. Beautiful courtyard."
+    },
+    {
+      "name": "Casa de los Azulejos",
+      "category": "eat",
+      "lat": 19.4349,
+      "lng": -99.1404,
+      "address": "Av. Francisco I. Madero 4, Centro Histórico",
+      "note": "Stunning tiled 18th-century palace. Great brunch in the courtyard."
+    },
+    {
+      "name": "Maizajo",
+      "category": "eat",
+      "lat": 19.4130,
+      "lng": -99.1730,
+      "address": "Condesa",
+      "note": "Michelin recommended taco shop near the Airbnb. Previous Airbnb guests rave about it."
+    },
+    {
+      "name": "Handshake Speakeasy",
       "category": "drink",
-      "lat": 19.4340,
-      "lng": -99.1379,
-      "address": "Luis Moya 31, Centro Histórico",
-      "note": "Tiny mezcal bar. Let the bartender guide you through a flight."
+      "lat": 19.4210,
+      "lng": -99.1564,
+      "address": "Amberes 65, Juárez",
+      "note": "Top 50 bar in the world. World-famous speakeasy."
+    },
+    {
+      "name": "Hanky Panky Cocktail Bar",
+      "category": "drink",
+      "lat": 19.4188,
+      "lng": -99.1650,
+      "address": "Roma Nte.",
+      "note": "Must do. Go Man Go drink is great. Top 50 in the world."
     },
     {
       "name": "Limantour",
@@ -442,20 +629,132 @@
       "note": "World's 50 Best Bars list. Creative cocktails, great vibe."
     },
     {
-      "name": "Supra",
+      "name": "Librería Valladolid",
+      "category": "drink",
+      "lat": 19.4190,
+      "lng": -99.1625,
+      "address": "Roma Nte.",
+      "note": "Hidden speakeasy behind a bookshelf."
+    },
+    {
+      "name": "Baltra Bar",
+      "category": "drink",
+      "lat": 19.4130,
+      "lng": -99.1650,
+      "address": "Iztaccíhuatl 36D, Roma Sur",
+      "note": "Jeff says great bar for dessert drinks."
+    },
+    {
+      "name": "Gin Gin Álvaro Obregón",
+      "category": "drink",
+      "lat": 19.4196,
+      "lng": -99.1613,
+      "address": "Álvaro Obregón, Roma Nte.",
+      "note": "Good spot for drinks."
+    },
+    {
+      "name": "Ladina Bar",
+      "category": "drink",
+      "lat": 19.4184,
+      "lng": -99.1644,
+      "address": "Roma Nte.",
+      "note": "Cool little vibey bar. Usually pretty empty though."
+    },
+    {
+      "name": "Deleted Souls",
+      "category": "drink",
+      "lat": 19.4148,
+      "lng": -99.1695,
+      "address": "Condesa",
+      "note": "Local recommended bar."
+    },
+    {
+      "name": "Blanco Colima",
+      "category": "drink",
+      "lat": 19.4189,
+      "lng": -99.1639,
+      "address": "Roma Nte.",
+      "note": "Cool vibe bar."
+    },
+    {
+      "name": "Xaman Bar",
+      "category": "drink",
+      "lat": 19.4180,
+      "lng": -99.1655,
+      "address": "Roma Nte.",
+      "note": "Downstairs kind of dark but cool bar."
+    },
+    {
+      "name": "Supra Roma Rooftop",
       "category": "drink",
       "lat": 19.4210,
       "lng": -99.1560,
-      "address": "Av. Chapultepec, Roma Nte.",
-      "note": "Rooftop bar. Great sunset views and mezcal cocktails."
+      "address": "Roma Nte.",
+      "note": "Jeff, Jenny, MJ all recommend. Rooftop bar."
     },
     {
-      "name": "Café Avellaneda",
+      "name": "Balmori Roofbar",
       "category": "drink",
-      "lat": 19.3498,
-      "lng": -99.1606,
-      "address": "Higuera 40-C, Coyoacán",
-      "note": "Best specialty coffee in Coyoacán. Single-origin Mexican beans."
+      "lat": 19.4185,
+      "lng": -99.1636,
+      "address": "Roma Nte.",
+      "note": "Rooftop bar in Roma."
+    },
+    {
+      "name": "Toledo Rooftop",
+      "category": "drink",
+      "lat": 19.4150,
+      "lng": -99.1698,
+      "address": "Condesa",
+      "note": "Rooftop bar."
+    },
+    {
+      "name": "Terraza Catedral",
+      "category": "drink",
+      "lat": 19.4330,
+      "lng": -99.1335,
+      "address": "Centro Histórico",
+      "note": "Rooftop overlooking the Zocalo and Cathedral."
+    },
+    {
+      "name": "Jazzatlan Capital",
+      "category": "drink",
+      "lat": 19.4187,
+      "lng": -99.1618,
+      "address": "Roma Nte.",
+      "note": "Jazz bar in Roma."
+    },
+    {
+      "name": "Tokyo Music Bar",
+      "category": "drink",
+      "lat": 19.4105,
+      "lng": -99.1740,
+      "address": "Condesa",
+      "note": "Music bar."
+    },
+    {
+      "name": "Gran Hotel Ciudad de México",
+      "category": "drink",
+      "lat": 19.4328,
+      "lng": -99.1330,
+      "address": "16 de Septiembre 82, Centro Histórico",
+      "note": "A must if you're in Centro. Amazing architecture and a balcony overlooking the Zocalo. Go for food or drinks."
+    },
+    {
+      "name": "Qūentin Café",
+      "category": "drink",
+      "lat": 19.4191,
+      "lng": -99.1630,
+      "address": "Roma Nte.",
+      "note": "Coffee shop in Roma."
+    },
+    {
+      "name": "Frëims",
+      "category": "drink",
+      "lat": 19.4152,
+      "lng": -99.1702,
+      "address": "Condesa",
+      "note": "Coffee spot in Condesa."
     },
     {
       "name": "Departamento",
@@ -463,15 +762,15 @@
       "lat": 19.4125,
       "lng": -99.1700,
       "address": "Edinburgo 67, Condesa",
-      "note": "Cozy neighborhood coffee shop. Great for a quiet afternoon cortado."
+      "note": "Cozy neighborhood coffee shop."
     },
     {
-      "name": "Palacio de Bellas Artes",
+      "name": "Teotihuacan Pyramids",
       "category": "see",
-      "lat": 19.4352,
-      "lng": -99.1413,
-      "address": "Av. Juárez, Centro Histórico",
-      "note": "Art Nouveau/Deco masterpiece. Rivera and Orozco murals inside. Free on Sundays."
+      "lat": 19.6925,
+      "lng": -98.8438,
+      "address": "San Juan Teotihuacán, State of Mexico",
+      "note": "Ancient pyramids ~1 hour north of CDMX. Climb the Pyramid of the Sun and Moon."
     },
     {
       "name": "Frida Kahlo Museum (Casa Azul)",
@@ -482,12 +781,68 @@
       "note": "Frida's actual home. Buy tickets online in advance — they sell out."
     },
     {
-      "name": "Templo Mayor Museum",
+      "name": "Bazar Sabado",
       "category": "see",
-      "lat": 19.4349,
-      "lng": -99.1316,
-      "address": "Seminario 8, Centro Histórico",
-      "note": "Aztec ruins in the heart of the city. Small but mind-blowing."
+      "lat": 19.3462,
+      "lng": -99.1936,
+      "address": "Plaza San Jacinto 11, San Ángel",
+      "note": "Saturday artisan market. Great crafts, folk art, and food stalls."
+    },
+    {
+      "name": "Xochimilco",
+      "category": "see",
+      "lat": 19.2577,
+      "lng": -99.1040,
+      "address": "Xochimilco, CDMX",
+      "note": "Colorful trajinera boats on ancient Aztec canals. A must-do CDMX experience."
+    },
+    {
+      "name": "Diego Rivera Murals (Palacio Nacional)",
+      "category": "see",
+      "lat": 19.4326,
+      "lng": -99.1332,
+      "address": "Plaza de la Constitución S/N, Centro Histórico",
+      "note": "Famous murals depicting Mexican history. Free admission. Right on the Zocalo."
+    },
+    {
+      "name": "Zocalo",
+      "category": "see",
+      "lat": 19.4326,
+      "lng": -99.1332,
+      "address": "Plaza de la Constitución, Centro Histórico",
+      "note": "Massive central plaza. One of the largest public squares in the world."
+    },
+    {
+      "name": "Parque México",
+      "category": "see",
+      "lat": 19.4113,
+      "lng": -99.1715,
+      "address": "Av. México, Condesa",
+      "note": "Beautiful Art Deco park in Condesa. Near the Airbnb."
+    },
+    {
+      "name": "Parque España",
+      "category": "see",
+      "lat": 19.4155,
+      "lng": -99.1725,
+      "address": "Condesa",
+      "note": "Right next to the Airbnb. Nice park for a quick stroll."
+    },
+    {
+      "name": "Palacio de Bellas Artes",
+      "category": "see",
+      "lat": 19.4352,
+      "lng": -99.1413,
+      "address": "Av. Juárez, Centro Histórico",
+      "note": "Art Nouveau/Deco masterpiece. Rivera and Orozco murals inside. Near the Chinatown Gate."
+    },
+    {
+      "name": "Chinatown Gate",
+      "category": "see",
+      "lat": 19.4348,
+      "lng": -99.1420,
+      "address": "Centro Histórico",
+      "note": "Nice to walk through. Near Palacio de Bellas Artes."
     },
     {
       "name": "Museo Nacional de Antropología",
@@ -502,40 +857,24 @@
       "category": "see",
       "lat": 19.4205,
       "lng": -99.1817,
-      "address": "Bosque de Chapultepec, Chapultepec",
+      "address": "Bosque de Chapultepec",
       "note": "Castle on a hill with panoramic city views. Great murals inside."
     },
     {
-      "name": "Soumaya Museum",
-      "category": "see",
-      "lat": 19.4405,
-      "lng": -99.2043,
-      "address": "Blvd. Miguel de Cervantes Saavedra, Polanco",
-      "note": "Free admission! Wild building. Huge Rodin collection. The top floor view is great."
-    },
-    {
-      "name": "Parque México",
-      "category": "see",
-      "lat": 19.4113,
-      "lng": -99.1715,
-      "address": "Av. México, Condesa",
-      "note": "Beautiful Art Deco park in Condesa. Great for a morning walk or afternoon rest."
-    },
-    {
-      "name": "Mercado Roma",
-      "category": "see",
-      "lat": 19.4120,
-      "lng": -99.1640,
-      "address": "Querétaro 225, Roma Nte.",
-      "note": "Upscale food hall. Great for browsing and snacking. Good coffee upstairs."
-    },
-    {
-      "name": "Coyoacán Market",
+      "name": "Goodbye Folk Vintage Boutique",
       "category": "shop",
-      "lat": 19.3500,
-      "lng": -99.1617,
-      "address": "Ignacio Allende 38, Coyoacán",
-      "note": "Artisan market with great crafts and textiles. Bargain respectfully."
+      "lat": 19.4192,
+      "lng": -99.1638,
+      "address": "Roma Nte.",
+      "note": "Vintage shop in Roma."
+    },
+    {
+      "name": "Lozartmx",
+      "category": "shop",
+      "lat": 19.4190,
+      "lng": -99.1715,
+      "address": "Condesa",
+      "note": "Ceramics shop."
     },
     {
       "name": "La Ciudadela Market",
@@ -543,7 +882,7 @@
       "lat": 19.4288,
       "lng": -99.1459,
       "address": "Balderas, Centro Histórico",
-      "note": "Best spot for souvenirs. Huge variety of folk art, ceramics, textiles. Fixed prices mostly."
+      "note": "Best spot for souvenirs. Huge variety of folk art, ceramics, textiles."
     },
     {
       "name": "FONART",

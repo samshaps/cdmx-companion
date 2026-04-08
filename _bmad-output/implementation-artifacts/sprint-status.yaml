@@ -55,7 +55,7 @@ development_status:
   epic-2: in-progress
   2-1-airbnb-card-with-photo-and-details: review
   2-2-uber-and-maps-navigation-buttons: review
-  2-3-wifi-card-with-tap-to-copy: in-progress
+  2-3-wifi-card-with-tap-to-copy: review
   epic-2-retrospective: optional
 
   # Epic 3: Interactive Itinerary
