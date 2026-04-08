@@ -59,10 +59,10 @@ development_status:
   epic-2-retrospective: optional
 
   # Epic 3: Interactive Itinerary
-  epic-3: backlog
-  3-1-day-selector-and-event-cards: backlog
-  3-2-today-auto-select-and-now-next-indicators: backlog
-  3-3-event-navigation-and-personal-notes: backlog
+  epic-3: in-progress
+  3-1-day-selector-and-event-cards: ready-for-dev
+  3-2-today-auto-select-and-now-next-indicators: ready-for-dev
+  3-3-event-navigation-and-personal-notes: ready-for-dev
   epic-3-retrospective: optional
 
   # Epic 4: Phrase Book
