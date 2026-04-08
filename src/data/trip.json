@@ -50,8 +50,7 @@
           "time": "12:00",
           "name": "Land at MEX Airport",
           "category": "transit",
-          "lat": 19.4363,
-          "lng": -99.0721,
+          "address": "Mexico City International Airport (MEX), Terminal 1",
           "notes": "Terminal 1. Grab pesos at the ATM in arrivals — better rate than the exchange booth.",
           "personalNote": ""
         },
@@ -67,8 +66,7 @@
           "time": "15:00",
           "name": "Lunch: Chilpa or Ojo de Agua",
           "category": "meal",
-          "lat": 19.4119,
-          "lng": -99.1710,
+          "address": "Chilpa, Condesa, Mexico City",
           "notes": "Chilpa is a cozy spot for traditional Mexican dishes. Ojo de Agua has healthy bowls and juices.",
           "personalNote": ""
         },
@@ -76,8 +74,7 @@
           "time": "16:30",
           "name": "Parque Mexico loop, shopping, churros",
           "category": "activity",
-          "lat": 19.4113,
-          "lng": -99.1715,
+          "address": "Parque México, Condesa, Mexico City",
           "notes": "Walk the Art Deco park loop, browse shops on Tamaulipas, grab churros from a street vendor.",
           "personalNote": ""
         },
@@ -85,8 +82,7 @@
           "time": "19:00",
           "name": "Dinner: Tacos la Chula",
           "category": "meal",
-          "lat": 19.4140,
-          "lng": -99.1700,
+          "address": "Tacos la Chula, Condesa, Mexico City",
           "notes": "Great casual taco spot in the neighborhood.",
           "personalNote": ""
         },
@@ -94,8 +90,7 @@
           "time": "21:00",
           "name": "Handshake Speakeasy",
           "category": "activity",
-          "lat": 19.4210,
-          "lng": -99.1564,
+          "address": "Handshake Speakeasy, Colonia Juárez, Mexico City",
           "notes": "World-famous speakeasy. Reservation booked for 9 PM.",
           "personalNote": "Reservation confirmed 9pm"
         }
@@ -117,8 +112,7 @@
           "time": "06:00",
           "name": "Hot air balloon flight",
           "category": "activity",
-          "lat": 19.6925,
-          "lng": -98.8438,
+          "address": "Teotihuacan, State of Mexico, Mexico",
           "notes": "30–50 min flight over Teotihuacan. Sparkling wine toast + flight certificate included. Max 100kg/person.",
           "personalNote": ""
         },
@@ -126,8 +120,7 @@
           "time": "07:30",
           "name": "Cave breakfast",
           "category": "meal",
-          "lat": 19.6925,
-          "lng": -98.8438,
+          "address": "Teotihuacan, State of Mexico, Mexico",
           "notes": "Breakfast in an ancient cave — included in the all-inclusive package.",
           "personalNote": ""
         },
@@ -135,8 +128,7 @@
           "time": "09:00",
           "name": "Teotihuacan pyramids",
           "category": "activity",
-          "lat": 19.6925,
-          "lng": -98.8438,
+          "address": "Teotihuacan Archaeological Zone, State of Mexico, Mexico",
           "notes": "Pyramid access included. Climb the Pyramid of the Sun and Moon, walk the Avenue of the Dead.",
           "personalNote": ""
         },
@@ -144,8 +136,7 @@
           "time": "10:30",
           "name": "Maguey & obsidian workshop",
           "category": "activity",
-          "lat": 19.6925,
-          "lng": -98.8438,
+          "address": "Teotihuacan, State of Mexico, Mexico",
           "notes": "Includes liquor tasting. Then van ride back to CDMX (~11:30 AM return).",
           "personalNote": ""
         },
@@ -153,8 +144,7 @@
           "time": "14:00",
           "name": "Lunch: Taco tour",
           "category": "meal",
-          "lat": 19.4188,
-          "lng": -99.1608,
+          "address": "Pescadita de Roma, Roma Norte, Mexico City",
           "notes": "Hit Pescadita, Orinoco, and Califa for a proper CDMX taco crawl.",
           "personalNote": ""
         },
@@ -162,8 +152,7 @@
           "time": "19:00",
           "name": "Dinner: Cuerno",
           "category": "meal",
-          "lat": 19.4326,
-          "lng": -99.1919,
+          "address": "Cuerno, Polanco, Mexico City",
           "notes": "Restaurant on Av. Presidente Masaryk in Polanco.",
           "personalNote": "Reservation confirmed 7pm"
         },
@@ -171,8 +160,7 @@
           "time": "22:00",
           "name": "Limantour",
           "category": "activity",
-          "lat": 19.4195,
-          "lng": -99.1617,
+          "address": "Limantour, Roma Norte, Mexico City",
           "notes": "World's 50 Best Bars list. Creative cocktails, great vibe.",
           "personalNote": "Reservation booked 10pm"
         }
@@ -186,8 +174,7 @@
           "time": "09:30",
           "name": "Brunch: San Angel Inn",
           "category": "meal",
-          "lat": 19.3468,
-          "lng": -99.1919,
+          "address": "San Angel Inn, San Ángel, Mexico City",
           "notes": "Historic hacienda restaurant in San Angel. Beautiful courtyard setting.",
           "personalNote": "Reservation booked 9:30am"
         },
@@ -195,8 +182,7 @@
           "time": "11:00",
           "name": "Bazar Sabado",
           "category": "activity",
-          "lat": 19.3462,
-          "lng": -99.1936,
+          "address": "Bazar Sábado, Plaza San Jacinto, San Ángel, Mexico City",
           "notes": "Famous Saturday artisan market in Plaza San Jacinto, San Angel. Great crafts and folk art.",
           "personalNote": ""
         },
@@ -204,8 +190,7 @@
           "time": "13:30",
           "name": "Frida Kahlo Museum (Casa Azul)",
           "category": "activity",
-          "lat": 19.3555,
-          "lng": -99.1627,
+          "address": "Museo Frida Kahlo, Coyoacán, Mexico City",
           "notes": "Frida's actual home in Coyoacán. Tickets pre-purchased for 1:30 PM. No large bags allowed.",
           "personalNote": "Tickets purchased 1:30pm"
         },
@@ -213,8 +198,7 @@
           "time": "19:00",
           "name": "Dinner: Contramar",
           "category": "meal",
-          "lat": 19.4180,
-          "lng": -99.1680,
+          "address": "Contramar, Roma Norte, Mexico City",
           "notes": "Iconic seafood spot. Get the tuna tostadas and the red/green grilled fish.",
           "personalNote": "Reservation confirmed 7pm"
         },
@@ -222,8 +206,7 @@
           "time": "21:00",
           "name": "Librería Valladolid",
           "category": "activity",
-          "lat": 19.4190,
-          "lng": -99.1625,
+          "address": "Librería Valladolid, Roma Norte, Mexico City",
           "notes": "Hidden speakeasy behind a bookshelf. Great cocktails in Roma Norte.",
           "personalNote": "Reservation confirmed 9pm"
         }
@@ -237,8 +220,7 @@
           "time": "09:30",
           "name": "Brunch: Casa de los Azulejos",
           "category": "meal",
-          "lat": 19.4349,
-          "lng": -99.1404,
+          "address": "Casa de los Azulejos, Centro Histórico, Mexico City",
           "notes": "Stunning tiled 18th-century palace in Centro. Now a Sanborns restaurant. Beautiful courtyard.",
           "personalNote": ""
         },
@@ -246,8 +228,7 @@
           "time": "11:00",
           "name": "Panaderia Rosetta / La Esquina",
           "category": "meal",
-          "lat": 19.4200,
-          "lng": -99.1614,
+          "address": "Panadería Rosetta, Roma Norte, Mexico City",
           "notes": "Best bakery in the city. Grab guava rolls and a cortado.",
           "personalNote": ""
         },
@@ -255,8 +236,7 @@
           "time": "11:30",
           "name": "Diego Rivera murals & Zocalo",
           "category": "activity",
-          "lat": 19.4326,
-          "lng": -99.1332,
+          "address": "Palacio Nacional, Zócalo, Centro Histórico, Mexico City",
           "notes": "See the famous murals at Palacio Nacional. Walk the massive Zocalo plaza in Centro Historico.",
           "personalNote": ""
         },
@@ -264,8 +244,7 @@
           "time": "14:00",
           "name": "Xochimilco",
           "category": "activity",
-          "lat": 19.2577,
-          "lng": -99.1040,
+          "address": "Embarcadero Xochimilco, Xochimilco, Mexico City",
           "notes": "Colorful trajinera boats on ancient Aztec canals. About 45 min south of Centro.",
           "personalNote": ""
         },
@@ -273,8 +252,7 @@
           "time": "20:00",
           "name": "Dinner: Huset",
           "category": "meal",
-          "lat": 19.4138,
-          "lng": -99.1684,
+          "address": "Huset Restaurant, Condesa, Mexico City",
           "notes": "Nordic-Mexican restaurant in Condesa.",
           "personalNote": "Reservation booked 8pm"
         }
