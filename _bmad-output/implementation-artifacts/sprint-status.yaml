@@ -55,14 +55,14 @@ development_status:
   epic-2: in-progress
   2-1-airbnb-card-with-photo-and-details: review
   2-2-uber-and-maps-navigation-buttons: review
-  2-3-wifi-card-with-tap-to-copy: backlog
+  2-3-wifi-card-with-tap-to-copy: in-progress
   epic-2-retrospective: optional
 
   # Epic 3: Interactive Itinerary
   epic-3: in-progress
-  3-1-day-selector-and-event-cards: ready-for-dev
-  3-2-today-auto-select-and-now-next-indicators: ready-for-dev
-  3-3-event-navigation-and-personal-notes: ready-for-dev
+  3-1-day-selector-and-event-cards: review
+  3-2-today-auto-select-and-now-next-indicators: review
+  3-3-event-navigation-and-personal-notes: review
   epic-3-retrospective: optional
 
   # Epic 4: Phrase Book
