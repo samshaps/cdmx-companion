@@ -52,8 +52,8 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Home Base
-  epic-2: backlog
-  2-1-airbnb-card-with-photo-and-details: backlog
+  epic-2: in-progress
+  2-1-airbnb-card-with-photo-and-details: in-progress
   2-2-uber-and-maps-navigation-buttons: backlog
   2-3-wifi-card-with-tap-to-copy: backlog
   epic-2-retrospective: optional
@@ -66,19 +66,19 @@ development_status:
   epic-3-retrospective: optional
 
   # Epic 4: Phrase Book
-  epic-4: backlog
-  4-1-phrase-book-with-category-tabs: backlog
-  4-2-tap-to-hear-pronunciation: backlog
+  epic-4: in-progress
+  4-1-phrase-book-with-category-tabs: review
+  4-2-tap-to-hear-pronunciation: review
   epic-4-retrospective: optional
 
   # Epic 5: Currency Converter
-  epic-5: backlog
-  5-1-bidirectional-converter-with-live-rate: backlog
-  5-2-quick-amount-buttons-and-offline-fallback: backlog
+  epic-5: in-progress
+  5-1-bidirectional-converter-with-live-rate: review
+  5-2-quick-amount-buttons-and-offline-fallback: review
   epic-5-retrospective: optional
 
   # Epic 6: Nearby Places (Explore)
-  epic-6: backlog
-  6-1-place-cards-with-category-filter: backlog
-  6-2-geolocation-distance-sort-and-navigation: backlog
+  epic-6: in-progress
+  6-1-place-cards-with-category-filter: ready-for-dev
+  6-2-geolocation-distance-sort-and-navigation: ready-for-dev
   epic-6-retrospective: optional
