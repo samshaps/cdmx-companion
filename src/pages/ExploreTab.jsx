@@ -83,7 +83,7 @@ export default function ExploreTab() {
               )}
 
               <div className="flex justify-end mt-2">
-                <NavigateButton lat={place.lat} lng={place.lng} />
+                <NavigateButton name={`${place.name} ${place.address || 'CDMX Mexico City'}`} />
               </div>
             </Card>
           )

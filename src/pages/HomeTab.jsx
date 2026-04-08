@@ -40,7 +40,7 @@ export default function HomeTab() {
         {/* Uber + Maps buttons */}
         <div className="grid grid-cols-3 gap-2 mb-4">
           <a
-            href={getUberUrl(trip.airbnb.lat, trip.airbnb.lng, trip.airbnb.name)}
+            href={getUberUrl(trip.airbnb.address, trip.airbnb.name)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
@@ -48,7 +48,7 @@ export default function HomeTab() {
             Uber
           </a>
           <a
-            href={getAppleMapsUrl(trip.airbnb.lat, trip.airbnb.lng)}
+            href={getAppleMapsUrl(trip.airbnb.address)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
@@ -56,7 +56,7 @@ export default function HomeTab() {
             Apple Maps
           </a>
           <a
-            href={getGoogleMapsUrl(trip.airbnb.lat, trip.airbnb.lng)}
+            href={getGoogleMapsUrl(trip.airbnb.address)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"

@@ -66,9 +66,9 @@ export function EventCard({ event, badge }) {
               <p className="text-sm italic text-charcoal/60">{personalNote}</p>
             </div>
           )}
-          {lat && lng && (
+          {name && (
             <div className="flex justify-end mt-2">
-              <NavigateButton lat={lat} lng={lng} />
+              <NavigateButton name={`${name} CDMX Mexico City`} />
             </div>
           )}
         </div>
