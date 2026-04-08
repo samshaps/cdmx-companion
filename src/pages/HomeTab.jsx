@@ -1,7 +1,7 @@
 import { Card } from '../components/Card'
 import { TripCountdown } from '../components/home/TripCountdown'
 import { WifiCard } from '../components/home/WifiCard'
-import { getNavigateUrl, getUberUrl } from '../utils/deeplinks'
+import { getAppleMapsUrl, getGoogleMapsUrl, getUberUrl } from '../utils/deeplinks'
 import tripData from '../data/trip.json'
 
 export default function HomeTab() {
@@ -38,22 +38,30 @@ export default function HomeTab() {
         </p>
 
         {/* Uber + Maps buttons */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-3 gap-2 mb-4">
           <a
             href={getUberUrl(trip.airbnb.lat, trip.airbnb.lng, trip.airbnb.name)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg"
+            className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
           >
-            Open in Uber
+            Uber
           </a>
           <a
-            href={getNavigateUrl(trip.airbnb.lat, trip.airbnb.lng)}
+            href={getAppleMapsUrl(trip.airbnb.lat, trip.airbnb.lng)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg"
+            className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
           >
-            Open in Maps
+            Apple Maps
+          </a>
+          <a
+            href={getGoogleMapsUrl(trip.airbnb.lat, trip.airbnb.lng)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center min-h-[48px] bg-teal text-white font-bold rounded-lg text-sm"
+          >
+            Google Maps
           </a>
         </div>
 

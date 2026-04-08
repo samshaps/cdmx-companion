@@ -1,9 +1,9 @@
-const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent)
+export function getAppleMapsUrl(lat, lng) {
+  return `https://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`
+}
 
-export function getNavigateUrl(lat, lng) {
-  return isIOS()
-    ? `https://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`
-    : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+export function getGoogleMapsUrl(lat, lng) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
 }
 
 export function getUberUrl(lat, lng, name) {
