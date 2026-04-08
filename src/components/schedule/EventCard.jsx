@@ -41,7 +41,7 @@ function Badge({ type }) {
 }
 
 export function EventCard({ event, badge }) {
-  const { time, name, category, notes, personalNote, lat, lng } = event
+  const { time, name, category, notes, personalNote, address } = event
   const emoji = CATEGORY_EMOJI[category] || '📌'
   const borderClass = CATEGORY_BORDER[category] || 'border-l-charcoal'
 
@@ -68,7 +68,7 @@ export function EventCard({ event, badge }) {
           )}
           {name && (
             <div className="flex justify-end mt-2">
-              <NavigateButton name={`${name} CDMX Mexico City`} />
+              <NavigateButton name={address || `${name} CDMX Mexico City`} />
             </div>
           )}
         </div>

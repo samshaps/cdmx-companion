@@ -59,8 +59,7 @@
           "time": "14:00",
           "name": "Check in at Airbnb",
           "category": "transit",
-          "lat": 19.4151,
-          "lng": -99.1845,
+          "address": "501, Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
           "notes": "Condominio Pelotari, Apt 501 Tower A. Door code: 3030. Check-in after 3 PM.",
           "personalNote": ""
         },
@@ -110,8 +109,7 @@
           "time": "04:30",
           "name": "Teotihuacan pickup",
           "category": "transit",
-          "lat": 19.4151,
-          "lng": -99.1845,
+          "address": "501, Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
           "notes": "Pickup from Airbnb between 4:10–5:00 AM. Visita Teotihuacan, booking ref 1381123137. 6 adults. Call +525549320667 if needed.",
           "personalNote": ""
         },
@@ -290,8 +288,7 @@
           "time": "10:00",
           "name": "Free morning",
           "category": "free",
-          "lat": 19.4151,
-          "lng": -99.1845,
+          "address": "501, Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
           "notes": "Sleep in, grab coffee, walk the neighborhood one last time. Check the Explore tab for nearby spots!",
           "personalNote": ""
         },
@@ -299,8 +296,6 @@
           "time": "19:00",
           "name": "Dinner: TBD",
           "category": "meal",
-          "lat": 19.4151,
-          "lng": -99.1845,
           "notes": "Last dinner — pick a favorite from the trip or try somewhere new.",
           "personalNote": ""
         },
@@ -308,8 +303,6 @@
           "time": "21:00",
           "name": "Bars: TBD",
           "category": "activity",
-          "lat": 19.4151,
-          "lng": -99.1845,
           "notes": "Last night out. Check the Explore tab for options.",
           "personalNote": ""
         }
