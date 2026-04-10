@@ -150,20 +150,20 @@
           "personalNote": ""
         },
         {
-          "time": "19:00",
+          "time": "20:00",
           "name": "Dinner: Cuerno",
           "category": "meal",
           "address": "Cuerno, Polanco, Mexico City",
           "notes": "Restaurant on Av. Presidente Masaryk in Polanco.",
-          "personalNote": "Reservation confirmed 7pm"
+          "personalNote": "Reservation confirmed 8pm"
         },
         {
           "time": "22:00",
-          "name": "Limantour",
+          "name": "Rest at rooms",
           "category": "activity",
-          "address": "Limantour, Roma Norte, Mexico City",
-          "notes": "World's 50 Best Bars list. Creative cocktails, great vibe.",
-          "personalNote": "Reservation booked 10pm"
+          "address": "",
+          "notes": "Head back to rest after a long day.",
+          "personalNote": ""
         }
       ]
     },
