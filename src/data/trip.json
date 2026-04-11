@@ -169,18 +169,26 @@
     },
     {
       "date": "2026-04-11",
-      "dayTitle": "San Angel, Frida & Contramar",
+      "dayTitle": "Roma Norte, Bazar Sábado & Frida",
       "events": [
         {
           "time": "09:30",
-          "name": "Brunch: San Angel Inn",
+          "name": "Panaderia Rosetta",
           "category": "meal",
-          "address": "San Angel Inn, San Ángel, Mexico City",
-          "notes": "Historic hacienda restaurant in San Angel. Beautiful courtyard setting.",
-          "personalNote": "Reservation booked 9:30am"
+          "address": "Panadería Rosetta, Roma Norte, Mexico City",
+          "notes": "Best bakery in the city. Grab guava rolls and a cortado.",
+          "personalNote": ""
         },
         {
-          "time": "11:00",
+          "time": "10:15",
+          "name": "Walk around Roma Norte",
+          "category": "activity",
+          "address": "Roma Norte, Mexico City",
+          "notes": "Stroll the tree-lined streets of Roma Norte. Beautiful Art Deco architecture and leafy plazas.",
+          "personalNote": ""
+        },
+        {
+          "time": "11:30",
           "name": "Bazar Sabado",
           "category": "activity",
           "address": "Bazar Sábado, Plaza San Jacinto, San Ángel, Mexico City",
