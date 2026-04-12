@@ -223,38 +223,38 @@
     },
     {
       "date": "2026-04-12",
-      "dayTitle": "Centro & Xochimilco",
+      "dayTitle": "Centro, Tacos & Chapultepec",
       "events": [
         {
-          "time": "09:30",
-          "name": "Brunch: Casa de los Azulejos",
+          "time": "10:00",
+          "name": "Brunch: Lardo",
           "category": "meal",
-          "address": "Casa de los Azulejos, Centro Histórico, Mexico City",
-          "notes": "Stunning tiled 18th-century palace in Centro. Now a Sanborns restaurant. Beautiful courtyard.",
+          "address": "Lardo, Roma Norte, Mexico City",
+          "notes": "Popular brunch spot in Roma Norte. Great pastries and coffee.",
           "personalNote": ""
         },
         {
-          "time": "11:00",
-          "name": "Panaderia Rosetta / La Esquina",
+          "time": "11:45",
+          "name": "Centro walking tour",
+          "category": "activity",
+          "address": "Centro Histórico, Mexico City",
+          "notes": "2-hour walking tour of Centro Histórico led by Sam.",
+          "personalNote": ""
+        },
+        {
+          "time": "14:15",
+          "name": "Taco tour",
           "category": "meal",
-          "address": "Panadería Rosetta, Roma Norte, Mexico City",
-          "notes": "Best bakery in the city. Grab guava rolls and a cortado.",
+          "address": "Centro Histórico, Mexico City",
+          "notes": "Hit three legendary taco spots: Orinoco, Califa, and Atarantados.",
           "personalNote": ""
         },
         {
-          "time": "11:30",
-          "name": "Diego Rivera murals & Zocalo",
+          "time": "16:00",
+          "name": "Chapultepec Park & Castle",
           "category": "activity",
-          "address": "Palacio Nacional, Zócalo, Centro Histórico, Mexico City",
-          "notes": "See the famous murals at Palacio Nacional. Walk the massive Zocalo plaza in Centro Historico.",
-          "personalNote": ""
-        },
-        {
-          "time": "14:00",
-          "name": "Xochimilco",
-          "category": "activity",
-          "address": "Embarcadero Xochimilco, Xochimilco, Mexico City",
-          "notes": "Colorful trajinera boats on ancient Aztec canals. About 45 min south of Centro.",
+          "address": "Bosque de Chapultepec, Mexico City",
+          "notes": "Stroll through Chapultepec Park and visit the hilltop castle with panoramic city views.",
           "personalNote": ""
         },
         {
