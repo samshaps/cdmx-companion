@@ -3,6 +3,7 @@ import { Field, Link, Page, buttonPrimary, inputClass } from '../components/Page
 import { createTrip } from '../lib/api'
 import { rememberMyTrip } from '../lib/localTrips'
 import { navigate } from '../lib/router'
+import { hasStarterPhrases } from '../../shared/phrasePacks'
 import { CURRENCIES, LANGUAGES, suggestLocale } from '../../shared/tripSchema'
 
 export default function NewTrip() {
@@ -86,7 +87,7 @@ export default function NewTrip() {
             </select>
           </Field>
         </div>
-        <Field label="Local language" hint="Used for the phrase book’s pronunciation.">
+        <Field label="Local language" hint={hasStarterPhrases(form.languageCode) ? 'Your trip starts with a phrase book in this language.' : 'Used for the phrase book’s pronunciation.'}>
           <select className={inputClass} value={form.languageCode} onChange={set('languageCode')}>
             {LANGUAGES.map((l) => <option key={l.code} value={l.code}>{l.name}</option>)}
           </select>

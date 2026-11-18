@@ -61,7 +61,34 @@ test('changing dates keeps planned days and adds empty ones', () => {
 })
 
 test('destinations suggest a currency and language', () => {
-  assert.deepEqual(suggestLocale('Mexico City'), { currency: 'MXN', language: 'es-MX', emoji: '🇲🇽' })
+  assert.deepEqual(suggestLocale('Mexico City'), { emoji: '🇲🇽', currency: 'MXN', language: 'es-MX' })
+  assert.equal(suggestLocale('São Paulo').language, 'pt-BR')
+  assert.equal(suggestLocale('Lagos, Portugal').currency, 'EUR')
+  assert.equal(suggestLocale('a week in new york').emoji, '🇺🇸')
+  assert.equal(suggestLocale('Bukhara'), null)
   assert.equal(suggestLocale('Kyoto').currency, 'JPY')
   assert.equal(suggestLocale('Atlantis'), null)
+})
+
+test('new trips start with a phrase book when the language has one', () => {
+  const lisbon = createBlankTrip(basics)
+  assert.equal(lisbon.phrases.length, 17)
+  assert.equal(lisbon.phrases[1].translation, 'Obrigado / Obrigada')
+  assert.equal(createBlankTrip({ ...basics, languageCode: 'pt-BR' }).phrases[11].translation, 'Onde fica o banheiro?')
+  assert.deepEqual(createBlankTrip({ ...basics, languageCode: 'sv-SE' }).phrases, [])
+})
+
+test('every starter phrase book is complete', async () => {
+  const { starterPhrases, STARTER_PHRASES } = await import('../shared/phrasePacks.js')
+  for (const code of ['es', 'fr', 'it', 'pt', 'de', 'nl', 'el', 'tr', 'ja', 'ko', 'zh', 'th', 'vi', 'id', 'hi', 'ar', 'he']) {
+    const pack = starterPhrases(code)
+    assert.equal(pack.length, STARTER_PHRASES.length, code)
+    assert.ok(pack.every((p) => p.translation && p.phonetic), code)
+  }
+})
+
+test('events remember which part of the day they fill', () => {
+  const doc = createBlankTrip(basics)
+  doc.itinerary[0].events = [{ time: '19:30', name: 'Dinner', slot: 'dinner' }, { time: '09:00', name: 'Pickup', slot: 'brunch' }]
+  assert.deepEqual(normalizeTrip(doc).itinerary[0].events.map((e) => e.slot), ['', 'dinner'])
 })

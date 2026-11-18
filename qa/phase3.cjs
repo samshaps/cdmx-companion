@@ -58,13 +58,23 @@ async function organiserBuilds(links) {
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
     await field(page, 'Title for this day').fill('Alfama & fado')
   })
-  await run.step('Add a dinner at 8pm with a note', async () => {
-    await page.getByRole('button', { name: '+ Add an event' }).click()
+  await run.step('The day has ready-made blanks from Breakfast to Evening', async () => {
+    for (const slot of ['breakfast', 'morning', 'lunch', 'afternoon', 'dinner', 'evening']) await page.getByTestId(`slot-${slot}`).waitFor()
+    await page.getByTestId('slot-dinner').scrollIntoViewIfNeeded()
+  })
+  await run.step('Type into Dinner: it becomes an event at a sensible default time', async () => {
+    await page.getByLabel('Dinner', { exact: true }).fill('Dinner: Tasca Exemplo')
+    await page.getByTestId('slot-dinner').getByText('7:30 PM').waitFor()
+  })
+  await run.step('Open its details to set the real time and add notes', async () => {
+    await page.getByTestId('slot-dinner').getByRole('button', { name: 'Time, place & notes' }).click()
     await field(page, 'Time').fill('20:00')
-    await field(page, 'Type').selectOption('meal')
-    await field(page, 'What').fill('Dinner: Tasca Exemplo')
     await field(page, 'Notes (optional)').fill('Grilled sardines. Cash only.')
     await field(page, 'Highlighted note (optional)').fill('Booked for six')
+    await saved(page)
+  })
+  await run.step('Fill Breakfast too; the other blanks are left empty', async () => {
+    await page.getByLabel('Breakfast', { exact: true }).fill('Pastéis at the corner café')
     await saved(page)
   })
 
@@ -79,12 +89,17 @@ async function organiserBuilds(links) {
     await page.getByLabel('Map pin').fill('38.7164, -9.1315')
     await saved(page)
   })
-  await run.step('Add a Portuguese phrase', async () => {
+  await run.step('Phrases already holds a starter phrase book in Portuguese', async () => {
     await section(page, 'Phrases')
+    assert((await field(page, 'Translation').count()) === 17, 'expected 17 starter phrases')
+    assert((await field(page, 'Translation').nth(1).inputValue()) === 'Obrigado / Obrigada', 'second phrase should be thank you')
+  })
+  await run.step('Add one of their own', async () => {
     await page.getByRole('button', { name: '+ Add a phrase' }).click()
-    await field(page, 'In English').fill('Thank you')
-    await field(page, 'Translation').fill('Obrigado')
-    await field(page, 'Sounds like (optional)').fill('oh-bree-GAH-doo')
+    await field(page, 'In English').last().fill('Cheers!')
+    await field(page, 'Translation').last().fill('Saúde!')
+    await field(page, 'Sounds like (optional)').last().fill('sah-OO-deh')
+    await field(page, 'Group').last().fill('basics')
     await saved(page)
   })
   return run.finish()
@@ -115,11 +130,13 @@ async function guestSees(links) {
     await visible(page, '8:00 PM')
     await visible(page, 'Dinner: Tasca Exemplo')
     await visible(page, 'Booked for six')
+    await visible(page, 'Pastéis at the corner café')
+    assert((await page.getByText('Nothing planned').count()) === 0, 'empty blanks should not reach guests')
   })
-  await run.step('Phrases has the Portuguese phrase', async () => {
+  await run.step('Phrases has the starter book plus the organiser’s own phrase', async () => {
     await tab(page, 'Phrases').click()
-    await visible(page, 'Obrigado')
-    await visible(page, 'oh-bree-GAH-doo')
+    await visible(page, 'Obrigado / Obrigada')
+    await visible(page, 'Saúde!')
   })
   await run.step('Explore shows the bar and how far away it is', async () => {
     await tab(page, 'Explore').click()
@@ -138,6 +155,7 @@ async function organiserChanges(links) {
     await page.goto(links.edit)
     await section(page, 'Schedule')
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
+    await page.getByTestId('slot-dinner').getByRole('button', { name: 'Time, place & notes' }).click()
     await field(page, 'Time').fill('21:00')
     await saved(page)
   })
@@ -148,7 +166,7 @@ async function organiserChanges(links) {
     await section(page, 'Schedule')
     assert((await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).count()) === 4, 'expected 4 days')
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
-    assert((await field(page, 'What').inputValue()) === 'Dinner: Tasca Exemplo', 'dinner should survive the date change')
+    assert((await page.getByLabel('Dinner', { exact: true }).inputValue()) === 'Dinner: Tasca Exemplo', 'dinner should survive the date change')
   })
   await run.step('Organiser turns on a guest passcode', async () => {
     await section(page, 'Basics')
@@ -188,7 +206,35 @@ async function guestSeesChanges(links) {
     await tab(page, 'Schedule').click()
     await visible(page, '9:00 PM')
     assert((await page.getByText('8:00 PM').count()) === 0, 'old time should be gone')
-    assert((await page.locator('button.rounded-full.min-w-\\[56px\\]').count()) === 4, 'expected 4 day buttons')
+    assert((await page.locator('button.min-w-\\[56px\\]').count()) === 4, 'expected 4 day buttons')
+  })
+  return run.finish()
+}
+
+async function longTrip() {
+  const res = await fetch(`${BASE_URL}/api/trips`, {
+    method: 'POST',
+    body: JSON.stringify({ name: 'Two Weeks in Japan', destination: 'Tokyo', start: day(-8), end: day(5), homeCurrency: 'USD', localCurrency: 'JPY', languageCode: 'ja-JP' }),
+  })
+  const { id } = await res.json()
+  const run = await createRun('phase3-e')
+  const { page } = run
+
+  run.story('Story 7 · A two-week trip on a phone')
+  await run.step('The schedule fits the screen: 14 days scroll sideways, today is in view', async () => {
+    await page.goto(`${BASE_URL}/t/${id}`)
+    await tab(page, 'Schedule').click()
+    await visible(page, 'Day 9')
+    const { content, screen } = await page.evaluate(() => ({ content: document.documentElement.scrollWidth, screen: window.innerWidth }))
+    assert(content <= screen, `page is ${content}px wide on a ${screen}px screen`)
+    assert((await page.locator('button.min-w-\\[56px\\]').count()) === 14, 'expected 14 day buttons')
+    const today = await page.locator('button.bg-teal.min-w-\\[56px\\]').boundingBox()
+    assert(today.x >= 0 && today.x + today.width <= screen, 'today should be scrolled into view')
+  })
+  await run.step('Swiping the day strip reaches the last day', async () => {
+    await page.locator('button.min-w-\\[56px\\]').last().scrollIntoViewIfNeeded()
+    await page.locator('button.min-w-\\[56px\\]').last().click()
+    await visible(page, 'Departure')
   })
   return run.finish()
 }
@@ -198,7 +244,7 @@ async function guestSeesChanges(links) {
   let failed = 1
   try {
     const links = await createViaApi()
-    const runs = [await organiserBuilds(links), await guestSees(links), await organiserChanges(links), await guestSeesChanges(links)]
+    const runs = [await organiserBuilds(links), await guestSees(links), await organiserChanges(links), await guestSeesChanges(links), await longTrip()]
     failed = runs.reduce((n, r) => n + r.failed, 0)
     joinVideos('phase3', runs.map((r) => r.mp4))
   } finally {

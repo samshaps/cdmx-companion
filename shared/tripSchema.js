@@ -1,5 +1,8 @@
 // The trip document: its shape, limits and defaults. Shared by the browser
 // (forms) and the server (validation), so both agree on what a trip is.
+import { starterPhrases } from './phrasePacks.js'
+
+export { suggestLocale } from './destinations.js'
 
 export const LIMITS = {
   docBytes: 200_000,
@@ -13,11 +16,23 @@ export const LIMITS = {
 export const EVENT_CATEGORIES = ['activity', 'meal', 'transit', 'free']
 export const PLACE_CATEGORIES = ['eat', 'drink', 'see', 'shop']
 
+// The parts of a day the schedule editor offers as ready-made blanks. An
+// event remembers which one it fills; `time` and `category` are its defaults.
+export const DAY_SLOTS = [
+  { key: 'breakfast', label: 'Breakfast', emoji: '🍳', time: '08:30', category: 'meal' },
+  { key: 'morning', label: 'Morning', emoji: '🌤️', time: '10:00', category: 'activity' },
+  { key: 'lunch', label: 'Lunch', emoji: '🥗', time: '13:00', category: 'meal' },
+  { key: 'afternoon', label: 'Afternoon', emoji: '☀️', time: '15:00', category: 'activity' },
+  { key: 'dinner', label: 'Dinner', emoji: '🍽️', time: '19:30', category: 'meal' },
+  { key: 'evening', label: 'Evening', emoji: '🌙', time: '21:30', category: 'activity' },
+]
+const SLOT_KEYS = DAY_SLOTS.map((slot) => slot.key)
+
 export const CURRENCIES = [
   'USD', 'EUR', 'GBP', 'CAD', 'AUD', 'MXN', 'JPY', 'CHF', 'SEK', 'NOK', 'DKK',
   'NZD', 'BRL', 'ARS', 'COP', 'PEN', 'CLP', 'THB', 'VND', 'IDR', 'INR', 'KRW',
   'CNY', 'HKD', 'SGD', 'TRY', 'ZAR', 'MAD', 'EGP', 'AED', 'ILS', 'CZK', 'PLN',
-  'HUF', 'ISK', 'CRC',
+  'HUF', 'ISK', 'CRC', 'TWD', 'PHP', 'MYR', 'JOD', 'KES', 'DOP', 'CUP',
 ]
 
 export const LANGUAGES = [
@@ -40,45 +55,18 @@ export const LANGUAGES = [
   { code: 'hi-IN', name: 'Hindi' },
   { code: 'ar-SA', name: 'Arabic' },
   { code: 'he-IL', name: 'Hebrew' },
-  { code: 'en-GB', name: 'English' },
+  { code: 'sv-SE', name: 'Swedish' },
+  { code: 'nb-NO', name: 'Norwegian' },
+  { code: 'da-DK', name: 'Danish' },
+  { code: 'fi-FI', name: 'Finnish' },
+  { code: 'is-IS', name: 'Icelandic' },
+  { code: 'cs-CZ', name: 'Czech' },
+  { code: 'pl-PL', name: 'Polish' },
+  { code: 'hu-HU', name: 'Hungarian' },
+  { code: 'hr-HR', name: 'Croatian' },
+  { code: 'en-GB', name: 'English (UK)' },
+  { code: 'en-US', name: 'English (US)' },
 ]
-
-// Rough "where is this?" guesses so the create form can prefill currency,
-// language and emoji. First keyword match wins; anything else stays manual.
-const LOCALE_HINTS = [
-  [/mexico|cdmx|oaxaca|cancun|tulum|guadalajara/i, 'MXN', 'es-MX', '🇲🇽'],
-  [/spain|madrid|barcelona|seville|sevilla|valencia|mallorca/i, 'EUR', 'es-ES', '🇪🇸'],
-  [/france|paris|lyon|nice|marseille|bordeaux/i, 'EUR', 'fr-FR', '🇫🇷'],
-  [/italy|rome|roma|florence|venice|milan|naples|amalfi|sicily/i, 'EUR', 'it-IT', '🇮🇹'],
-  [/portugal|lisbon|lisboa|porto|algarve|madeira/i, 'EUR', 'pt-PT', '🇵🇹'],
-  [/brazil|rio de janeiro|são paulo|sao paulo/i, 'BRL', 'pt-BR', '🇧🇷'],
-  [/germany|berlin|munich|hamburg/i, 'EUR', 'de-DE', '🇩🇪'],
-  [/austria|vienna|salzburg/i, 'EUR', 'de-DE', '🇦🇹'],
-  [/netherlands|amsterdam|rotterdam/i, 'EUR', 'nl-NL', '🇳🇱'],
-  [/greece|athens|santorini|mykonos|crete/i, 'EUR', 'el-GR', '🇬🇷'],
-  [/turkey|türkiye|istanbul/i, 'TRY', 'tr-TR', '🇹🇷'],
-  [/japan|tokyo|kyoto|osaka/i, 'JPY', 'ja-JP', '🇯🇵'],
-  [/korea|seoul|busan/i, 'KRW', 'ko-KR', '🇰🇷'],
-  [/china|beijing|shanghai/i, 'CNY', 'zh-CN', '🇨🇳'],
-  [/thailand|bangkok|phuket|chiang mai/i, 'THB', 'th-TH', '🇹🇭'],
-  [/vietnam|hanoi|ho chi minh|saigon|da nang/i, 'VND', 'vi-VN', '🇻🇳'],
-  [/indonesia|bali|jakarta/i, 'IDR', 'id-ID', '🇮🇩'],
-  [/india|delhi|mumbai|goa|jaipur/i, 'INR', 'hi-IN', '🇮🇳'],
-  [/argentina|buenos aires/i, 'ARS', 'es-MX', '🇦🇷'],
-  [/colombia|bogot|medell|cartagena/i, 'COP', 'es-MX', '🇨🇴'],
-  [/peru|lima|cusco/i, 'PEN', 'es-MX', '🇵🇪'],
-  [/costa rica/i, 'CRC', 'es-MX', '🇨🇷'],
-  [/morocco|marrakech|fez/i, 'MAD', 'ar-SA', '🇲🇦'],
-  [/egypt|cairo/i, 'EGP', 'ar-SA', '🇪🇬'],
-  [/israel|tel aviv|jerusalem/i, 'ILS', 'he-IL', '🇮🇱'],
-  [/uk|england|london|scotland|edinburgh/i, 'GBP', 'en-GB', '🇬🇧'],
-]
-
-export function suggestLocale(destination) {
-  const hit = LOCALE_HINTS.find(([pattern]) => pattern.test(destination || ''))
-  if (!hit) return null
-  return { currency: hit[1], language: hit[2], emoji: hit[3] }
-}
 
 export class TripValidationError extends Error {}
 
@@ -181,6 +169,7 @@ export function normalizeTrip(input) {
           time: TIME.test(e?.time) ? e.time : '12:00',
           name: text(e?.name, 100),
           category: oneOf(e?.category, EVENT_CATEGORIES),
+          slot: SLOT_KEYS.includes(e?.slot) ? e.slot : '',
           address: text(e?.address, 200),
           notes: text(e?.notes, 500),
           personalNote: text(e?.personalNote, 300),
@@ -224,7 +213,8 @@ export function reconcileItinerary(itinerary, start, end) {
     itinerary.find((day) => day.date === date) || { date, dayTitle: defaultDayTitle(i, dates.length), events: [] })
 }
 
-// A new trip: the basics from the create form plus one empty day per date.
+// A new trip: the basics from the create form, one empty day per date, and
+// a starter phrase book when we have one for the language.
 export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode }) {
   const language = LANGUAGES.find((l) => l.code === languageCode) || { code: languageCode, name: '' }
   const dates = ISO_DATE.test(start || '') && ISO_DATE.test(end || '') && end >= start ? datesBetween(start, end) : []
@@ -240,6 +230,6 @@ export function createBlankTrip({ name, emoji, destination, start, end, homeCurr
     },
     itinerary: dates.length ? reconcileItinerary([], start, end) : [],
     places: [],
-    phrases: [],
+    phrases: starterPhrases(language.code),
   })
 }

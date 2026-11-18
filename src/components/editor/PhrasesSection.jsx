@@ -1,4 +1,6 @@
 import { AddButton, ItemCard, TextField } from './fields'
+import { buttonSecondary } from '../Page'
+import { hasStarterPhrases, starterPhrases } from '../../../shared/phrasePacks'
 
 export function PhrasesSection({ doc, change }) {
   const set = (i, key) => (value) => change((d) => { d.phrases[i][key] = value })
@@ -10,6 +12,11 @@ export function PhrasesSection({ doc, change }) {
       <p className="text-sm text-charcoal/60">
         Handy phrases in {language}. Guests can tap to hear each one spoken. Phrases with the same group appear together.
       </p>
+      {doc.phrases.length === 0 && hasStarterPhrases(doc.trip.language.code) && (
+        <button type="button" className={buttonSecondary} onClick={() => change((d) => { d.phrases = starterPhrases(d.trip.language.code) })}>
+          Add the starter phrase book
+        </button>
+      )}
       {doc.phrases.map((phrase, i) => (
         <ItemCard key={i} title={phrase.english || `Phrase ${i + 1}`} onRemove={() => change((d) => { d.phrases.splice(i, 1) })}>
           <TextField label="In English" value={phrase.english} onChange={set(i, 'english')} maxLength={200} />
