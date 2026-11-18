@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { rememberMyTrip } from './lib/localTrips'
+import { adoptEditKeyFromUrl } from './lib/manifest'
 
 // Bump this version to force a hard refresh for all users.
 // This clears all service worker caches and reloads the page.
@@ -40,18 +42,7 @@ if (storedVersion && storedVersion !== APP_VERSION) {
   }
 }
 
-// On a trip page, point the browser at that trip's own manifest so "Add to
-// Home Screen" installs the trip (its name and link), not the landing page.
-const tripMatch = /^\/t\/([^/]+)/.exec(window.location.pathname)
-if (tripMatch) {
-  let link = document.querySelector('link[rel="manifest"]')
-  if (!link) {
-    link = document.createElement('link')
-    link.rel = 'manifest'
-    document.head.appendChild(link)
-  }
-  link.href = `/api/manifest?id=${tripMatch[1]}`
-}
+adoptEditKeyFromUrl(rememberMyTrip)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

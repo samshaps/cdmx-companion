@@ -28,8 +28,10 @@ export const rememberPasscode = (id, passcode) => write(`trip_passcode:${id}`, p
 export const getMyTrips = () => read('my_trips', [])
 export const getEditToken = (id) => getMyTrips().find((t) => t.id === id)?.token || ''
 export function rememberMyTrip(id, name, token) {
-  const others = getMyTrips().filter((t) => t.id !== id)
-  write('my_trips', [{ id, name, token }, ...others].slice(0, 20))
+  const trips = getMyTrips()
+  const known = trips.find((t) => t.id === id)
+  const others = trips.filter((t) => t.id !== id)
+  write('my_trips', [{ id, name: name || known?.name || id, token }, ...others].slice(0, 20))
 }
 export function forgetMyTrip(id) {
   write('my_trips', getMyTrips().filter((t) => t.id !== id))

@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { TripShell } from './components/TripShell'
 import { getDemoTrip } from './data/demo'
+import { syncManifestLink } from './lib/manifest'
 import { useRoute } from './lib/router'
 import GuestTrip from './pages/GuestTrip'
 import Landing from './pages/Landing'
@@ -10,6 +12,10 @@ const demoTrip = getDemoTrip()
 
 function App() {
   const route = useRoute()
+
+  useEffect(() => {
+    syncManifestLink(route)
+  }, [route.name, route.id]) // eslint-disable-line react-hooks/exhaustive-deps -- route is a fresh object each render
 
   switch (route.name) {
     case 'demo':

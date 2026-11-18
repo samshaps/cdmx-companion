@@ -134,16 +134,29 @@ export async function handleTrips(request, env = process.env) {
 // Each trip gets its own web app manifest so "Add to Home Screen" installs
 // that trip (its name, its link) rather than the generic landing page.
 export async function handleManifest(request, env = process.env) {
-  const id = new URL(request.url).searchParams.get('id') || ''
+  const params = new URL(request.url).searchParams
+  const id = params.get('id') || ''
+  const key = params.get('k') || ''
   let name = 'Trip Companion'
+  let startUrl = '/'
+  let isOrganiser = false
   try {
     const record = id ? await getStore(env).get(`trip:${id}`) : null
-    if (record) name = record.doc.trip.name
-  } catch { /* fall back to the generic name */ }
+    if (record) {
+      name = record.doc.trip.name
+      startUrl = `/t/${encodeURIComponent(id)}`
+      // An organiser's installed app starts with their edit key, since an
+      // installed app on iPhone does not share the browser's storage.
+      if (key && sameHash(sha256(key), record.editHash)) {
+        isOrganiser = true
+        startUrl += `?k=${encodeURIComponent(key)}`
+      }
+    }
+  } catch { /* fall back to the generic manifest */ }
   const manifest = {
     name,
     short_name: name.slice(0, 12),
-    start_url: id ? `/t/${encodeURIComponent(id)}` : '/',
+    start_url: startUrl,
     scope: '/',
     display: 'standalone',
     theme_color: '#1A535C',
@@ -154,6 +167,9 @@ export async function handleManifest(request, env = process.env) {
     ],
   }
   return new Response(JSON.stringify(manifest), {
-    headers: { 'Content-Type': 'application/manifest+json', 'Cache-Control': 'public, max-age=300' },
+    headers: {
+      'Content-Type': 'application/manifest+json',
+      'Cache-Control': isOrganiser ? 'private, no-store' : 'public, max-age=300',
+    },
   })
 }

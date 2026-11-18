@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TripShell } from '../components/TripShell'
 import { Field, Link, Page, buttonPrimary, inputClass } from '../components/Page'
 import { useRemoteTrip } from '../hooks/useRemoteTrip'
+import { getEditToken } from '../lib/localTrips'
 
 function Message({ emoji, title, children }) {
   return (
@@ -51,5 +52,12 @@ export default function GuestTrip({ id }) {
   if (trip.status === 'error') {
     return <Message emoji="📡" title="Can’t load the trip">{trip.message || 'Connect to the internet and open the link again. After the first load it works offline.'}</Message>
   }
-  return <TripShell data={trip.data} banner={trip.offline ? 'Offline · showing the copy saved on this phone' : null} />
+  return (
+    <TripShell
+      data={trip.data}
+      installable
+      editHref={getEditToken(id) ? `/t/${id}/edit` : null}
+      banner={trip.offline ? 'Offline · showing the copy saved on this phone' : null}
+    />
+  )
 }

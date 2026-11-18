@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { InstallGuide } from '../components/InstallGuide'
 import { Link, Page } from '../components/Page'
 import { BasicsSection } from '../components/editor/BasicsSection'
 import { PhrasesSection } from '../components/editor/PhrasesSection'
@@ -8,6 +9,7 @@ import { ShareSection } from '../components/editor/ShareSection'
 import { StaySection } from '../components/editor/StaySection'
 import { fetchTrip, saveTrip } from '../lib/api'
 import { forgetMyTrip, getEditToken, rememberMyTrip } from '../lib/localTrips'
+import { dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
 
 const SECTIONS = ['Share', 'Basics', 'Stay', 'Schedule', 'Places', 'Phrases']
 const SAVE_DELAY_MS = 800
@@ -28,6 +30,7 @@ export default function ManageTrip({ id }) {
   const [hasPasscode, setHasPasscode] = useState(false)
   const [section, setSection] = useState('Share')
   const [save, setSave] = useState({ state: 'saved', error: '' })
+  const [installOpen, setInstallOpen] = useState(shouldAutoShowInstallGuide)
   const latest = useRef(null)
   const timer = useRef(null)
 
@@ -116,6 +119,16 @@ export default function ManageTrip({ id }) {
   const { trip } = doc
   return (
     <Page>
+      {installOpen && (
+        <InstallGuide
+          name={trip.name}
+          emoji={trip.emoji}
+          onClose={() => {
+            dismissInstallGuide()
+            setInstallOpen(false)
+          }}
+        />
+      )}
       <Link to="/" className="text-teal text-sm font-medium">← All trips</Link>
       <h1 className="font-display text-3xl font-bold text-charcoal mt-3">
         {trip.emoji} {trip.name || 'Untitled trip'}
@@ -148,7 +161,7 @@ export default function ManageTrip({ id }) {
       </div>
 
       <div className="mt-4 pb-16">
-        {section === 'Share' && <ShareSection id={id} token={token} doc={doc} onImport={replaceDoc} />}
+        {section === 'Share' && <ShareSection id={id} token={token} doc={doc} onImport={replaceDoc} onShowInstall={() => setInstallOpen(true)} />}
         {section === 'Basics' && <BasicsSection doc={doc} change={change} hasPasscode={hasPasscode} onSetPasscode={(p) => flush(p)} />}
         {section === 'Stay' && <StaySection doc={doc} change={change} />}
         {section === 'Schedule' && <ScheduleSection doc={doc} change={change} />}

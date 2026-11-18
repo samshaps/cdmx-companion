@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import { Card } from '../Card'
-import { buttonPrimary } from '../Page'
+import { Link, buttonPrimary } from '../Page'
 import { editUrl, guestUrl } from '../../lib/router'
 import { copyToClipboard } from '../../utils/clipboard'
+import { getInstallPlatform } from '../../utils/platform'
 
 function ShareLink({ label, description, url, testId }) {
   const [copied, setCopied] = useState(false)
@@ -26,7 +27,8 @@ function ShareLink({ label, description, url, testId }) {
   )
 }
 
-export function ShareSection({ id, token, doc, onImport }) {
+export function ShareSection({ id, token, doc, onImport, onShowInstall }) {
+  const [platform] = useState(getInstallPlatform)
   const fileInput = useRef(null)
   const [importError, setImportError] = useState('')
 
@@ -67,9 +69,25 @@ export function ShareSection({ id, token, doc, onImport }) {
         url={editUrl(id, token)}
         testId="edit-link"
       />
-      <a href={guestUrl(id)} target="_blank" rel="noopener noreferrer" className={`${buttonPrimary} mt-2`}>
+      <Link to={`/t/${id}`} className={`${buttonPrimary} mt-2`}>
         Open the guest view
-      </a>
+      </Link>
+
+      <Card className="mt-4">
+        <h3 className="font-bold text-charcoal">📲 On your home screen</h3>
+        {platform === 'installed' ? (
+          <p className="text-sm text-charcoal/60 mt-0.5">You are using the installed app. Guests are shown how to install it when they first open their link.</p>
+        ) : platform === 'desktop' ? (
+          <p className="text-sm text-charcoal/60 mt-0.5">
+            The trip works best as an app on your phone. Open your edit link there and you will be walked through adding it. Guests get the same walkthrough the first time they open their link.
+          </p>
+        ) : (
+          <>
+            <p className="text-sm text-charcoal/60 mt-0.5">Add the trip to your phone like an app. Guests get the same walkthrough the first time they open their link.</p>
+            <button onClick={onShowInstall} className="min-h-[44px] text-terracotta font-bold">Show me how</button>
+          </>
+        )}
+      </Card>
 
       <Card className="mt-4">
         <h3 className="font-bold text-charcoal">Backup</h3>

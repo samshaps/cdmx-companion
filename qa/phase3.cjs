@@ -97,7 +97,7 @@ async function guestSees(links) {
   const { page, context } = run
   await context.route('https://open.er-api.com/**', (route) => route.fulfill({ json: { result: 'success', rates: { EUR: 0.9 } } }))
 
-  run.story('Story 4 · Guest sees everything the organiser entered')
+  run.story('Story 4 · Guest sees it all')
   await run.step('Home shows the stay, wifi and door code', async () => {
     await page.goto(links.guest)
     await visible(page, 'Rua Exemplo 12, Alfama, Lisbon')
