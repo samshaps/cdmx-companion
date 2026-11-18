@@ -8,9 +8,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'La Familia CDMX',
-        short_name: 'CDMX Trip',
-        description: 'Our family trip to Mexico City',
+        name: 'Trip Companion',
+        short_name: 'Trip',
+        description: 'Everything your group needs for the trip, in one place',
         theme_color: '#1A535C',
         background_color: '#FFF5E6',
         display: 'standalone',

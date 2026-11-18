@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { TabBar } from './components/TabBar'
 import { OnboardingOverlay } from './components/OnboardingOverlay'
 import { ToastProvider } from './contexts/ToastContext'
+import { TripProvider } from './contexts/TripContext'
+import { getDemoTrip } from './data/demo'
 import HomeTab from './pages/HomeTab'
 import ScheduleTab from './pages/ScheduleTab'
 import PhrasesTab from './pages/PhrasesTab'
@@ -16,12 +18,15 @@ const TAB_COMPONENTS = {
   explore: ExploreTab,
 }
 
+const demoTrip = getDemoTrip()
+
 function App() {
   const [activeTab, setActiveTab] = useState('home')
 
   const ActiveComponent = TAB_COMPONENTS[activeTab]
 
   return (
+    <TripProvider data={demoTrip}>
     <ToastProvider>
       <div className="min-h-screen bg-cream pb-20">
         <OnboardingOverlay />
@@ -31,6 +36,7 @@ function App() {
         <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
     </ToastProvider>
+    </TripProvider>
   )
 }
 

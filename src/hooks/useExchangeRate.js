@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 
-const CACHE_KEY = 'exchange_rate'
 const CACHE_TTL = 4 * 60 * 60 * 1000 // 4 hours
-const API_URL = 'https://open.er-api.com/v6/latest/USD'
+const API_BASE = 'https://open.er-api.com/v6/latest'
 
-function getCached() {
+function getCached(key) {
   try {
-    const raw = localStorage.getItem(CACHE_KEY)
+    const raw = localStorage.getItem(key)
     if (!raw) return null
     return JSON.parse(raw)
   } catch {
@@ -14,11 +13,12 @@ function getCached() {
   }
 }
 
-function setCache(rate) {
-  localStorage.setItem(CACHE_KEY, JSON.stringify({ rate, timestamp: Date.now() }))
+function setCache(key, rate) {
+  localStorage.setItem(key, JSON.stringify({ rate, timestamp: Date.now() }))
 }
 
-export function useExchangeRate() {
+// Rate is expressed as: 1 unit of `home` = `rate` units of `local`.
+export function useExchangeRate(home, local) {
   const [rate, setRate] = useState(null)
   const [lastUpdated, setLastUpdated] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -28,7 +28,8 @@ export function useExchangeRate() {
     let cancelled = false
 
     async function fetchRate() {
-      const cached = getCached()
+      const cacheKey = `exchange_rate_${home}_${local}`
+      const cached = getCached(cacheKey)
 
       // Use cache if fresh
       if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
@@ -42,13 +43,13 @@ export function useExchangeRate() {
 
       // Fetch fresh rate
       try {
-        const res = await fetch(API_URL)
+        const res = await fetch(`${API_BASE}/${home}`)
         const data = await res.json()
-        if (data.result === 'success' && data.rates?.MXN) {
-          const mxnRate = data.rates.MXN
-          setCache(mxnRate)
+        if (data.result === 'success' && data.rates?.[local]) {
+          const fresh = data.rates[local]
+          setCache(cacheKey, fresh)
           if (!cancelled) {
-            setRate(mxnRate)
+            setRate(fresh)
             setLastUpdated(Date.now())
             setLoading(false)
           }
@@ -77,7 +78,7 @@ export function useExchangeRate() {
 
     fetchRate()
     return () => { cancelled = true }
-  }, [])
+  }, [home, local])
 
   return { rate, lastUpdated, loading, error }
 }

@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
+import { localISODate } from '../utils/dates'
 
 export function useNowNext(events, dayDate) {
   return useMemo(() => {
-    const today = new Date().toISOString().slice(0, 10)
+    const today = localISODate()
     if (dayDate !== today) return { nowIndex: -1, nextIndex: -1 }
 
     const now = new Date()

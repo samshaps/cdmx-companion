@@ -1,6 +1,7 @@
 import { Card } from '../Card'
 import { Converter } from './Converter'
 import { useExchangeRate } from '../../hooks/useExchangeRate'
+import { useTrip } from '../../contexts/TripContext'
 
 function formatTimestamp(ts) {
   if (!ts) return ''
@@ -14,7 +15,8 @@ function formatTimestamp(ts) {
 }
 
 export function CurrencyTab() {
-  const { rate, lastUpdated, loading, error } = useExchangeRate()
+  const { home, local } = useTrip().trip.currency
+  const { rate, lastUpdated, loading, error } = useExchangeRate(home, local)
 
   return (
     <div className="px-4 py-8">
@@ -38,7 +40,7 @@ export function CurrencyTab() {
         <>
           <Card className="text-center mb-6">
             <p className="text-lg font-bold text-charcoal">
-              1 USD = {rate.toFixed(2)} MXN
+              1 {home} = {rate.toFixed(2)} {local}
             </p>
             {lastUpdated && (
               <p className="text-sm text-charcoal/50 mt-1">
@@ -47,7 +49,7 @@ export function CurrencyTab() {
             )}
           </Card>
 
-          <Converter rate={rate} />
+          <Converter rate={rate} home={home} local={local} />
         </>
       )}
     </div>

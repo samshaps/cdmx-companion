@@ -1,26 +1,25 @@
 import { useState } from 'react'
+import { currencySymbol, formatMoney } from '../../utils/currency'
 
 const QUICK_AMOUNTS = [100, 200, 500, 1000]
 
-export function Converter({ rate }) {
+export function Converter({ rate, home, local }) {
   const [amount, setAmount] = useState('')
-  const [direction, setDirection] = useState('usd-to-mxn')
+  const [direction, setDirection] = useState('home-to-local')
 
-  const isUsdToMxn = direction === 'usd-to-mxn'
-  const fromLabel = isUsdToMxn ? 'USD' : 'MXN'
-  const toLabel = isUsdToMxn ? 'MXN' : 'USD'
-  const fromSymbol = isUsdToMxn ? '$' : 'MX$'
-  const toSymbol = isUsdToMxn ? 'MX$' : '$'
-
+  const isHomeToLocal = direction === 'home-to-local'
+  const fromLabel = isHomeToLocal ? home : local
+  const toLabel = isHomeToLocal ? local : home
+  const fromSymbol = currencySymbol(fromLabel)
   const numericAmount = parseFloat(amount) || 0
   const converted = rate
-    ? isUsdToMxn
+    ? isHomeToLocal
       ? numericAmount * rate
       : numericAmount / rate
     : null
 
   function handleSwap() {
-    setDirection(d => d === 'usd-to-mxn' ? 'mxn-to-usd' : 'usd-to-mxn')
+    setDirection(d => d === 'home-to-local' ? 'local-to-home' : 'home-to-local')
   }
 
   function handleAmountChange(e) {
@@ -32,7 +31,7 @@ export function Converter({ rate }) {
 
   function handleQuickAmount(value) {
     setAmount(String(value))
-    setDirection('mxn-to-usd')
+    setDirection('local-to-home')
   }
 
   const disabled = !rate
@@ -73,33 +72,33 @@ export function Converter({ rate }) {
           {disabled
             ? <span className="text-charcoal/20">&mdash;</span>
             : converted !== null && amount
-              ? `${toSymbol} ${converted.toFixed(2)}`
-              : <span className="text-charcoal/20">{toSymbol} 0.00</span>
+              ? formatMoney(converted, toLabel)
+              : <span className="text-charcoal/20">{formatMoney(0, toLabel)}</span>
           }
         </p>
       </div>
 
       {/* Quick amount buttons */}
-      <div className="flex gap-2 justify-center mt-4">
+      <div className="flex flex-wrap gap-2 justify-center mt-4">
         {QUICK_AMOUNTS.map(val => {
-          const isActive = direction === 'mxn-to-usd' && amount === String(val)
+          const isActive = direction === 'local-to-home' && amount === String(val)
           return (
             <button
               key={val}
               onClick={() => handleQuickAmount(val)}
               disabled={disabled}
-              className={`px-4 py-2 rounded-full text-sm font-medium min-h-[44px] active:scale-[0.98] transition-all disabled:opacity-40 ${
+              className={`px-3 py-2 rounded-full text-sm font-medium min-h-[44px] active:scale-[0.98] transition-all disabled:opacity-40 ${
                 isActive
                   ? 'bg-teal text-white'
                   : 'bg-warm-gray text-charcoal'
               }`}
             >
-              ${val.toLocaleString()}
+              {formatMoney(val, local, { decimals: 0 })}
             </button>
           )
         })}
       </div>
-      <p className="text-xs text-charcoal/40">Common peso amounts</p>
+      <p className="text-xs text-charcoal/40">Common {local} amounts</p>
     </div>
   )
 }

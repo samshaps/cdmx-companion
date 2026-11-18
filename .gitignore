@@ -23,3 +23,6 @@ _bmad/
 *.njsproj
 *.sln
 *.sw?
+
+# QA run recordings
+qa/output/

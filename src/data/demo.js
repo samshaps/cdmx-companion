@@ -1,0 +1,22 @@
+import demoTrip from './demo-trip.json'
+import { addDays, daysBetween, localISODate } from '../utils/dates'
+
+// The demo trip is always "in progress": its dates are shifted so that today
+// is day 2, which keeps the countdown and NOW/NEXT badges alive in the demo.
+export function getDemoTrip(today = localISODate()) {
+  const shift = daysBetween(demoTrip.trip.dates.start, today) - 1
+  return {
+    ...demoTrip,
+    trip: {
+      ...demoTrip.trip,
+      dates: {
+        start: addDays(demoTrip.trip.dates.start, shift),
+        end: addDays(demoTrip.trip.dates.end, shift),
+      },
+    },
+    itinerary: demoTrip.itinerary.map((day) => ({
+      ...day,
+      date: addDays(day.date, shift),
+    })),
+  }
+}

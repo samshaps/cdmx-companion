@@ -1,7 +1,7 @@
-import tripData from '../../data/trip.json'
+import { useTrip } from '../../contexts/TripContext'
 
 export function TripCountdown() {
-  const { trip } = tripData
+  const { trip } = useTrip()
   const today = new Date()
   const start = new Date(trip.dates.start + 'T00:00:00')
   const end = new Date(trip.dates.end + 'T00:00:00')

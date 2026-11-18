@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import tripData from '../data/trip.json'
+import { useTrip } from '../contexts/TripContext'
 import { DaySelector } from '../components/schedule/DaySelector'
 import { EventCard } from '../components/schedule/EventCard'
 import { useCurrentDay } from '../hooks/useCurrentDay'
 import { useNowNext } from '../hooks/useNowNext'
-
-const { itinerary } = tripData
 
 function getDayLabel(date, dayTitle) {
   const dayName = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long' })
@@ -13,6 +11,7 @@ function getDayLabel(date, dayTitle) {
 }
 
 export default function ScheduleTab() {
+  const { trip, itinerary } = useTrip()
   const initialDay = useCurrentDay(itinerary)
   const [selectedDay, setSelectedDay] = useState(initialDay)
   const day = itinerary[selectedDay]
@@ -42,7 +41,7 @@ export default function ScheduleTab() {
 
       <div className="flex flex-col gap-3">
         {day.events.map((event, i) => (
-          <EventCard key={i} event={event} badge={getBadge(i)} />
+          <EventCard key={i} event={event} badge={getBadge(i)} destination={trip.destination} />
         ))}
       </div>
     </div>

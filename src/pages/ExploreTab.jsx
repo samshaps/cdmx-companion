@@ -4,7 +4,7 @@ import { NavigateButton } from '../components/NavigateButton'
 import { CategoryFilter } from '../components/CategoryFilter'
 import { useGeolocation } from '../hooks/useGeolocation'
 import { getDistanceMiles } from '../utils/distance'
-import tripData from '../data/trip.json'
+import { useTrip } from '../contexts/TripContext'
 
 const CATEGORY_EMOJI = {
   eat: '🍽️',
@@ -16,7 +16,7 @@ const CATEGORY_EMOJI = {
 export default function ExploreTab() {
   const [activeCategory, setActiveCategory] = useState('all')
   const { position, loading: geoLoading } = useGeolocation()
-  const { places } = tripData
+  const { trip, places } = useTrip()
 
   const sorted = useMemo(() => {
     const filtered = activeCategory === 'all'
@@ -83,7 +83,7 @@ export default function ExploreTab() {
               )}
 
               <div className="flex justify-end mt-2">
-                <NavigateButton name={`${place.name} ${place.address || 'CDMX Mexico City'}`} />
+                <NavigateButton name={[place.name, place.address, trip.destination].filter(Boolean).join(' ')} />
               </div>
             </Card>
           )

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Card } from './Card'
 import { shouldShowOnboarding } from '../utils/platform'
+import { useTrip } from '../contexts/TripContext'
 
 export function OnboardingOverlay() {
+  const { trip } = useTrip()
   const [visible, setVisible] = useState(shouldShowOnboarding)
-
   if (!visible) return null
 
   function handleDismiss() {
@@ -15,14 +16,14 @@ export function OnboardingOverlay() {
   return (
     <div className="fixed inset-0 z-50 bg-cream flex flex-col items-center justify-center px-6 overflow-y-auto">
       <div className="max-w-sm w-full text-center space-y-6 py-8">
-        <div className="text-6xl">🇲🇽</div>
+        <div className="text-6xl">{trip.emoji || '✈️'}</div>
 
         <h1 className="font-display text-3xl font-bold text-charcoal">
-          La Familia CDMX
+          {trip.name}
         </h1>
 
         <p className="text-charcoal/80 text-lg leading-relaxed">
-          Your family trip companion app.
+          Your trip companion app.
           <br />
           Add it to your home screen to use it like a real app!
         </p>

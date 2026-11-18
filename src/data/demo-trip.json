@@ -1,45 +1,51 @@
 {
   "trip": {
-    "name": "La Familia CDMX",
+    "name": "Amigos en CDMX",
+    "emoji": "🇲🇽",
+    "destination": "Mexico City",
     "dates": {
       "start": "2026-04-09",
       "end": "2026-04-13"
     },
-    "airbnb": {
-      "name": "Epic Penthouse | Private Rooftop | Condesa",
-      "address": "501, Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
-      "navigationAddress": "Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
-      "lat": 19.415220,
-      "lng": -99.179333,
-      "photo": "/images/airbnb.jpg",
+    "currency": {
+      "home": "USD",
+      "local": "MXN"
+    },
+    "language": {
+      "code": "es-MX",
+      "name": "Spanish"
+    },
+    "stay": {
+      "name": "Casa Jacaranda · Rooftop Loft",
+      "address": "Apt 4B, Calle Ejemplo 123, Condesa, Mexico City, 06140, MX",
+      "navigationAddress": "Calle Ejemplo 123, Condesa, Mexico City, 06140, MX",
+      "lat": 19.4116,
+      "lng": -99.1694,
+      "photo": "/images/demo-stay.svg",
       "wifi": {
-        "network": "Totalplay-7DAD & Totalplay-7DAD-5G",
-        "password": "7DADF110aKqf78xS"
+        "network": "CasaJacaranda-5G",
+        "password": "tacos-al-pastor-2026"
       },
       "checkIn": "3:00 PM",
       "checkOut": "10:00 AM",
-      "houseManual": {
-        "buildingName": "Condominio Pelotari",
-        "unit": "Apartment 501, Tower A",
-        "entrances": {
-          "pedestrian": "Fernando Montes de Oca 136",
-          "vehicle": "Zamora 129 (3 parking spaces — contact host to arrange)"
+      "manual": [
+        {
+          "title": "Building & Access",
+          "body": "Building: Edificio Jacaranda\nUnit: Apartment 4B\nDoor code: 1234#\nBolt the door from inside. To lock from outside, press the lock button on the keypad."
         },
-        "directions": {
-          "pedestrian": "At main entrance, take the ramp on your right for luggage. Walk straight to the wall, turn left, then right toward the elevator. Take elevator to 5th floor, turn right, walk to end of hallway — Apt 501.",
-          "vehicle": "After parking, take the first elevator on your left to the 5th floor. Turn right, proceed to end of hallway — Apt 501."
+        {
+          "title": "Getting There",
+          "body": "On foot: main entrance on Calle Ejemplo. Take the elevator to the 4th floor, turn right — last door in the hallway.\nBy car: garage entrance is around the corner. Message the host to arrange a parking spot."
         },
-        "doorCode": "3030",
-        "lockNote": "Inside, manually bolt the door. To lock from outside, press the access button on the keypad.",
-        "amenities": {
-          "jacuzzi": "Set temperature to 37–38°C. Overhead lights: switch on the power outlet. No sunscreen in the jacuzzi.",
-          "patioUmbrella": "Lit by a solar-charged battery — use the switch on its side.",
-          "extraBedding": "Floor mattresses under queen beds (2 per room). Extra blankets in room closets.",
-          "gym": "S floor, open 6 AM – 10 PM daily."
+        {
+          "title": "Amenities",
+          "body": "Rooftop jacuzzi: set to 37–38°C. No sunscreen in the water.\nExtra bedding: blankets and floor mattresses are in the bedroom closets.\nGym: ground floor, open 6 AM – 10 PM daily."
         },
-        "cleaning": "Extra cleaning available at 800 pesos/session, paid directly to the cleaning team.",
-        "trash": "Dispose on S floor, in the garbage repository next to the car entrance ramp."
-      }
+        {
+          "title": "Good to Know",
+          "body": "Extra cleaning: 800 pesos per session, paid directly to the cleaning team.\nTrash: bins are on the ground floor next to the garage ramp."
+        }
+      ]
     }
   },
   "itinerary": [
@@ -57,10 +63,10 @@
         },
         {
           "time": "14:00",
-          "name": "Check in at Airbnb",
+          "name": "Check in at Casa Jacaranda",
           "category": "transit",
-          "address": "Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
-          "notes": "Condominio Pelotari, Apt 501 Tower A. Door code: 3030. Check-in after 3 PM.",
+          "address": "Calle Ejemplo 123, Condesa, Mexico City, 06140, MX",
+          "notes": "Edificio Jacaranda, Apt 4B. Door code is in the house manual on the Home tab.",
           "personalNote": ""
         },
         {
@@ -105,7 +111,7 @@
           "time": "04:30",
           "name": "Teotihuacan pickup",
           "category": "transit",
-          "address": "Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
+          "address": "Calle Ejemplo 123, Condesa, Mexico City, 06140, MX",
           "notes": "Dress warmly in layers and bring sunscreen and water.",
           "personalNote": ""
         },
@@ -238,7 +244,7 @@
           "name": "Centro walking tour",
           "category": "activity",
           "address": "Centro Histórico, Mexico City",
-          "notes": "2-hour walking tour of Centro Histórico led by Sam.",
+          "notes": "2-hour walking tour of Centro Histórico led by our resident history nerd.",
           "personalNote": ""
         },
         {
@@ -275,7 +281,7 @@
           "time": "10:00",
           "name": "Free morning",
           "category": "free",
-          "address": "Fernando Montes de Oca 136, Mexico City, Mexico City, 06140, MX",
+          "address": "Calle Ejemplo 123, Condesa, Mexico City, 06140, MX",
           "notes": "Sleep in, grab coffee, walk the neighborhood one last time. Check the Explore tab for nearby spots!",
           "personalNote": ""
         },
@@ -303,15 +309,15 @@
       "lat": 19.4191,
       "lng": -99.1637,
       "address": "Roma Nte.",
-      "note": "Per Sharon — highly recommended. Friend went a couple weeks ago and loved it."
+      "note": "Highly recommended — a friend went a couple weeks ago and loved it."
     },
     {
       "name": "Las Gorditas del Guero",
       "category": "eat",
       "lat": 19.4198,
-      "lng": -99.1580,
+      "lng": -99.158,
       "address": "Roma Nte.",
-      "note": "Sharon saw it in Bon Appétit."
+      "note": "Featured in Bon Appétit."
     },
     {
       "name": "Voraz",
@@ -319,13 +325,13 @@
       "lat": 19.4185,
       "lng": -99.1595,
       "address": "Roma Nte.",
-      "note": "Sharon saw this in Bon Appétit."
+      "note": "Featured in Bon Appétit."
     },
     {
       "name": "Expendio de Maiz",
       "category": "eat",
-      "lat": 19.4170,
-      "lng": -99.1590,
+      "lat": 19.417,
+      "lng": -99.159,
       "address": "Roma Nte.",
       "note": "Buzin and Julia said would be fun with our parents. Corn-based Mexican cuisine."
     },
@@ -333,14 +339,14 @@
       "name": "La Única CDMX",
       "category": "eat",
       "lat": 19.4335,
-      "lng": -99.1380,
+      "lng": -99.138,
       "address": "Centro Histórico",
       "note": "Jason Golnick said it is good."
     },
     {
       "name": "Esquina Común",
       "category": "eat",
-      "lat": 19.4160,
+      "lat": 19.416,
       "lng": -99.1645,
       "address": "Roma Nte.",
       "note": "Reddit says amazing. Must contact to book."
@@ -348,8 +354,8 @@
     {
       "name": "Cariñito Tacos",
       "category": "eat",
-      "lat": 19.4100,
-      "lng": -99.1750,
+      "lat": 19.41,
+      "lng": -99.175,
       "address": "Condesa",
       "note": "Reddit says insanely good."
     },
@@ -364,10 +370,10 @@
     {
       "name": "Tacos La Chula",
       "category": "eat",
-      "lat": 19.4140,
-      "lng": -99.1700,
+      "lat": 19.414,
+      "lng": -99.17,
       "address": "Condesa",
-      "note": "Excellent cheap tacos near the Airbnb."
+      "note": "Excellent cheap tacos near our place."
     },
     {
       "name": "Tizne Tacomotora",
@@ -397,14 +403,14 @@
       "name": "Jenni's Street Quesadillas",
       "category": "eat",
       "lat": 19.4186,
-      "lng": -99.1640,
+      "lng": -99.164,
       "address": "Roma Nte.",
       "note": "Venkat loves this spot."
     },
     {
       "name": "Café La Blanca",
       "category": "eat",
-      "lat": 19.4340,
+      "lat": 19.434,
       "lng": -99.1395,
       "address": "Centro Histórico",
       "note": "Locally recommended. OG Mexican diner."
@@ -413,7 +419,7 @@
       "name": "Tortería Los Güeros",
       "category": "eat",
       "lat": 19.4165,
-      "lng": -99.1660,
+      "lng": -99.166,
       "address": "Roma Nte.",
       "note": "All tortas all the time."
     },
@@ -421,7 +427,7 @@
       "name": "Taquería El Califa",
       "category": "eat",
       "lat": 19.4175,
-      "lng": -99.1620,
+      "lng": -99.162,
       "address": "Roma Nte.",
       "note": "ADR recommends. Classic CDMX taquería."
     },
@@ -436,16 +442,16 @@
     {
       "name": "Maximo",
       "category": "eat",
-      "lat": 19.4170,
-      "lng": -99.1620,
+      "lat": 19.417,
+      "lng": -99.162,
       "address": "Tonalá 133, Roma Nte.",
       "note": "MJ recommends. Farm-to-table, daily changing menu."
     },
     {
       "name": "El Habanerito",
       "category": "eat",
-      "lat": 19.4190,
-      "lng": -99.1630,
+      "lat": 19.419,
+      "lng": -99.163,
       "address": "Roma Nte.",
       "note": "Good casual spot in Roma."
     },
@@ -461,7 +467,7 @@
       "name": "Mercado de San Juan",
       "category": "eat",
       "lat": 19.4308,
-      "lng": -99.1430,
+      "lng": -99.143,
       "address": "Centro Histórico",
       "note": "Famous food market. Great for exotic meats and fresh seafood."
     },
@@ -477,7 +483,7 @@
       "name": "Churrería El Moro",
       "category": "eat",
       "lat": 19.4332,
-      "lng": -99.1400,
+      "lng": -99.14,
       "address": "Centro Histórico",
       "note": "Best churros in town. Been around forever."
     },
@@ -485,7 +491,7 @@
       "name": "Los Cocuyos",
       "category": "eat",
       "lat": 19.4335,
-      "lng": -99.1370,
+      "lng": -99.137,
       "address": "Centro Histórico",
       "note": "Late night street tacos in Centro."
     },
@@ -500,8 +506,8 @@
     {
       "name": "Contramar",
       "category": "eat",
-      "lat": 19.4180,
-      "lng": -99.1680,
+      "lat": 19.418,
+      "lng": -99.168,
       "address": "Calle de Durango 200, Roma Nte.",
       "note": "Iconic seafood. Tuna tostadas and the red/green grilled fish are must-orders."
     },
@@ -516,8 +522,8 @@
     {
       "name": "Entremar",
       "category": "eat",
-      "lat": 19.4320,
-      "lng": -99.1910,
+      "lat": 19.432,
+      "lng": -99.191,
       "address": "Polanco",
       "note": "Seafood spot."
     },
@@ -525,7 +531,7 @@
       "name": "Chilpa",
       "category": "eat",
       "lat": 19.4119,
-      "lng": -99.1710,
+      "lng": -99.171,
       "address": "Condesa",
       "note": "Cozy spot for traditional Mexican dishes."
     },
@@ -540,8 +546,8 @@
     {
       "name": "Em",
       "category": "eat",
-      "lat": 19.4210,
-      "lng": -99.1570,
+      "lat": 19.421,
+      "lng": -99.157,
       "address": "Juárez",
       "note": "Fine dining spot."
     },
@@ -564,7 +570,7 @@
     {
       "name": "Quintonil",
       "category": "eat",
-      "lat": 19.4310,
+      "lat": 19.431,
       "lng": -99.1905,
       "address": "Newton 55, Polanco",
       "note": "World's 50 Best. Modern Mexican fine dining."
@@ -580,7 +586,7 @@
     {
       "name": "Panadería Rosetta",
       "category": "eat",
-      "lat": 19.4200,
+      "lat": 19.42,
       "lng": -99.1614,
       "address": "Colima 179, Roma Nte.",
       "note": "MJ recommends. Guava roll is what they're known for but the corn ricotta muffin is even better."
@@ -588,8 +594,8 @@
     {
       "name": "Lalo!",
       "category": "eat",
-      "lat": 19.4130,
-      "lng": -99.1670,
+      "lat": 19.413,
+      "lng": -99.167,
       "address": "Zacatecas 173, Roma Nte.",
       "note": "Great brunch. Expect a line on weekends."
     },
@@ -597,7 +603,7 @@
       "name": "Lardo",
       "category": "eat",
       "lat": 19.4145,
-      "lng": -99.1690,
+      "lng": -99.169,
       "address": "Condesa",
       "note": "Good restaurant in Condesa."
     },
@@ -628,15 +634,15 @@
     {
       "name": "Maizajo",
       "category": "eat",
-      "lat": 19.4130,
-      "lng": -99.1730,
+      "lat": 19.413,
+      "lng": -99.173,
       "address": "Condesa",
-      "note": "Michelin recommended taco shop near the Airbnb. Previous Airbnb guests rave about it."
+      "note": "Michelin recommended taco shop near our place. Previous guests rave about it."
     },
     {
       "name": "Handshake Speakeasy",
       "category": "drink",
-      "lat": 19.4210,
+      "lat": 19.421,
       "lng": -99.1564,
       "address": "Amberes 65, Juárez",
       "note": "Top 50 bar in the world. World-famous speakeasy."
@@ -645,7 +651,7 @@
       "name": "Hanky Panky Cocktail Bar",
       "category": "drink",
       "lat": 19.4188,
-      "lng": -99.1650,
+      "lng": -99.165,
       "address": "Roma Nte.",
       "note": "Must do. Go Man Go drink is great. Top 50 in the world."
     },
@@ -660,7 +666,7 @@
     {
       "name": "Librería Valladolid",
       "category": "drink",
-      "lat": 19.4190,
+      "lat": 19.419,
       "lng": -99.1625,
       "address": "Roma Nte.",
       "note": "Hidden speakeasy behind a bookshelf."
@@ -668,8 +674,8 @@
     {
       "name": "Baltra Bar",
       "category": "drink",
-      "lat": 19.4130,
-      "lng": -99.1650,
+      "lat": 19.413,
+      "lng": -99.165,
       "address": "Iztaccíhuatl 36D, Roma Sur",
       "note": "Jeff says great bar for dessert drinks."
     },
@@ -708,7 +714,7 @@
     {
       "name": "Xaman Bar",
       "category": "drink",
-      "lat": 19.4180,
+      "lat": 19.418,
       "lng": -99.1655,
       "address": "Roma Nte.",
       "note": "Downstairs kind of dark but cool bar."
@@ -716,8 +722,8 @@
     {
       "name": "Supra Roma Rooftop",
       "category": "drink",
-      "lat": 19.4210,
-      "lng": -99.1560,
+      "lat": 19.421,
+      "lng": -99.156,
       "address": "Roma Nte.",
       "note": "Jeff, Jenny, MJ all recommend. Rooftop bar."
     },
@@ -732,7 +738,7 @@
     {
       "name": "Toledo Rooftop",
       "category": "drink",
-      "lat": 19.4150,
+      "lat": 19.415,
       "lng": -99.1698,
       "address": "Condesa",
       "note": "Rooftop bar."
@@ -740,7 +746,7 @@
     {
       "name": "Terraza Catedral",
       "category": "drink",
-      "lat": 19.4330,
+      "lat": 19.433,
       "lng": -99.1335,
       "address": "Centro Histórico",
       "note": "Rooftop overlooking the Zocalo and Cathedral."
@@ -757,7 +763,7 @@
       "name": "Tokyo Music Bar",
       "category": "drink",
       "lat": 19.4105,
-      "lng": -99.1740,
+      "lng": -99.174,
       "address": "Condesa",
       "note": "Music bar."
     },
@@ -765,7 +771,7 @@
       "name": "Gran Hotel Ciudad de México",
       "category": "drink",
       "lat": 19.4328,
-      "lng": -99.1330,
+      "lng": -99.133,
       "address": "16 de Septiembre 82, Centro Histórico",
       "note": "A must if you're in Centro. Amazing architecture and a balcony overlooking the Zocalo. Go for food or drinks."
     },
@@ -773,7 +779,7 @@
       "name": "Qūentin Café",
       "category": "drink",
       "lat": 19.4191,
-      "lng": -99.1630,
+      "lng": -99.163,
       "address": "Roma Nte.",
       "note": "Coffee shop in Roma."
     },
@@ -789,7 +795,7 @@
       "name": "Departamento",
       "category": "drink",
       "lat": 19.4125,
-      "lng": -99.1700,
+      "lng": -99.17,
       "address": "Edinburgo 67, Condesa",
       "note": "Cozy neighborhood coffee shop."
     },
@@ -821,7 +827,7 @@
       "name": "Xochimilco",
       "category": "see",
       "lat": 19.2577,
-      "lng": -99.1040,
+      "lng": -99.104,
       "address": "Xochimilco, CDMX",
       "note": "Colorful trajinera boats on ancient Aztec canals. A must-do CDMX experience."
     },
@@ -847,7 +853,7 @@
       "lat": 19.4113,
       "lng": -99.1715,
       "address": "Av. México, Condesa",
-      "note": "Beautiful Art Deco park in Condesa. Near the Airbnb."
+      "note": "Beautiful Art Deco park in Condesa. Near our place."
     },
     {
       "name": "Parque España",
@@ -855,7 +861,7 @@
       "lat": 19.4155,
       "lng": -99.1725,
       "address": "Condesa",
-      "note": "Right next to the Airbnb. Nice park for a quick stroll."
+      "note": "Right next to our place. Nice park for a quick stroll."
     },
     {
       "name": "Palacio de Bellas Artes",
@@ -869,14 +875,14 @@
       "name": "Chinatown Gate",
       "category": "see",
       "lat": 19.4348,
-      "lng": -99.1420,
+      "lng": -99.142,
       "address": "Centro Histórico",
       "note": "Nice to walk through. Near Palacio de Bellas Artes."
     },
     {
       "name": "Museo Nacional de Antropología",
       "category": "see",
-      "lat": 19.4260,
+      "lat": 19.426,
       "lng": -99.1862,
       "address": "Av. Paseo de la Reforma, Chapultepec",
       "note": "World-class museum. The Aztec Sun Stone alone is worth the visit. Allow 3+ hours."
@@ -900,7 +906,7 @@
     {
       "name": "Lozartmx",
       "category": "shop",
-      "lat": 19.4190,
+      "lat": 19.419,
       "lng": -99.1715,
       "address": "Condesa",
       "note": "Ceramics shop."
@@ -926,175 +932,175 @@
     {
       "category": "greetings",
       "english": "Hello / Good morning",
-      "spanish": "Hola / Buenos días",
+      "translation": "Hola / Buenos días",
       "phonetic": "OH-lah / BWEH-nos DEE-ahs"
     },
     {
       "category": "greetings",
       "english": "Good afternoon",
-      "spanish": "Buenas tardes",
+      "translation": "Buenas tardes",
       "phonetic": "BWEH-nahs TAR-des"
     },
     {
       "category": "greetings",
       "english": "Good night",
-      "spanish": "Buenas noches",
+      "translation": "Buenas noches",
       "phonetic": "BWEH-nahs NO-ches"
     },
     {
       "category": "greetings",
       "english": "Please",
-      "spanish": "Por favor",
+      "translation": "Por favor",
       "phonetic": "por fah-VOR"
     },
     {
       "category": "greetings",
       "english": "Thank you (very much)",
-      "spanish": "Muchas gracias",
+      "translation": "Muchas gracias",
       "phonetic": "MOO-chas GRAH-see-ahs"
     },
     {
       "category": "greetings",
       "english": "Excuse me / Sorry",
-      "spanish": "Disculpe / Perdón",
+      "translation": "Disculpe / Perdón",
       "phonetic": "dees-KOOL-peh / pair-DON"
     },
     {
       "category": "greetings",
       "english": "You're welcome",
-      "spanish": "De nada",
+      "translation": "De nada",
       "phonetic": "deh NAH-dah"
     },
     {
       "category": "restaurant",
       "english": "A table for four, please",
-      "spanish": "Una mesa para cuatro, por favor",
+      "translation": "Una mesa para cuatro, por favor",
       "phonetic": "OO-nah MEH-sah PAH-rah KWAH-troh, por fah-VOR"
     },
     {
       "category": "restaurant",
       "english": "Can I see the menu?",
-      "spanish": "¿Me puede dar la carta?",
+      "translation": "¿Me puede dar la carta?",
       "phonetic": "meh PWEH-deh dar la KAR-tah"
     },
     {
       "category": "restaurant",
       "english": "Can I have the check, please?",
-      "spanish": "¿Me trae la cuenta, por favor?",
+      "translation": "¿Me trae la cuenta, por favor?",
       "phonetic": "meh TRA-eh la KWEN-tah, por fah-VOR"
     },
     {
       "category": "restaurant",
       "english": "Water, no ice please",
-      "spanish": "Agua sin hielo, por favor",
+      "translation": "Agua sin hielo, por favor",
       "phonetic": "AH-gwah seen YEH-lo, por fah-VOR"
     },
     {
       "category": "restaurant",
       "english": "This is delicious!",
-      "spanish": "¡Está delicioso!",
+      "translation": "¡Está delicioso!",
       "phonetic": "eh-STAH deh-lee-see-OH-so"
     },
     {
       "category": "restaurant",
       "english": "No spicy, please",
-      "spanish": "Sin picante, por favor",
+      "translation": "Sin picante, por favor",
       "phonetic": "seen pee-KAHN-teh, por fah-VOR"
     },
     {
       "category": "restaurant",
       "english": "What do you recommend?",
-      "spanish": "¿Qué me recomienda?",
+      "translation": "¿Qué me recomienda?",
       "phonetic": "keh meh reh-koh-mee-EN-dah"
     },
     {
       "category": "directions",
       "english": "Where is...?",
-      "spanish": "¿Dónde está...?",
+      "translation": "¿Dónde está...?",
       "phonetic": "DON-deh eh-STAH"
     },
     {
       "category": "directions",
       "english": "How far is it?",
-      "spanish": "¿Qué tan lejos está?",
+      "translation": "¿Qué tan lejos está?",
       "phonetic": "keh tahn LEH-hos eh-STAH"
     },
     {
       "category": "directions",
       "english": "To the right / To the left",
-      "spanish": "A la derecha / A la izquierda",
+      "translation": "A la derecha / A la izquierda",
       "phonetic": "ah la deh-REH-chah / ah la ees-kee-AIR-dah"
     },
     {
       "category": "directions",
       "english": "Straight ahead",
-      "spanish": "Derecho / Todo recto",
+      "translation": "Derecho / Todo recto",
       "phonetic": "deh-REH-cho / TOH-do REK-to"
     },
     {
       "category": "directions",
       "english": "Can you take me to this address?",
-      "spanish": "¿Me puede llevar a esta dirección?",
+      "translation": "¿Me puede llevar a esta dirección?",
       "phonetic": "meh PWEH-deh yeh-VAR ah ES-tah dee-rek-see-ON"
     },
     {
       "category": "shopping",
       "english": "How much does this cost?",
-      "spanish": "¿Cuánto cuesta?",
+      "translation": "¿Cuánto cuesta?",
       "phonetic": "KWAHN-to KWES-tah"
     },
     {
       "category": "shopping",
       "english": "Too expensive",
-      "spanish": "Muy caro",
+      "translation": "Muy caro",
       "phonetic": "mooy KAH-ro"
     },
     {
       "category": "shopping",
       "english": "Can you give me a better price?",
-      "spanish": "¿Me puede dar mejor precio?",
+      "translation": "¿Me puede dar mejor precio?",
       "phonetic": "meh PWEH-deh dar meh-HOR PREH-see-oh"
     },
     {
       "category": "shopping",
       "english": "I'll take it",
-      "spanish": "Me lo llevo",
+      "translation": "Me lo llevo",
       "phonetic": "meh lo YEH-vo"
     },
     {
       "category": "shopping",
       "english": "Do you accept credit cards?",
-      "spanish": "¿Aceptan tarjetas de crédito?",
+      "translation": "¿Aceptan tarjetas de crédito?",
       "phonetic": "ah-SEP-tahn tar-HEH-tahs deh KREH-dee-to"
     },
     {
       "category": "emergency",
       "english": "I need help",
-      "spanish": "Necesito ayuda",
+      "translation": "Necesito ayuda",
       "phonetic": "neh-seh-SEE-to ah-YOO-dah"
     },
     {
       "category": "emergency",
       "english": "Call a doctor / ambulance",
-      "spanish": "Llame a un doctor / una ambulancia",
+      "translation": "Llame a un doctor / una ambulancia",
       "phonetic": "YAH-meh ah oon dok-TOR / OO-nah ahm-boo-LAHN-see-ah"
     },
     {
       "category": "emergency",
       "english": "Where is the nearest hospital?",
-      "spanish": "¿Dónde está el hospital más cercano?",
+      "translation": "¿Dónde está el hospital más cercano?",
       "phonetic": "DON-deh eh-STAH el os-pee-TAHL mahs ser-KAH-no"
     },
     {
       "category": "emergency",
       "english": "I am allergic to...",
-      "spanish": "Soy alérgico/a a...",
+      "translation": "Soy alérgico/a a...",
       "phonetic": "soy ah-LAIR-hee-ko/ah ah..."
     },
     {
       "category": "emergency",
       "english": "Where is the bathroom?",
-      "spanish": "¿Dónde está el baño?",
+      "translation": "¿Dónde está el baño?",
       "phonetic": "DON-deh eh-STAH el BAH-nyo"
     }
   ]

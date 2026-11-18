@@ -1,22 +1,17 @@
 import { useState } from 'react'
-import tripData from '../data/trip.json'
+import { useTrip } from '../contexts/TripContext'
 import { PhraseCard } from '../components/phrases/PhraseCard'
 
-const CATEGORIES = [
-  { key: 'greetings', label: 'Greetings' },
-  { key: 'restaurant', label: 'Restaurant' },
-  { key: 'directions', label: 'Directions' },
-  { key: 'shopping', label: 'Shopping' },
-  { key: 'emergency', label: 'Emergency' },
-]
-
+function toLabel(key) {
+  return key.charAt(0).toUpperCase() + key.slice(1)
+}
 export default function PhrasesTab() {
-  const [activeCategory, setActiveCategory] = useState('greetings')
-
-  const filteredPhrases = tripData.phrases.filter(
-    p => p.category === activeCategory
-  )
-
+  const { trip, phrases } = useTrip()
+  const categories = [...new Set(phrases.map(p => p.category))]
+  const [selected, setSelected] = useState(null)
+  const activeCategory = categories.includes(selected) ? selected : categories[0]
+  const filteredPhrases = phrases.filter(p => p.category === activeCategory)
+  const langCode = trip.language.code
   return (
     <div className="px-4 py-6">
       <h1 className="font-display text-2xl font-bold text-charcoal">
@@ -28,17 +23,17 @@ export default function PhrasesTab() {
 
       {/* Category filter pills */}
       <div className="flex gap-2 overflow-x-auto mt-4 pb-2 -mx-4 px-4 no-scrollbar">
-        {CATEGORIES.map(cat => (
+        {categories.map(cat => (
           <button
-            key={cat.key}
-            onClick={() => setActiveCategory(cat.key)}
+            key={cat}
+            onClick={() => setSelected(cat)}
             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap min-h-[44px] transition-colors ${
-              activeCategory === cat.key
+              activeCategory === cat
                 ? 'bg-teal text-white'
                 : 'border border-teal text-teal'
             }`}
           >
-            {cat.label}
+            {toLabel(cat)}
           </button>
         ))}
       </div>
@@ -46,14 +41,14 @@ export default function PhrasesTab() {
       {/* Phrase cards */}
       <div className="flex flex-col gap-3 mt-4">
         {filteredPhrases.map((phrase, i) => (
-          <PhraseCard key={`${phrase.category}-${i}`} phrase={phrase} />
+          <PhraseCard key={`${phrase.category}-${i}`} phrase={phrase} langCode={langCode} />
         ))}
       </div>
 
       {/* Google Translate link */}
       <div className="mt-6 text-center">
         <a
-          href="https://translate.google.com/?sl=en&tl=es"
+          href={`https://translate.google.com/?sl=en&tl=${langCode.split('-')[0]}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-teal font-medium text-sm underline underline-offset-2"

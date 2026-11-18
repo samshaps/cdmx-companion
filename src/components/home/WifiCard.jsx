@@ -1,11 +1,11 @@
 import { Card } from '../Card'
 import { copyToClipboard } from '../../utils/clipboard'
 import { useToast } from '../../contexts/ToastContext'
-import tripData from '../../data/trip.json'
+import { useTrip } from '../../contexts/TripContext'
 
 export function WifiCard() {
   const { showToast } = useToast()
-  const { wifi } = tripData.trip.airbnb
+  const { wifi } = useTrip().trip.stay
 
   const handleCopy = async () => {
     const ok = await copyToClipboard(wifi.password)

@@ -2,15 +2,12 @@ import { useState, useEffect } from 'react'
 
 export function useGeolocation() {
   const [position, setPosition] = useState(null)
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const supported = typeof navigator !== 'undefined' && !!navigator.geolocation
+  const [error, setError] = useState(supported ? null : 'Geolocation not supported')
+  const [loading, setLoading] = useState(supported)
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation not supported')
-      setLoading(false)
-      return
-    }
+    if (!supported) return
 
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -23,7 +20,7 @@ export function useGeolocation() {
       },
       { enableHighAccuracy: false, timeout: 10000 }
     )
-  }, [])
+  }, [supported])
 
   return { position, error, loading }
 }
