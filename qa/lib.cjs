@@ -74,6 +74,7 @@ async function createRun(name, { contextOptions = {} } = {}) {
     }, true)
   })
   const page = await context.newPage()
+  page.setDefaultTimeout(5000)
   const t0 = Date.now()
   const captions = [] // { story, text, start, end }
   const results = [] // { story, text, ok, error }
@@ -151,8 +152,15 @@ function joinVideos(name, files) {
   return out
 }
 
+// The form control under a field label, matched on the exact label text
+// (field hints live inside the <label> too, so getByLabel is ambiguous).
+function field(page, label) {
+  const exact = new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`)
+  return page.locator('label', { has: page.locator('span', { hasText: exact }) }).locator('input, textarea, select')
+}
+
 function assert(condition, message) {
   if (!condition) throw new Error(message)
 }
 
-module.exports = { startServer, createRun, joinVideos, assert, sleep, BASE_URL, ROOT }
+module.exports = { startServer, createRun, joinVideos, assert, field, sleep, BASE_URL, ROOT }

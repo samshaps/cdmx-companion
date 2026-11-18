@@ -214,6 +214,16 @@ export function normalizeTrip(input) {
   return doc
 }
 
+const defaultDayTitle = (i, count) => (i === 0 ? 'Arrival' : i === count - 1 ? 'Departure' : `Day ${i + 1}`)
+
+// Fits the itinerary to a (possibly changed) date range: days already
+// planned are kept, new dates get an empty day, dates outside the range go.
+export function reconcileItinerary(itinerary, start, end) {
+  const dates = datesBetween(start, end).slice(0, LIMITS.tripDays)
+  return dates.map((date, i) =>
+    itinerary.find((day) => day.date === date) || { date, dayTitle: defaultDayTitle(i, dates.length), events: [] })
+}
+
 // A new trip: the basics from the create form plus one empty day per date.
 export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode }) {
   const language = LANGUAGES.find((l) => l.code === languageCode) || { code: languageCode, name: '' }
@@ -228,11 +238,7 @@ export function createBlankTrip({ name, emoji, destination, start, end, homeCurr
       language,
       stay: {},
     },
-    itinerary: dates.slice(0, LIMITS.tripDays).map((date, i) => ({
-      date,
-      dayTitle: i === 0 ? 'Arrival' : i === dates.length - 1 ? 'Departure' : `Day ${i + 1}`,
-      events: [],
-    })),
+    itinerary: dates.length ? reconcileItinerary([], start, end) : [],
     places: [],
     phrases: [],
   })
