@@ -26,3 +26,6 @@ _bmad/
 
 # QA run recordings
 qa/output/
+
+# Local development trip storage
+.data/

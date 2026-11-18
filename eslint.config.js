@@ -26,4 +26,12 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    files: ['server/**/*.js', 'api/**/*.js', 'vite.config.js', 'qa/**/*.cjs'],
+    languageOptions: { globals: globals.node },
+  },
+  {
+    files: ['qa/**/*.cjs'],
+    languageOptions: { sourceType: 'commonjs' },
+  },
 ])

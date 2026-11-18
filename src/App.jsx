@@ -1,43 +1,28 @@
-import { useState } from 'react'
-import { TabBar } from './components/TabBar'
-import { OnboardingOverlay } from './components/OnboardingOverlay'
-import { ToastProvider } from './contexts/ToastContext'
-import { TripProvider } from './contexts/TripContext'
+import { TripShell } from './components/TripShell'
 import { getDemoTrip } from './data/demo'
-import HomeTab from './pages/HomeTab'
-import ScheduleTab from './pages/ScheduleTab'
-import PhrasesTab from './pages/PhrasesTab'
-import MoneyTab from './pages/MoneyTab'
-import ExploreTab from './pages/ExploreTab'
-
-const TAB_COMPONENTS = {
-  home: HomeTab,
-  schedule: ScheduleTab,
-  phrases: PhrasesTab,
-  money: MoneyTab,
-  explore: ExploreTab,
-}
+import { useRoute } from './lib/router'
+import GuestTrip from './pages/GuestTrip'
+import Landing from './pages/Landing'
+import ManageTrip from './pages/ManageTrip'
+import NewTrip from './pages/NewTrip'
 
 const demoTrip = getDemoTrip()
 
 function App() {
-  const [activeTab, setActiveTab] = useState('home')
+  const route = useRoute()
 
-  const ActiveComponent = TAB_COMPONENTS[activeTab]
-
-  return (
-    <TripProvider data={demoTrip}>
-    <ToastProvider>
-      <div className="min-h-screen bg-cream pb-20">
-        <OnboardingOverlay />
-        <div key={activeTab} className="animate-fade-in">
-          <ActiveComponent />
-        </div>
-        <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
-      </div>
-    </ToastProvider>
-    </TripProvider>
-  )
+  switch (route.name) {
+    case 'demo':
+      return <TripShell data={demoTrip} />
+    case 'new':
+      return <NewTrip />
+    case 'trip':
+      return <GuestTrip key={route.id} id={route.id} />
+    case 'edit':
+      return <ManageTrip key={route.id} id={route.id} />
+    default:
+      return <Landing />
+  }
 }
 
 export default App

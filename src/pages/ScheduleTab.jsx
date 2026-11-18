@@ -14,7 +14,7 @@ export default function ScheduleTab() {
   const { trip, itinerary } = useTrip()
   const initialDay = useCurrentDay(itinerary)
   const [selectedDay, setSelectedDay] = useState(initialDay)
-  const day = itinerary[selectedDay]
+  const day = itinerary[selectedDay] || { date: '', dayTitle: '', events: [] }
   const { nowIndex, nextIndex } = useNowNext(day.events, day.date)
 
   function getBadge(i) {
@@ -36,8 +36,11 @@ export default function ScheduleTab() {
       />
 
       <h2 className="font-display text-lg font-semibold text-charcoal mt-4 mb-3">
-        {getDayLabel(day.date, day.dayTitle)}
+        {day.date ? getDayLabel(day.date, day.dayTitle) : 'No days planned yet'}
       </h2>
+      {day.events.length === 0 && (
+        <p className="text-sm text-charcoal/50">Nothing planned for this day yet.</p>
+      )}
 
       <div className="flex flex-col gap-3">
         {day.events.map((event, i) => (

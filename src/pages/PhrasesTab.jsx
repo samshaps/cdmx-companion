@@ -38,6 +38,10 @@ export default function PhrasesTab() {
         ))}
       </div>
 
+      {phrases.length === 0 && (
+        <p className="text-sm text-charcoal/50 mt-4">No phrases have been added yet.</p>
+      )}
+
       {/* Phrase cards */}
       <div className="flex flex-col gap-3 mt-4">
         {filteredPhrases.map((phrase, i) => (

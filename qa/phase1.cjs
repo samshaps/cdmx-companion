@@ -1,7 +1,7 @@
 // Phase 1 QA: a guest's happy path through the companion app, first on the
 // bundled demo trip, then on a completely different trip to prove nothing
 // about the destination is hardcoded.
-const { startServer, createRun, assert, BASE_URL } = require('./lib.cjs')
+const { startServer, createRun, joinVideos, assert, BASE_URL } = require('./lib.cjs')
 const paris = require('./fixtures/paris.cjs')
 
 const RATES = { USD: { MXN: 18.5 }, GBP: { EUR: 1.2 } }
@@ -17,7 +17,7 @@ const tab = (page, label) => page.getByRole('navigation').getByRole('button', { 
 const visible = (page, text) => page.getByText(text, { exact: false }).first().waitFor({ timeout: 4000 })
 
 async function demoTrip() {
-  const run = await createRun('phase1-guest-demo-trip', {
+  const run = await createRun('phase1-a-demo-trip', {
     contextOptions: {
       permissions: ['geolocation', 'clipboard-read', 'clipboard-write'],
       geolocation: { latitude: 19.4116, longitude: -99.1694 }, // Parque México
@@ -28,7 +28,7 @@ async function demoTrip() {
 
   run.story('Story 1 · Guest finds the stay details')
   await run.step('Open the app: trip name, live day counter and stay address show', async () => {
-    await page.goto(BASE_URL)
+    await page.goto(`${BASE_URL}/demo`)
     await visible(page, 'Amigos en CDMX')
     await visible(page, 'Day 2 of 5!')
     await visible(page, 'Calle Ejemplo 123')
@@ -113,7 +113,7 @@ async function demoTrip() {
 }
 
 async function differentTrip() {
-  const run = await createRun('phase1-different-trip')
+  const run = await createRun('phase1-b-different-trip')
   const { page, context } = run
   await mockExchangeRates(context)
   // Swap the bundled trip for the Paris fixture at the network layer, so the
@@ -123,7 +123,7 @@ async function differentTrip() {
 
   run.story('Story 6 · Same app, a Paris trip')
   await run.step('Home shows the Paris trip, stay and wifi', async () => {
-    await page.goto(BASE_URL)
+    await page.goto(`${BASE_URL}/demo`)
     await visible(page, 'Paris Long Weekend')
     await visible(page, '10 Rue Exemple')
     await visible(page, 'MaraisGuest')
@@ -170,8 +170,9 @@ async function differentTrip() {
   const stop = await startServer()
   let failed = 0
   try {
-    failed += (await demoTrip()).failed
-    failed += (await differentTrip()).failed
+    const runs = [await demoTrip(), await differentTrip()]
+    failed = runs.reduce((n, r) => n + r.failed, 0)
+    joinVideos('phase1', runs.map((r) => r.mp4))
   } finally {
     stop()
   }

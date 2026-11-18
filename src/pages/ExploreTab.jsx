@@ -24,11 +24,9 @@ export default function ExploreTab() {
       : places.filter((p) => p.category === activeCategory)
 
     if (position) {
-      return [...filtered].sort(
-        (a, b) =>
-          getDistanceMiles(position.lat, position.lng, a.lat, a.lng) -
-          getDistanceMiles(position.lat, position.lng, b.lat, b.lng)
-      )
+      const miles = (p) =>
+        p.lat == null || p.lng == null ? Infinity : getDistanceMiles(position.lat, position.lng, p.lat, p.lng)
+      return [...filtered].sort((a, b) => miles(a) - miles(b))
     }
     return [...filtered].sort((a, b) => a.name.localeCompare(b.name))
   }, [places, activeCategory, position])
@@ -53,9 +51,13 @@ export default function ExploreTab() {
         onCategoryChange={setActiveCategory}
       />
 
+      {places.length === 0 && (
+        <p className="text-sm text-charcoal/50 text-center mt-6">No places have been saved yet.</p>
+      )}
+
       <div className="mt-4 flex flex-col gap-3">
         {sorted.map((place) => {
-          const distance = position
+          const distance = position && place.lat != null && place.lng != null
             ? getDistanceMiles(position.lat, position.lng, place.lat, place.lng)
             : null
 

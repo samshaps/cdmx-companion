@@ -18,10 +18,15 @@ const FONT_BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 async function startServer() {
+  // Every run starts from an empty trip store.
+  fs.mkdirSync(OUT, { recursive: true })
+  const storePath = path.join(OUT, '.store.json')
+  fs.rmSync(storePath, { force: true })
   const proc = spawn('npx', ['vite', '--port', String(PORT), '--strictPort'], {
     cwd: ROOT,
     stdio: 'ignore',
     detached: true,
+    env: { ...process.env, LOCAL_STORE_PATH: storePath },
   })
   for (let i = 0; i < 60; i++) {
     try {
@@ -134,8 +139,20 @@ async function createRun(name, { contextOptions = {} } = {}) {
   return run
 }
 
+// Joins the per-device recordings of a phase into one video.
+function joinVideos(name, files) {
+  const listFile = path.join(OUT, `.${name}.txt`)
+  fs.writeFileSync(listFile, files.map((f) => `file '${f}'`).join('\n'))
+  const out = path.join(OUT, `${name}.mp4`)
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', '-movflags', '+faststart', out])
+  fs.rmSync(listFile)
+  files.forEach((f) => fs.rmSync(f))
+  console.log(`\nRecording → ${path.relative(ROOT, out)}`)
+  return out
+}
+
 function assert(condition, message) {
   if (!condition) throw new Error(message)
 }
 
-module.exports = { startServer, createRun, assert, sleep, BASE_URL, ROOT }
+module.exports = { startServer, createRun, joinVideos, assert, sleep, BASE_URL, ROOT }

@@ -40,6 +40,19 @@ if (storedVersion && storedVersion !== APP_VERSION) {
   }
 }
 
+// On a trip page, point the browser at that trip's own manifest so "Add to
+// Home Screen" installs the trip (its name and link), not the landing page.
+const tripMatch = /^\/t\/([^/]+)/.exec(window.location.pathname)
+if (tripMatch) {
+  let link = document.querySelector('link[rel="manifest"]')
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'manifest'
+    document.head.appendChild(link)
+  }
+  link.href = `/api/manifest?id=${tripMatch[1]}`
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
