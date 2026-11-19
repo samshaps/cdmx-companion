@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useTrip } from '../contexts/TripContext'
 import { PhraseCard } from '../components/phrases/PhraseCard'
+import { useT } from '../i18n/LocaleContext'
 
 function toLabel(key) {
   return key.charAt(0).toUpperCase() + key.slice(1)
 }
 export default function PhrasesTab() {
   const { trip, phrases } = useTrip()
+  const t = useT()
   const categories = [...new Set(phrases.map(p => p.category))]
   const [selected, setSelected] = useState(null)
   const activeCategory = categories.includes(selected) ? selected : categories[0]
@@ -15,10 +17,10 @@ export default function PhrasesTab() {
   return (
     <div className="px-4 py-6">
       <h1 className="font-display text-2xl font-bold text-charcoal">
-        Phrases
+        {t('Phrases')}
       </h1>
       <p className="text-charcoal/50 text-sm mt-1">
-        Tap a category, then tap 🔈 to hear it spoken
+        {t('Tap a category, then tap 🔈 to hear it spoken')}
       </p>
 
       {/* Category filter pills */}
@@ -33,13 +35,13 @@ export default function PhrasesTab() {
                 : 'border border-teal text-teal'
             }`}
           >
-            {toLabel(cat)}
+            {t(toLabel(cat))}
           </button>
         ))}
       </div>
 
       {phrases.length === 0 && (
-        <p className="text-sm text-charcoal/50 mt-4">No phrases have been added yet.</p>
+        <p className="text-sm text-charcoal/50 mt-4">{t('No phrases have been added yet.')}</p>
       )}
 
       {/* Phrase cards */}
@@ -57,7 +59,7 @@ export default function PhrasesTab() {
           rel="noopener noreferrer"
           className="text-teal font-medium text-sm underline underline-offset-2"
         >
-          Open Google Translate →
+          {t('Open Google Translate →')}
         </a>
       </div>
     </div>

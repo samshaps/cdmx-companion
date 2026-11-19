@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Card } from '../Card'
 import { isSpeechSupported, speak } from '../../utils/speech'
+import { useT } from '../../i18n/LocaleContext'
 
 export function PhraseCard({ phrase, langCode }) {
   const [speechAvailable] = useState(isSpeechSupported)
   const [speaking, setSpeaking] = useState(false)
+  const t = useT()
 
   useEffect(() => {
     // Load voices (some browsers load async)
@@ -34,7 +36,7 @@ export function PhraseCard({ phrase, langCode }) {
             className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full transition-colors ${
               speaking ? 'text-marigold' : 'text-teal'
             }`}
-            aria-label={`Listen to "${phrase.translation}"`}
+            aria-label={t('Listen to "{phrase}"', { phrase: phrase.translation })}
           >
             <span className="text-xl">{speaking ? '🔊' : '🔈'}</span>
           </button>

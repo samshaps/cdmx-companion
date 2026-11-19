@@ -4,11 +4,14 @@ import { inputClass } from '../Page'
 import { SelectField, TextField } from './fields'
 import { ToolsCards } from './ToolsCards'
 import { DestinationField } from '../DestinationField'
+import { UI_LANGUAGES } from '../../../shared/i18n/index.js'
 import { SkinToast } from '../SkinToast'
+import { useT } from '../../i18n/LocaleContext'
 import { sameSkin } from '../../../shared/skins'
 import { CURRENCIES, LANGUAGES, reconcileItinerary, suggestLocale } from '../../../shared/tripSchema'
 
 export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onImport, onShowInstall }) {
+  const t = useT()
   const { trip } = doc
   const [passcode, setPasscode] = useState('')
   const [greeting, setGreeting] = useState(null)
@@ -21,7 +24,7 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
     const next = reconcileItinerary(doc.itinerary, start, end)
     const kept = new Set(next.map((d) => d.date))
     const losing = doc.itinerary.filter((d) => !kept.has(d.date) && d.events.length > 0)
-    if (losing.length && !window.confirm(`This removes ${losing.length} day(s) that have events planned. Continue?`)) return
+    if (losing.length && !window.confirm(t('This removes {count} day(s) that have events planned. Continue?', { count: losing.length }))) return
     change((d) => {
       d.trip.dates = { start, end }
       d.itinerary = next
@@ -39,7 +42,7 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
 
   return (
     <div className="flex flex-col gap-4">
-      <TextField label="Trip name" value={trip.name} onChange={(v) => change((d) => { d.trip.name = v })} maxLength={60} />
+      <TextField label={t('Trip name')} value={trip.name} onChange={(v) => change((d) => { d.trip.name = v })} maxLength={60} />
       <div className="grid grid-cols-[1fr_5rem] gap-3">
         <DestinationField
           value={trip.destination}
@@ -49,32 +52,39 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
             setGreeting(match)
           }}
         />
-        <TextField label="Flag" value={trip.emoji} onChange={(v) => change((d) => { d.trip.emoji = v })} maxLength={8} />
+        <TextField label={t('Flag')} value={trip.emoji} onChange={(v) => change((d) => { d.trip.emoji = v })} maxLength={8} />
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <TextField label="First day" type="date" value={trip.dates.start} onChange={(v) => changeDates(v, trip.dates.end < v ? v : trip.dates.end)} />
-        <TextField label="Last day" type="date" value={trip.dates.end} min={trip.dates.start} onChange={(v) => changeDates(trip.dates.start, v)} />
+        <TextField label={t('First day')} type="date" value={trip.dates.start} onChange={(v) => changeDates(v, trip.dates.end < v ? v : trip.dates.end)} />
+        <TextField label={t('Last day')} type="date" value={trip.dates.end} min={trip.dates.start} onChange={(v) => changeDates(trip.dates.start, v)} />
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <SelectField label="Your currency" value={trip.currency.home} options={CURRENCIES} onChange={(v) => change((d) => { d.trip.currency.home = v })} />
-        <SelectField label="Local currency" value={trip.currency.local} options={CURRENCIES} onChange={(v) => change((d) => { d.trip.currency.local = v })} />
+        <SelectField label={t('Your currency')} value={trip.currency.home} options={CURRENCIES} onChange={(v) => change((d) => { d.trip.currency.home = v })} />
+        <SelectField label={t('Local currency')} value={trip.currency.local} options={CURRENCIES} onChange={(v) => change((d) => { d.trip.currency.local = v })} />
       </div>
       <SelectField
-        label="Local language"
-        hint="Used for the phrase book’s pronunciation."
+        label={t('Language of the app')}
+        hint={t('What you and your guests see the app in.')}
+        value={trip.locale}
+        options={UI_LANGUAGES.map((l) => ({ value: l.code, label: l.name }))}
+        onChange={(v) => change((d) => { d.trip.locale = v })}
+      />
+      <SelectField
+        label={t('Local language')}
+        hint={t('Used for the phrase book’s pronunciation.')}
         value={trip.language.code}
         options={languageOptions}
         onChange={(v) => change((d) => { d.trip.language = { code: v, name: LANGUAGES.find((l) => l.code === v)?.name || '' } })}
       />
 
       <Card>
-        <h3 className="font-bold text-charcoal">Colours</h3>
+        <h3 className="font-bold text-charcoal">{t('Colours')}</h3>
         <p className="text-sm text-charcoal/60 mt-0.5">
           {!known
-            ? 'Pick a destination we recognise and the trip can wear the colours of its flag.'
+            ? t('Pick a destination we recognise and the trip can wear the colours of its flag.')
             : wearingFlag
-              ? `Wearing the colours of ${known.place}’s flag ${known.emoji}. Guests see them too.`
-              : `Using the original colours. ${known.place}’s flag colours are available.`}
+              ? t('Wearing the colours of {place}’s flag {emoji}. Guests see them too.', { place: known.place, emoji: known.emoji })
+              : t('Using the original colours. {place}’s flag colours are available.', { place: known.place })}
         </p>
         {known && (
           <button
@@ -82,12 +92,12 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
             onClick={() => { setGreeting(null); change((d) => { d.trip.skin = wearingFlag ? null : known.skin }) }}
             className="min-h-[44px] text-terracotta font-bold"
           >
-            {wearingFlag ? 'Back to the original colours' : `Use ${known.place}’s colours ${known.emoji}`}
+            {wearingFlag ? t('Back to the original colours') : t('Use {place}’s colours {emoji}', { place: known.place, emoji: known.emoji })}
           </button>
         )}
         {!known && trip.skin && (
           <button type="button" onClick={() => change((d) => { d.trip.skin = null })} className="min-h-[44px] text-terracotta font-bold">
-            Back to the original colours
+            {t('Back to the original colours')}
           </button>
         )}
       </Card>
@@ -103,11 +113,11 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
       )}
 
       <Card>
-        <h3 className="font-bold text-charcoal">Guest passcode</h3>
+        <h3 className="font-bold text-charcoal">{t('Guest passcode')}</h3>
         <p className="text-sm text-charcoal/60 mt-0.5">
           {hasPasscode
-            ? 'On. Guests enter it once to open the trip.'
-            : 'Off. Anyone with the guest link can open the trip.'}
+            ? t('On. Guests enter it once to open the trip.')
+            : t('Off. Anyone with the guest link can open the trip.')}
         </p>
         <form
           className="flex gap-2 mt-3"
@@ -122,16 +132,16 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
             className={inputClass}
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
-            placeholder={hasPasscode ? 'New passcode' : 'Choose a passcode'}
-            aria-label="New passcode"
+            placeholder={hasPasscode ? t('New passcode') : t('Choose a passcode')}
+            aria-label={t('New passcode')}
             maxLength={40}
             autoCapitalize="none"
           />
-          <button type="submit" className="text-terracotta font-bold px-2 whitespace-nowrap">Set</button>
+          <button type="submit" className="text-terracotta font-bold px-2 whitespace-nowrap">{t('Set')}</button>
         </form>
         {hasPasscode && (
           <button type="button" onClick={() => onSetPasscode('')} className="text-terracotta text-sm font-bold mt-2 min-h-[32px]">
-            Remove passcode
+            {t('Remove passcode')}
           </button>
         )}
       </Card>

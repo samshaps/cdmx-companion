@@ -12,9 +12,14 @@ export function LocaleProvider({ locale, children }) {
 
 // const t = useT(); t('Create a trip'); t('Step {n} of {total}', { n, total })
 // t.locale is the active language code.
+//
+// A screen that both loads a trip and sets its language (the provider is
+// inside it, so context would be one step behind) passes the trip's
+// language as `override`.
 // eslint-disable-next-line react-refresh/only-export-components
-export function useT() {
-  const locale = useContext(LocaleContext)
+export function useT(override) {
+  const inherited = useContext(LocaleContext)
+  const locale = isUiLanguage(override) ? override : inherited
   return useMemo(() => Object.assign((text, vars) => translate(locale, text, vars), { locale }), [locale])
 }
 

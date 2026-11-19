@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Field, inputClass } from '../Page'
 import { parseCoordinates } from '../../utils/coordinates'
+import { useT } from '../../i18n/LocaleContext'
 
 export function TextField({ label, hint, value, onChange, ...rest }) {
   return (
@@ -39,6 +40,7 @@ export function SelectField({ label, hint, value, onChange, options }) {
 // Coordinates power the Uber button and "sorted by distance". Organisers
 // paste a maps link rather than typing numbers.
 export function LocationField({ lat, lng, onChange }) {
+  const t = useT()
   const [text, setText] = useState('')
   const [failed, setFailed] = useState(false)
   const hasPin = lat != null && lng != null
@@ -52,18 +54,18 @@ export function LocationField({ lat, lng, onChange }) {
 
   return (
     <Field
-      label="Map pin (optional)"
+      label={t('Map pin (optional)')}
       hint={
-        failed ? 'No coordinates found in that. Open the place in Google Maps on a computer and copy the address bar.'
-          : hasPin ? `📍 Pinned at ${lat.toFixed(4)}, ${lng.toFixed(4)}`
-            : 'Paste a Google Maps link or "lat, lng". Enables Uber and distance sorting.'
+        failed ? t('No coordinates found in that. Open the place in Google Maps on a computer and copy the address bar.')
+          : hasPin ? t('📍 Pinned at {lat}, {lng}', { lat: lat.toFixed(4), lng: lng.toFixed(4) })
+            : t('Paste a Google Maps link or "lat, lng". Enables Uber and distance sorting.')
       }
     >
       <div className="flex gap-2">
-        <input className={inputClass} value={text} onChange={(e) => handleChange(e.target.value)} placeholder="Paste a maps link" aria-label="Map pin" />
+        <input className={inputClass} value={text} onChange={(e) => handleChange(e.target.value)} placeholder={t('Paste a maps link')} aria-label={t('Map pin')} />
         {hasPin && (
           <button type="button" onClick={() => { setText(''); onChange({ lat: null, lng: null }) }} className="text-terracotta text-sm font-bold px-2">
-            Clear
+            {t('Clear')}
           </button>
         )}
       </div>
@@ -72,11 +74,12 @@ export function LocationField({ lat, lng, onChange }) {
 }
 
 export function ItemCard({ title, onRemove, children }) {
+  const t = useT()
   return (
     <div className="bg-warm-gray rounded-card shadow-card p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wide text-charcoal/50">{title}</span>
-        <button type="button" onClick={onRemove} className="text-terracotta text-sm font-bold min-h-[32px]">Remove</button>
+        <button type="button" onClick={onRemove} className="text-terracotta text-sm font-bold min-h-[32px]">{t('Remove')}</button>
       </div>
       {children}
     </div>

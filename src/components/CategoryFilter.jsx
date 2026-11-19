@@ -1,12 +1,17 @@
+import { useT } from '../i18n/LocaleContext'
+
+const tx = (s) => s // marks text for translation; translated where rendered
+
 const CATEGORIES = [
-  { key: 'all', label: 'All' },
-  { key: 'eat', label: 'Eat', emoji: '🍽️' },
-  { key: 'drink', label: 'Drink', emoji: '🍺' },
-  { key: 'see', label: 'See', emoji: '👁️' },
-  { key: 'shop', label: 'Shop', emoji: '🛍️' },
+  { key: 'all', label: tx('All') },
+  { key: 'eat', label: tx('Eat'), emoji: '🍽️' },
+  { key: 'drink', label: tx('Drink'), emoji: '🍺' },
+  { key: 'see', label: tx('See'), emoji: '👁️' },
+  { key: 'shop', label: tx('Shop'), emoji: '🛍️' },
 ]
 
 export function CategoryFilter({ activeCategory, onCategoryChange }) {
+  const t = useT()
   return (
     <div className="flex gap-2 overflow-x-auto py-2 -mx-1 px-1">
       {CATEGORIES.map(({ key, label, emoji }) => {
@@ -21,7 +26,7 @@ export function CategoryFilter({ activeCategory, onCategoryChange }) {
                 : 'border border-teal text-teal'
             }`}
           >
-            {emoji ? `${emoji} ${label}` : label}
+            {emoji ? `${emoji} ${t(label)}` : t(label)}
           </button>
         )
       })}

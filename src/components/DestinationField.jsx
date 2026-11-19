@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Field, inputClass } from './Page'
+import { useT } from '../i18n/LocaleContext'
 import { searchDestinations } from '../../shared/destinations'
 
 // A type-ahead for the destination. The list narrows as you type; picking a
 // place fills in its flag, currency and language. Anything can still be typed
 // freely: a place we do not know is used exactly as written.
 export function DestinationField({ value, onType, onPick }) {
+  const t = useT()
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0)
   const matches = searchDestinations(value)
@@ -36,7 +38,7 @@ export function DestinationField({ value, onType, onPick }) {
 
   return (
     <div className="relative">
-      <Field label="Destination">
+      <Field label={t('Destination')}>
         <input
           className={inputClass}
           value={value}
@@ -49,7 +51,7 @@ export function DestinationField({ value, onType, onPick }) {
           // Delay so a tap on an option lands before the list closes.
           onBlur={() => setTimeout(() => setOpen(false), 150)}
           onKeyDown={handleKeyDown}
-          placeholder="Start typing a city or country"
+          placeholder={t('Start typing a city or country')}
           maxLength={80}
           required
           autoComplete="off"
@@ -82,7 +84,7 @@ export function DestinationField({ value, onType, onPick }) {
                 className="w-full text-left px-3 min-h-[44px] flex items-center gap-2 text-charcoal/70 border-t border-charcoal/10"
               >
                 <span className="text-lg">✏️</span>
-                <span>Use “{typed}”{matches.length === 0 ? ' and set currency and language below' : ''}</span>
+                <span>{matches.length === 0 ? t('Use “{typed}” and set currency and language below', { typed }) : t('Use “{typed}”', { typed })}</span>
               </button>
             </li>
           )}

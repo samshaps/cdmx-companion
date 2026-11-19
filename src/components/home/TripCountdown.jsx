@@ -1,7 +1,9 @@
 import { useTrip } from '../../contexts/TripContext'
+import { useT } from '../../i18n/LocaleContext'
 
 export function TripCountdown() {
   const { trip } = useTrip()
+  const t = useT()
   const today = new Date()
   const start = new Date(trip.dates.start + 'T00:00:00')
   const end = new Date(trip.dates.end + 'T00:00:00')
@@ -24,7 +26,7 @@ export function TripCountdown() {
     const dayNum = Math.floor((todayDate - startDate) / msPerDay) + 1
     return (
       <span className="text-marigold font-bold">
-        Day {dayNum} of {totalDays}!
+        {t('Day {day} of {total}!', { day: dayNum, total: totalDays })}
       </span>
     )
   }
@@ -32,7 +34,7 @@ export function TripCountdown() {
   // Post-trip
   return (
     <span className="text-charcoal/50 text-sm">
-      Trip complete
+      {t('Trip complete')}
     </span>
   )
 }

@@ -2,16 +2,20 @@ import { useState } from 'react'
 import { AddButton, ItemCard, SelectField, TextArea, TextField } from './fields'
 import { inputClass } from '../Page'
 import { DAY_SLOTS } from '../../../shared/tripSchema'
+import { dateLocale } from '../../../shared/i18n/index.js'
+import { useT } from '../../i18n/LocaleContext'
+
+const tx = (s) => s // marks text for translation; translated where rendered
 
 const CATEGORY_OPTIONS = [
-  { value: 'activity', label: '🎯 Activity' },
-  { value: 'meal', label: '🍽️ Meal' },
-  { value: 'transit', label: '🚗 Travel' },
-  { value: 'free', label: '☀️ Free time' },
+  { value: 'activity', label: tx('🎯 Activity') },
+  { value: 'meal', label: tx('🍽️ Meal') },
+  { value: 'transit', label: tx('🚗 Travel') },
+  { value: 'free', label: tx('☀️ Free time') },
 ]
 
-const dayLabel = (date) =>
-  new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+const dayLabel = (date, t) =>
+  new Date(date + 'T12:00:00').toLocaleDateString(dateLocale(t.locale), { weekday: 'short', month: 'short', day: 'numeric' })
 
 function formatTime(time24) {
   const [h, m] = time24.split(':').map(Number)
@@ -19,15 +23,17 @@ function formatTime(time24) {
 }
 
 function EventDetails({ event, set, showType }) {
+  const t = useT()
+  const categoryOptions = CATEGORY_OPTIONS.map((o) => ({ value: o.value, label: t(o.label) }))
   return (
     <>
       <div className={showType ? 'grid grid-cols-[7.5rem_1fr] gap-3' : ''}>
-        <TextField label="Time" type="time" value={event.time} onChange={set('time')} />
-        {showType && <SelectField label="Type" value={event.category} options={CATEGORY_OPTIONS} onChange={set('category')} />}
+        <TextField label={t('Time')} type="time" value={event.time} onChange={set('time')} />
+        {showType && <SelectField label={t('Type')} value={event.category} options={categoryOptions} onChange={set('category')} />}
       </div>
-      <TextField label="Where (optional)" hint="An address or place name for the Maps links." value={event.address} onChange={set('address')} maxLength={200} />
-      <TextArea label="Notes (optional)" value={event.notes} onChange={set('notes')} rows={2} maxLength={500} />
-      <TextField label="Highlighted note (optional)" hint="Stands out on the card, e.g. “Reservation confirmed 8pm”." value={event.personalNote} onChange={set('personalNote')} maxLength={300} />
+      <TextField label={t('Where (optional)')} hint={t('An address or place name for the Maps links.')} value={event.address} onChange={set('address')} maxLength={200} />
+      <TextArea label={t('Notes (optional)')} value={event.notes} onChange={set('notes')} rows={2} maxLength={500} />
+      <TextField label={t('Highlighted note (optional)')} hint={t('Stands out on the card, e.g. “Reservation confirmed 8pm”.')} value={event.personalNote} onChange={set('personalNote')} maxLength={300} />
     </>
   )
 }
@@ -35,26 +41,27 @@ function EventDetails({ event, set, showType }) {
 // One ready-made blank for a part of the day. Typing in it creates the
 // event; time, place and notes are tucked behind "Add details".
 function SlotCard({ slot, event, onName, set }) {
+  const t = useT()
   const [open, setOpen] = useState(false)
   return (
     <div data-testid={`slot-${slot.key}`} className="bg-warm-gray rounded-card shadow-card p-4 flex flex-col gap-3">
       <label className="block">
         <span className="flex items-center justify-between text-sm font-bold text-charcoal mb-1">
-          <span>{slot.emoji} {slot.label}</span>
+          <span>{slot.emoji} {t(slot.label)}</span>
           {event && <span className="font-medium text-charcoal/50">{formatTime(event.time)}</span>}
         </span>
         <input
           className={inputClass}
           value={event?.name ?? ''}
           onChange={(e) => onName(e.target.value)}
-          placeholder="Nothing planned"
-          aria-label={slot.label}
+          placeholder={t('Nothing planned')}
+          aria-label={t(slot.label)}
           maxLength={100}
         />
       </label>
       {event && (
         <button type="button" onClick={() => setOpen(!open)} className="self-start text-terracotta text-sm font-bold min-h-[32px]">
-          {open ? 'Hide details' : 'Time, place & notes'}
+          {open ? t('Hide details') : t('Time, place & notes')}
         </button>
       )}
       {event && open && <EventDetails event={event} set={set} />}
@@ -63,11 +70,12 @@ function SlotCard({ slot, event, onName, set }) {
 }
 
 export function ScheduleSection({ doc, change }) {
+  const t = useT()
   const [selected, setSelected] = useState(0)
   const index = Math.min(selected, doc.itinerary.length - 1)
   const day = doc.itinerary[index]
 
-  if (!day) return <p className="text-charcoal/60">Set the trip dates under Basics to start planning days.</p>
+  if (!day) return <p className="text-charcoal/60">{t('Set the trip dates under Basics to start planning days.')}</p>
 
   const setEvent = (i) => (key) => (value) => change((d) => { d.itinerary[index].events[i][key] = value })
 
@@ -98,14 +106,14 @@ export function ScheduleSection({ doc, change }) {
               i === index ? 'bg-teal text-white' : 'border border-teal text-teal'
             }`}
           >
-            {dayLabel(d.date)}
+            {dayLabel(d.date, t)}
           </button>
         ))}
       </div>
 
-      <TextField label="Title for this day" value={day.dayTitle} onChange={(v) => change((d) => { d.itinerary[index].dayTitle = v })} placeholder="Old town & seafood" maxLength={60} />
+      <TextField label={t('Title for this day')} value={day.dayTitle} onChange={(v) => change((d) => { d.itinerary[index].dayTitle = v })} placeholder={t('Old town & seafood')} maxLength={60} />
 
-      <p className="text-sm text-charcoal/60 -mb-1">Fill in what you have. Blanks are simply left off the guest schedule.</p>
+      <p className="text-sm text-charcoal/60 -mb-1">{t('Fill in what you have. Blanks are simply left off the guest schedule.')}</p>
       {DAY_SLOTS.map((slot) => {
         const i = day.events.findIndex((e) => e.slot === slot.key)
         return (
@@ -119,10 +127,10 @@ export function ScheduleSection({ doc, change }) {
         )
       })}
 
-      {extras.length > 0 && <h3 className="font-display text-lg font-bold text-charcoal mt-2">Also that day</h3>}
+      {extras.length > 0 && <h3 className="font-display text-lg font-bold text-charcoal mt-2">{t('Also that day')}</h3>}
       {extras.map(({ event, i }, n) => (
-        <ItemCard key={i} title={`Extra ${n + 1}`} onRemove={() => change((d) => { d.itinerary[index].events.splice(i, 1) })}>
-          <TextField label="What" value={event.name} onChange={setEvent(i)('name')} placeholder="Airport pickup" maxLength={100} />
+        <ItemCard key={i} title={t('Extra {n}', { n: n + 1 })} onRemove={() => change((d) => { d.itinerary[index].events.splice(i, 1) })}>
+          <TextField label={t('What')} value={event.name} onChange={setEvent(i)('name')} placeholder={t('Airport pickup')} maxLength={100} />
           <EventDetails event={event} set={setEvent(i)} showType />
         </ItemCard>
       ))}
@@ -131,9 +139,9 @@ export function ScheduleSection({ doc, change }) {
           d.itinerary[index].events.push({ slot: '', time: '12:00', name: '', category: 'activity', address: '', notes: '', personalNote: '' })
         })}
       >
-        Add something else
+        {t('Add something else')}
       </AddButton>
-      <p className="text-xs text-charcoal/50 text-center">Guests see everything in time order.</p>
+      <p className="text-xs text-charcoal/50 text-center">{t('Guests see everything in time order.')}</p>
     </div>
   )
 }

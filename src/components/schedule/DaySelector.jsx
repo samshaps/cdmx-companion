@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react'
+import { useT } from '../../i18n/LocaleContext'
+import { dateLocale } from '../../../shared/i18n/index.js'
 
 // One pill per day. Short trips sit centred; long ones scroll sideways, with
 // the selected day kept in view.
 export function DaySelector({ days, selectedIndex, onSelect }) {
   const selected = useRef(null)
+  const t = useT()
 
   useEffect(() => {
     selected.current?.scrollIntoView({ block: 'nearest', inline: 'center' })
@@ -14,7 +17,7 @@ export function DaySelector({ days, selectedIndex, onSelect }) {
       <div className="flex gap-2 w-max mx-auto">
         {days.map((day, i) => {
           const date = new Date(day.date + 'T12:00:00')
-          const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })
+          const dayName = date.toLocaleDateString(dateLocale(t.locale), { weekday: 'short' })
           const isActive = i === selectedIndex
           const isBookend = i === 0 || i === days.length - 1
 

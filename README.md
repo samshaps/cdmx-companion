@@ -37,6 +37,12 @@ Organisers can also set a **guest passcode**. Without it, anyone holding the gue
 
 Trips are **deleted automatically 30 days after their end date**.
 
+### Languages
+
+The interface comes in English, Spanish, French, German and Portuguese. A visitor's language is taken from their browser and can be changed from the corner of the landing page; a trip then keeps its organiser's language, so guests see it that way too. The starter phrase book pairs that language with the destination's (French → Portuguese, say).
+
+To add a language, copy `shared/i18n/es.js`, translate the values, and list it in `shared/i18n/index.js`. `npm test` fails if any string in the app is missing from a catalogue.
+
 ## Run it locally
 
 ```bash

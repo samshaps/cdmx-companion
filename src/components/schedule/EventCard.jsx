@@ -1,5 +1,6 @@
 import { Card } from '../Card'
 import { NavigateButton } from '../NavigateButton'
+import { useT } from '../../i18n/LocaleContext'
 
 const CATEGORY_EMOJI = {
   transit: '🚗',
@@ -15,25 +16,28 @@ const CATEGORY_BORDER = {
   free: 'border-l-marigold',
 }
 
-function formatTime(time24) {
+// English keeps the 12-hour "8:00 PM"; every other language gets "20:00".
+function formatTime(time24, locale) {
   const [h, m] = time24.split(':').map(Number)
+  if (locale !== 'en') return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`
   const period = h >= 12 ? 'PM' : 'AM'
   const h12 = h % 12 || 12
   return `${h12}:${m.toString().padStart(2, '0')} ${period}`
 }
 
 function Badge({ type }) {
+  const t = useT()
   if (type === 'now') {
     return (
       <span className="inline-block bg-marigold text-white text-xs font-bold px-2 py-0.5 rounded-full mb-1">
-        NOW
+        {t('NOW')}
       </span>
     )
   }
   if (type === 'next') {
     return (
       <span className="inline-block border border-teal-light text-teal-light text-xs font-bold px-2 py-0.5 rounded-full mb-1">
-        NEXT
+        {t('NEXT')}
       </span>
     )
   }
@@ -42,6 +46,7 @@ function Badge({ type }) {
 
 export function EventCard({ event, badge, destination }) {
   const { time, name, category, notes, personalNote, address } = event
+  const t = useT()
   const emoji = CATEGORY_EMOJI[category] || '📌'
   const borderClass = CATEGORY_BORDER[category] || 'border-l-charcoal'
 
@@ -52,7 +57,7 @@ export function EventCard({ event, badge, destination }) {
         <span className="text-lg mt-0.5">{emoji}</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm text-charcoal/60 font-medium">
-            {formatTime(time)}
+            {formatTime(time, t.locale)}
           </p>
           <h3 className="font-sans font-semibold text-charcoal text-base leading-tight">
             {name}

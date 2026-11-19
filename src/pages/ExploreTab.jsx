@@ -5,6 +5,10 @@ import { CategoryFilter } from '../components/CategoryFilter'
 import { useGeolocation } from '../hooks/useGeolocation'
 import { getDistanceMiles } from '../utils/distance'
 import { useTrip } from '../contexts/TripContext'
+import { useT } from '../i18n/LocaleContext'
+import { usesMiles } from '../../shared/i18n/index.js'
+
+const KM_PER_MILE = 1.609344
 
 const CATEGORY_EMOJI = {
   eat: '🍽️',
@@ -17,6 +21,8 @@ export default function ExploreTab() {
   const [activeCategory, setActiveCategory] = useState('all')
   const { position, loading: geoLoading } = useGeolocation()
   const { trip, places } = useTrip()
+  const t = useT()
+  const miles = usesMiles(t.locale)
 
   const sorted = useMemo(() => {
     const filtered = activeCategory === 'all'
@@ -24,23 +30,23 @@ export default function ExploreTab() {
       : places.filter((p) => p.category === activeCategory)
 
     if (position) {
-      const miles = (p) =>
+      const distanceTo = (p) =>
         p.lat == null || p.lng == null ? Infinity : getDistanceMiles(position.lat, position.lng, p.lat, p.lng)
-      return [...filtered].sort((a, b) => miles(a) - miles(b))
+      return [...filtered].sort((a, b) => distanceTo(a) - distanceTo(b))
     }
     return [...filtered].sort((a, b) => a.name.localeCompare(b.name))
   }, [places, activeCategory, position])
 
   const subtitle = geoLoading
-    ? '📍 Getting your location...'
+    ? t('📍 Getting your location...')
     : position
-      ? '📍 Sorted by distance from you'
-      : 'Sorted alphabetically'
+      ? t('📍 Sorted by distance from you')
+      : t('Sorted alphabetically')
 
   return (
     <div className="px-4 py-8">
       <h1 className="font-display text-2xl font-bold text-charcoal text-center">
-        Explore
+        {t('Explore')}
       </h1>
       <p className="text-center text-charcoal/50 text-sm mt-1 mb-4">
         {subtitle}
@@ -52,7 +58,7 @@ export default function ExploreTab() {
       />
 
       {places.length === 0 && (
-        <p className="text-sm text-charcoal/50 text-center mt-6">No places have been saved yet.</p>
+        <p className="text-sm text-charcoal/50 text-center mt-6">{t('No places have been saved yet.')}</p>
       )}
 
       <div className="mt-4 flex flex-col gap-3">
@@ -73,7 +79,7 @@ export default function ExploreTab() {
                 </div>
                 {distance !== null && (
                   <span className="text-sm text-terracotta/70 font-medium whitespace-nowrap mt-1">
-                    {distance.toFixed(1)} mi
+                    {miles ? `${distance.toFixed(1)} mi` : `${(distance * KM_PER_MILE).toFixed(1)} km`}
                   </span>
                 )}
               </div>

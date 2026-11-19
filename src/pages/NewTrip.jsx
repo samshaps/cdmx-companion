@@ -3,6 +3,7 @@ import { DestinationField } from '../components/DestinationField'
 import { Field, Link, Page, buttonPrimary, inputClass } from '../components/Page'
 import { SkinToast } from '../components/SkinToast'
 import { useSkin } from '../hooks/useSkin'
+import { useT } from '../i18n/LocaleContext'
 import { createTrip } from '../lib/api'
 import { rememberMyTrip } from '../lib/localTrips'
 import { navigate } from '../lib/router'
@@ -10,6 +11,7 @@ import { hasStarterPhrases } from '../../shared/phrasePacks'
 import { CURRENCIES, LANGUAGES, suggestLocale } from '../../shared/tripSchema'
 
 export default function NewTrip() {
+  const t = useT()
   const [form, setForm] = useState({
     name: '',
     destination: '',
@@ -69,14 +71,14 @@ export default function NewTrip() {
     setError('')
     setSaving(true)
     try {
-      const { id, editToken, doc } = await createTrip(form)
+      const { id, editToken, doc } = await createTrip({ ...form, locale: t.locale })
       rememberMyTrip(id, doc.trip.name, editToken)
       navigate(`/t/${id}/edit#${editToken}`)
     } catch (err) {
       setError(
-        err.status === 0 ? 'You appear to be offline.'
-          : err.status === 503 ? 'This site has no database connected yet, so trips cannot be saved.'
-            : err.message
+        err.status === 0 ? t('You appear to be offline.')
+          : err.status === 503 ? t('This site has no database connected yet, so trips cannot be saved.')
+            : t(err.message)
       )
       setSaving(false)
     }
@@ -84,48 +86,48 @@ export default function NewTrip() {
 
   return (
     <Page>
-      <Link to="/" className="text-teal text-sm font-medium">← Back</Link>
-      <h1 className="font-display text-3xl font-bold text-charcoal mt-3">Create a trip</h1>
-      <p className="text-charcoal/60 mt-1">Start with the basics. You can add the stay, schedule and places next.</p>
+      <Link to="/" className="text-teal text-sm font-medium">← {t('Back')}</Link>
+      <h1 className="font-display text-3xl font-bold text-charcoal mt-3">{t('Create a trip')}</h1>
+      <p className="text-charcoal/60 mt-1">{t('Start with the basics. You can add the stay, schedule and places next.')}</p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
-        <Field label="Trip name">
-          <input className={inputClass} value={form.name} onChange={set('name')} placeholder="Lisbon with the crew" maxLength={60} required />
+        <Field label={t('Trip name')}>
+          <input className={inputClass} value={form.name} onChange={set('name')} placeholder={t('Lisbon with the crew')} maxLength={60} required />
         </Field>
         <DestinationField value={form.destination} onType={handleDestinationTyped} onPick={handleDestinationPicked} />
         <div className="grid grid-cols-2 gap-3">
-          <Field label="First day">
+          <Field label={t('First day')}>
             <input type="date" className={inputClass} value={form.start} onChange={set('start')} required />
           </Field>
-          <Field label="Last day">
+          <Field label={t('Last day')}>
             <input type="date" className={inputClass} value={form.end} min={form.start} onChange={set('end')} required />
           </Field>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <Field label="Your currency">
+          <Field label={t('Your currency')}>
             <select className={inputClass} value={form.homeCurrency} onChange={set('homeCurrency')}>
               {CURRENCIES.map((c) => <option key={c}>{c}</option>)}
             </select>
           </Field>
-          <Field label="Local currency">
+          <Field label={t('Local currency')}>
             <select className={inputClass} value={form.localCurrency} onChange={set('localCurrency')}>
               {CURRENCIES.map((c) => <option key={c}>{c}</option>)}
             </select>
           </Field>
         </div>
-        <Field label="Local language" hint={hasStarterPhrases(form.languageCode) ? 'Your trip starts with a phrase book in this language.' : 'Used for the phrase book’s pronunciation.'}>
+        <Field label={t('Local language')} hint={hasStarterPhrases(form.languageCode) ? t('Your trip starts with a phrase book in this language.') : t('Used for the phrase book’s pronunciation.')}>
           <select className={inputClass} value={form.languageCode} onChange={set('languageCode')}>
             {LANGUAGES.map((l) => <option key={l.code} value={l.code}>{l.name}</option>)}
           </select>
         </Field>
-        <Field label="Guest passcode (optional)" hint="If set, guests must enter it once to open the trip. Good if you will add a door code.">
-          <input className={inputClass} value={form.passcode} onChange={set('passcode')} placeholder="e.g. sardine" maxLength={40} autoCapitalize="none" />
+        <Field label={t('Guest passcode (optional)')} hint={t('If set, guests must enter it once to open the trip. Good if you will add a door code.')}>
+          <input className={inputClass} value={form.passcode} onChange={set('passcode')} placeholder={t('e.g. sardine')} maxLength={40} autoCapitalize="none" />
         </Field>
 
         {error && <p role="alert" className="text-terracotta text-sm font-medium">{error}</p>}
 
         <button type="submit" disabled={saving} className={buttonPrimary}>
-          {saving ? 'Creating…' : 'Create trip'}
+          {saving ? t('Creating…') : t('Create trip')}
         </button>
       </form>
       {offer && form.skin && (

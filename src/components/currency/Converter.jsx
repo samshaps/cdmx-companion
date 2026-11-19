@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { currencySymbol, formatMoney } from '../../utils/currency'
+import { useT } from '../../i18n/LocaleContext'
 
 const QUICK_AMOUNTS = [100, 200, 500, 1000]
 
 export function Converter({ rate, home, local }) {
+  const t = useT()
   const [amount, setAmount] = useState('')
   const [direction, setDirection] = useState('home-to-local')
 
@@ -60,7 +62,7 @@ export function Converter({ rate, home, local }) {
         onClick={handleSwap}
         disabled={disabled}
         className="w-12 h-12 rounded-full bg-teal text-white text-xl flex items-center justify-center active:scale-[0.95] transition-transform disabled:opacity-40"
-        aria-label="Swap currency direction"
+        aria-label={t('Swap currency direction')}
       >
         ⇅
       </button>
@@ -98,7 +100,7 @@ export function Converter({ rate, home, local }) {
           )
         })}
       </div>
-      <p className="text-xs text-charcoal/40">Common {local} amounts</p>
+      <p className="text-xs text-charcoal/40">{t('Common {currency} amounts', { currency: local })}</p>
     </div>
   )
 }

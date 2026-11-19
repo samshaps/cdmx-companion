@@ -1,7 +1,11 @@
+import { useT } from '../i18n/LocaleContext'
+
+const tx = (s) => s // marks text for translation; translated where rendered
+
 const tabs = [
   {
     key: 'home',
-    label: 'Home',
+    label: tx('Home'),
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
@@ -11,7 +15,7 @@ const tabs = [
   },
   {
     key: 'schedule',
-    label: 'Schedule',
+    label: tx('Schedule'),
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -23,7 +27,7 @@ const tabs = [
   },
   {
     key: 'phrases',
-    label: 'Phrases',
+    label: tx('Phrases'),
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" />
@@ -32,7 +36,7 @@ const tabs = [
   },
   {
     key: 'money',
-    label: 'Money',
+    label: tx('Money'),
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="1" x2="12" y2="23" />
@@ -42,7 +46,7 @@ const tabs = [
   },
   {
     key: 'explore',
-    label: 'Explore',
+    label: tx('Explore'),
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -53,6 +57,7 @@ const tabs = [
 ]
 
 export function TabBar({ activeTab, onTabChange }) {
+  const t = useT()
   return (
     <nav
       className="fixed bottom-0 left-0 right-0 bg-white border-t border-charcoal/10 flex justify-around items-center z-50"
@@ -71,7 +76,7 @@ export function TabBar({ activeTab, onTabChange }) {
             }`}
           >
             {tab.icon}
-            <span className="text-xs mt-0.5">{tab.label}</span>
+            <span className="text-xs mt-0.5">{t(tab.label)}</span>
           </button>
         )
       })}

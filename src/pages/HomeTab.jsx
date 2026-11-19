@@ -3,9 +3,11 @@ import { TripCountdown } from '../components/home/TripCountdown'
 import { WifiCard } from '../components/home/WifiCard'
 import { getAppleMapsUrl, getGoogleMapsUrl, getUberUrl } from '../utils/deeplinks'
 import { useTrip } from '../contexts/TripContext'
+import { useT } from '../i18n/LocaleContext'
 
 export default function HomeTab() {
   const { trip } = useTrip()
+  const t = useT()
   const { stay } = trip
   const navAddress = stay.navigationAddress || stay.address
   const hasCoords = stay.lat != null && stay.lng != null
@@ -44,7 +46,7 @@ export default function HomeTab() {
         {!hasStayDetails && (
           <Card>
             <p className="text-sm text-charcoal/60 text-center">
-              Stay details have not been added yet. Check back soon.
+              {t('Stay details have not been added yet. Check back soon.')}
             </p>
           </Card>
         )}
@@ -93,11 +95,11 @@ export default function HomeTab() {
           <Card>
             <div className="flex justify-between">
               <div>
-                <p className="text-xs text-charcoal/50 uppercase tracking-wide">Check-in</p>
+                <p className="text-xs text-charcoal/50 uppercase tracking-wide">{t('Check-in')}</p>
                 <p className="text-charcoal font-bold">{stay.checkIn}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-charcoal/50 uppercase tracking-wide">Check-out</p>
+                <p className="text-xs text-charcoal/50 uppercase tracking-wide">{t('Check-out')}</p>
                 <p className="text-charcoal font-bold">{stay.checkOut}</p>
               </div>
             </div>
@@ -107,7 +109,7 @@ export default function HomeTab() {
         {/* House Manual */}
         {stay.manual.length > 0 && (
           <h2 className="font-display text-lg font-bold text-charcoal mt-6 mb-3">
-            House Manual
+            {t('House Manual')}
           </h2>
         )}
 

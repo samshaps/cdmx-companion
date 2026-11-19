@@ -10,6 +10,7 @@ import PhrasesTab from '../pages/PhrasesTab'
 import MoneyTab from '../pages/MoneyTab'
 import ExploreTab from '../pages/ExploreTab'
 import { useSkin } from '../hooks/useSkin'
+import { useT } from '../i18n/LocaleContext'
 import { canShowInstallGuide, dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
 
 const TAB_COMPONENTS = {
@@ -24,6 +25,7 @@ const TAB_COMPONENTS = {
 // `installable` trips walk first-time phone visitors through adding the app
 // to their home screen; `editHref` shows organisers a way back to the editor.
 export function TripShell({ data, banner, installable = false, editHref }) {
+  const t = useT()
   const [activeTab, setActiveTab] = useState('home')
   useSkin(data.trip.skin)
   const [installOpen, setInstallOpen] = useState(() => installable && shouldAutoShowInstallGuide())
@@ -42,7 +44,7 @@ export function TripShell({ data, banner, installable = false, editHref }) {
           {installOpen && <InstallGuide name={data.trip.name} emoji={data.trip.emoji} onClose={closeInstall} />}
           {editHref && (
             <Link to={editHref} className="fixed top-3 right-3 z-40 bg-white/90 text-teal text-sm font-bold rounded-full shadow-card px-3 py-1.5">
-              ✏️ Edit
+              ✏️ {t('Edit')}
             </Link>
           )}
           {banner && (
@@ -53,7 +55,7 @@ export function TripShell({ data, banner, installable = false, editHref }) {
             {activeTab === 'home' && canInstall && (
               <div className="text-center pb-6">
                 <button onClick={() => setInstallOpen(true)} className="min-h-[44px] text-teal font-medium text-sm underline underline-offset-2">
-                  📲 Add this trip to your home screen
+                  📲 {t('Add this trip to your home screen')}
                 </button>
               </div>
             )}

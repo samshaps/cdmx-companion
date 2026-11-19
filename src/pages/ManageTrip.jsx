@@ -8,17 +8,21 @@ import { ScheduleSection } from '../components/editor/ScheduleSection'
 import { ShareSheet } from '../components/editor/ShareSheet'
 import { StaySection } from '../components/editor/StaySection'
 import { useSkin } from '../hooks/useSkin'
+import { LocaleProvider, useT } from '../i18n/LocaleContext'
 import { fetchTrip, saveTrip } from '../lib/api'
 import { forgetMyTrip, getEditToken, rememberMyTrip } from '../lib/localTrips'
 import { dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
 
-const SECTIONS = ['Basics', 'Stay', 'Schedule', 'Places', 'Phrases']
+const tx = (s) => s // marks text for translation; translated where rendered
+
+// Each name is both the section's internal key and its English label.
+const SECTIONS = [tx('Basics'), tx('Stay'), tx('Schedule'), tx('Places'), tx('Phrases')]
 const SAVE_DELAY_MS = 800
 
 const SAVE_LABEL = {
-  saved: '✓ All changes saved',
-  dirty: 'Saving…',
-  saving: 'Saving…',
+  saved: tx('✓ All changes saved'),
+  dirty: tx('Saving…'),
+  saving: tx('Saving…'),
 }
 
 // The organiser's page for one trip. Reached through the private edit link;
@@ -34,6 +38,8 @@ export default function ManageTrip({ id }) {
   const [save, setSave] = useState({ state: 'saved', error: '' })
   const [installOpen, setInstallOpen] = useState(shouldAutoShowInstallGuide)
   const latest = useRef(null)
+  // Once the trip has loaded, this page and everything in it speak the trip's language.
+  const t = useT(doc?.trip.locale)
   useSkin(doc?.trip.skin)
   const timer = useRef(null)
 
@@ -73,7 +79,7 @@ export default function ManageTrip({ id }) {
     } catch (error) {
       setSave({
         state: 'error',
-        error: error.status === 0 ? 'You are offline. Changes will save when you edit again online.' : error.message,
+        error: error.status === 0 ? t('You are offline. Changes will save when you edit again online.') : t(error.message),
       })
     }
   }
@@ -99,21 +105,21 @@ export default function ManageTrip({ id }) {
     }).catch(() => {})
   }
 
-  if (status === 'loading') return <Page><p className="text-center text-charcoal/50 mt-20">Loading…</p></Page>
+  if (status === 'loading') return <Page><p className="text-center text-charcoal/50 mt-20">{t('Loading…')}</p></Page>
 
   if (status !== 'ready') {
     const message = {
-      denied: 'This page needs the private edit link you were given when the trip was created.',
-      notfound: 'This trip no longer exists. Trips are deleted 30 days after they end.',
-      error: 'Could not reach the server. Check your connection and try again.',
+      denied: t('This page needs the private edit link you were given when the trip was created.'),
+      notfound: t('This trip no longer exists. Trips are deleted 30 days after they end.'),
+      error: t('Could not reach the server. Check your connection and try again.'),
     }[status]
     return (
       <Page>
         <div className="text-center mt-16">
           <div className="text-5xl">🔒</div>
-          <h1 className="font-display text-2xl font-bold text-charcoal mt-4">Can’t open the organiser page</h1>
+          <h1 className="font-display text-2xl font-bold text-charcoal mt-4">{t('Can’t open the organiser page')}</h1>
           <p className="text-charcoal/70 mt-2">{message}</p>
-          <Link to="/" className="inline-block mt-6 text-teal font-bold">Go to the home page</Link>
+          <Link to="/" className="inline-block mt-6 text-teal font-bold">{t('Go to the home page')}</Link>
         </div>
       </Page>
     )
@@ -121,77 +127,79 @@ export default function ManageTrip({ id }) {
 
   const { trip } = doc
   return (
-    <Page>
-      {installOpen && (
-        <InstallGuide
-          name={trip.name}
-          emoji={trip.emoji}
-          onClose={() => {
-            dismissInstallGuide()
-            setInstallOpen(false)
-          }}
-        />
-      )}
-      <Link to="/" className="text-teal text-sm font-medium">← All trips</Link>
-      <h1 className="font-display text-3xl font-bold text-charcoal mt-3">
-        {trip.emoji} {trip.name || 'Untitled trip'}
-      </h1>
-      <p className="text-charcoal/60 mt-1">
-        {trip.destination} · {trip.dates.start} to {trip.dates.end}
-        {hasPasscode && ' · passcode on'}
-      </p>
-
-      <div className="sticky top-0 z-10 bg-cream pt-3 pb-2 -mx-5 px-5 mt-4">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar">
-          {SECTIONS.map((name) => (
-            <button
-              key={name}
-              onClick={() => setSection(name)}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap min-h-[44px] transition-colors ${
-                section === name ? 'bg-teal text-white' : 'border border-teal text-teal'
-              }`}
-            >
-              {name}
-            </button>
-          ))}
-        </div>
-        <p
-          role="status"
-          className={`text-xs mt-2 ${save.state === 'error' ? 'text-terracotta font-bold' : 'text-charcoal/50'}`}
-        >
-          {save.state === 'error' ? `Not saved: ${save.error}` : SAVE_LABEL[save.state]}
-        </p>
-      </div>
-
-      <div className="mt-4 pb-28">
-        {section === 'Basics' && (
-          <BasicsSection
-            id={id}
-            doc={doc}
-            change={change}
-            hasPasscode={hasPasscode}
-            onSetPasscode={(p) => flush(p)}
-            onImport={replaceDoc}
-            onShowInstall={() => setInstallOpen(true)}
+    <LocaleProvider locale={trip.locale}>
+      <Page>
+        {installOpen && (
+          <InstallGuide
+            name={trip.name}
+            emoji={trip.emoji}
+            onClose={() => {
+              dismissInstallGuide()
+              setInstallOpen(false)
+            }}
           />
         )}
-        {section === 'Stay' && <StaySection doc={doc} change={change} id={id} token={token} />}
-        {section === 'Schedule' && <ScheduleSection doc={doc} change={change} />}
-        {section === 'Places' && <PlacesSection doc={doc} change={change} />}
-        {section === 'Phrases' && <PhrasesSection doc={doc} change={change} />}
-      </div>
+        <Link to="/" className="text-teal text-sm font-medium">← {t('All trips')}</Link>
+        <h1 className="font-display text-3xl font-bold text-charcoal mt-3">
+          {trip.emoji} {trip.name || t('Untitled trip')}
+        </h1>
+        <p className="text-charcoal/60 mt-1">
+          {trip.destination} · {t('{start} to {end}', { start: trip.dates.start, end: trip.dates.end })}
+          {hasPasscode && <> · {t('passcode on')}</>}
+        </p>
 
-      {/* Always within reach, whichever section is open. */}
-      <div
-        className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-charcoal/10"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
-      >
-        <div className="max-w-md mx-auto px-5 py-3 grid grid-cols-2 gap-3">
-          <button onClick={() => setShareOpen(true)} className={buttonPrimary}>Share</button>
-          <Link to={`/t/${id}`} className={buttonSecondary}>Preview</Link>
+        <div className="sticky top-0 z-10 bg-cream pt-3 pb-2 -mx-5 px-5 mt-4">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            {SECTIONS.map((name) => (
+              <button
+                key={name}
+                onClick={() => setSection(name)}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap min-h-[44px] transition-colors ${
+                  section === name ? 'bg-teal text-white' : 'border border-teal text-teal'
+                }`}
+              >
+                {t(name)}
+              </button>
+            ))}
+          </div>
+          <p
+            role="status"
+            className={`text-xs mt-2 ${save.state === 'error' ? 'text-terracotta font-bold' : 'text-charcoal/50'}`}
+          >
+            {save.state === 'error' ? t('Not saved: {error}', { error: save.error }) : t(SAVE_LABEL[save.state])}
+          </p>
         </div>
-      </div>
-      {shareOpen && <ShareSheet id={id} token={token} hasPasscode={hasPasscode} onClose={() => setShareOpen(false)} />}
-    </Page>
+
+        <div className="mt-4 pb-28">
+          {section === 'Basics' && (
+            <BasicsSection
+              id={id}
+              doc={doc}
+              change={change}
+              hasPasscode={hasPasscode}
+              onSetPasscode={(p) => flush(p)}
+              onImport={replaceDoc}
+              onShowInstall={() => setInstallOpen(true)}
+            />
+          )}
+          {section === 'Stay' && <StaySection doc={doc} change={change} id={id} token={token} />}
+          {section === 'Schedule' && <ScheduleSection doc={doc} change={change} />}
+          {section === 'Places' && <PlacesSection doc={doc} change={change} />}
+          {section === 'Phrases' && <PhrasesSection doc={doc} change={change} />}
+        </div>
+
+        {/* Always within reach, whichever section is open. */}
+        <div
+          className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-charcoal/10"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+        >
+          <div className="max-w-md mx-auto px-5 py-3 grid grid-cols-2 gap-3">
+            <button onClick={() => setShareOpen(true)} className={buttonPrimary}>{t('Share')}</button>
+            <Link to={`/t/${id}`} className={buttonSecondary}>{t('Preview')}</Link>
+          </div>
+        </div>
+        {shareOpen && <ShareSheet id={id} token={token} hasPasscode={hasPasscode} onClose={() => setShareOpen(false)} />}
+      </Page>
+    </LocaleProvider>
   )
 }

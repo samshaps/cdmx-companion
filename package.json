@@ -10,7 +10,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "qa": "node qa/phase1.cjs && node qa/phase2.cjs && node qa/phase3.cjs && node qa/phase4.cjs",
+    "qa": "node qa/phase1.cjs && node qa/phase2.cjs && node qa/phase3.cjs && node qa/phase4.cjs && node qa/phase5.cjs",
     "test": "node --test \"tests/*.test.js\""
   },
   "dependencies": {

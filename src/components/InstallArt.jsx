@@ -2,6 +2,8 @@
 // with the thing to tap ringed in marigold. They are illustrations rather
 // than screenshots so they stay crisp and need no image files.
 
+import { useT } from '../i18n/LocaleContext'
+
 function Phone({ children }) {
   return (
     <div className="mx-auto w-56 h-80 rounded-[2rem] border-[6px] border-charcoal bg-white overflow-hidden relative shadow-card">
@@ -59,10 +61,11 @@ function AppIcon({ emoji, size = 'w-10 h-10 text-xl' }) {
 
 // iPhone Safari: the Share button in the bottom toolbar.
 export function IosShareArt({ emoji, top = false }) {
+  const t = useT()
   const bar = (
     <div className={`absolute ${top ? 'top-0' : 'bottom-0'} inset-x-0 h-14 bg-white/95 border-charcoal/10 ${top ? 'border-b' : 'border-t'} flex items-center gap-2 px-3 text-[#007AFF]`}>
       {!top && <span className="text-lg text-charcoal/30">‹</span>}
-      <div className="flex-1 h-8 rounded-full bg-charcoal/10 text-[10px] text-charcoal/50 flex items-center justify-center">your trip link</div>
+      <div className="flex-1 h-8 rounded-full bg-charcoal/10 text-[10px] text-charcoal/50 flex items-center justify-center">{t('your trip link')}</div>
       <Ring><ShareIcon /></Ring>
       {!top && <span className="text-lg leading-none">⋯</span>}
     </div>
@@ -82,16 +85,17 @@ function SheetRow({ icon, label, highlight }) {
 
 // The share sheet, scrolled to "Add to Home Screen".
 export function IosSheetArt({ emoji }) {
+  const t = useT()
   return (
     <Phone>
       <PagePreview emoji={emoji} />
       <div className="absolute inset-0 bg-charcoal/30" />
       <div className="absolute bottom-0 inset-x-0 rounded-t-2xl bg-[#F2F2F7] p-3 pt-4">
         <div className="rounded-xl bg-white divide-y divide-charcoal/10 px-1">
-          <SheetRow label="Copy" icon="⧉" />
-          <SheetRow label="Add Bookmark" icon="☆" />
-          <SheetRow label="Add to Home Screen" icon={<AddSquareIcon className="w-4 h-4" />} highlight />
-          <SheetRow label="Find on Page" icon="⌕" />
+          <SheetRow label={t('Copy')} icon="⧉" />
+          <SheetRow label={t('Add Bookmark')} icon="☆" />
+          <SheetRow label={t('Add to Home Screen')} icon={<AddSquareIcon className="w-4 h-4" />} highlight />
+          <SheetRow label={t('Find on Page')} icon="⌕" />
         </div>
       </div>
     </Phone>
@@ -100,13 +104,14 @@ export function IosSheetArt({ emoji }) {
 
 // The confirmation screen with "Add" at the top right.
 export function IosConfirmArt({ emoji, name }) {
+  const t = useT()
   return (
     <Phone>
       <div className="absolute inset-0 bg-[#F2F2F7]">
         <div className="flex items-center justify-between px-3 pt-4 pb-3 text-xs text-[#007AFF]">
-          <span>Cancel</span>
-          <span className="text-charcoal font-bold">Add to Home Screen</span>
-          <Ring><span className="font-bold">Add</span></Ring>
+          <span>{t('Cancel')}</span>
+          <span className="text-charcoal font-bold">{t('Add to Home Screen')}</span>
+          <Ring><span className="font-bold">{t('Add')}</span></Ring>
         </div>
         <div className="mx-3 rounded-xl bg-white p-3 flex items-center gap-3">
           <AppIcon emoji={emoji} />
@@ -139,11 +144,12 @@ export function HomeScreenArt({ emoji, name }) {
 
 // Android Chrome: the ⋮ menu at the top right.
 export function AndroidMenuArt({ emoji }) {
+  const t = useT()
   return (
     <Phone>
       <PagePreview emoji={emoji} />
       <div className="absolute top-0 inset-x-0 h-12 bg-white border-b border-charcoal/10 flex items-center gap-2 px-3">
-        <div className="flex-1 h-7 rounded-full bg-charcoal/10 text-[10px] text-charcoal/50 flex items-center justify-center">your trip link</div>
+        <div className="flex-1 h-7 rounded-full bg-charcoal/10 text-[10px] text-charcoal/50 flex items-center justify-center">{t('your trip link')}</div>
         <Ring><span className="text-xl leading-none text-charcoal px-1">⋮</span></Ring>
       </div>
     </Phone>
@@ -151,34 +157,36 @@ export function AndroidMenuArt({ emoji }) {
 }
 
 export function AndroidListArt({ emoji }) {
+  const t = useT()
   return (
     <Phone>
       <PagePreview emoji={emoji} />
       <div className="absolute inset-0 bg-charcoal/20" />
       <div className="absolute top-2 right-2 w-44 rounded-lg bg-white shadow-card py-1">
-        <SheetRow label="New tab" icon="" />
-        <SheetRow label="Share…" icon="" />
-        <SheetRow label="Add to Home screen" icon={<AddSquareIcon className="w-4 h-4" />} highlight />
-        <SheetRow label="Translate…" icon="" />
+        <SheetRow label={t('New tab')} icon="" />
+        <SheetRow label={t('Share…')} icon="" />
+        <SheetRow label={t('Add to Home screen')} icon={<AddSquareIcon className="w-4 h-4" />} highlight />
+        <SheetRow label={t('Translate…')} icon="" />
       </div>
     </Phone>
   )
 }
 
 export function AndroidConfirmArt({ emoji, name }) {
+  const t = useT()
   return (
     <Phone>
       <PagePreview emoji={emoji} />
       <div className="absolute inset-0 bg-charcoal/30 flex items-center justify-center p-4">
         <div className="w-full rounded-2xl bg-white p-4">
-          <p className="text-xs font-bold text-charcoal mb-3">Install app</p>
+          <p className="text-xs font-bold text-charcoal mb-3">{t('Install app')}</p>
           <div className="flex items-center gap-3 mb-4">
             <AppIcon emoji={emoji} />
             <span className="text-xs text-charcoal font-medium truncate">{name}</span>
           </div>
           <div className="flex justify-end gap-4 text-xs text-teal font-bold items-center">
-            <span>Cancel</span>
-            <Ring><span>Install</span></Ring>
+            <span>{t('Cancel')}</span>
+            <Ring><span>{t('Install')}</span></Ring>
           </div>
         </div>
       </div>
@@ -188,6 +196,7 @@ export function AndroidConfirmArt({ emoji, name }) {
 
 // In-app browsers (Instagram, etc.): get out to the real browser first.
 export function OpenInBrowserArt({ emoji, browser }) {
+  const t = useT()
   return (
     <Phone>
       <PagePreview emoji={emoji} />
@@ -196,8 +205,8 @@ export function OpenInBrowserArt({ emoji, browser }) {
         <span className="text-xl leading-none">⋯</span>
       </div>
       <div className="absolute top-10 right-2 w-44 rounded-lg bg-white shadow-card py-1">
-        <SheetRow label="Copy link" icon="" />
-        <SheetRow label={`Open in ${browser}`} icon="↗" highlight />
+        <SheetRow label={t('Copy link')} icon="" />
+        <SheetRow label={t('Open in {browser}', { browser })} icon="↗" highlight />
       </div>
     </Phone>
   )
