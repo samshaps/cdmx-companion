@@ -149,10 +149,12 @@ export async function handleManifest(request, env = process.env) {
   let name = 'Trip Companion'
   let startUrl = '/'
   let isOrganiser = false
+  let themeColor = '#1A535C'
   try {
     const record = id ? await getStore(env).get(`trip:${id}`) : null
     if (record) {
       name = record.doc.trip.name
+      themeColor = record.doc.trip.skin?.primary || themeColor
       startUrl = `/t/${encodeURIComponent(id)}`
       // An organiser's installed app starts with their edit key, since an
       // installed app on iPhone does not share the browser's storage.
@@ -168,7 +170,7 @@ export async function handleManifest(request, env = process.env) {
     start_url: startUrl,
     scope: '/',
     display: 'standalone',
-    theme_color: '#1A535C',
+    theme_color: themeColor,
     background_color: '#FFF5E6',
     icons: [
       { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },

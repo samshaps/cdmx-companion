@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --color-terracotta: #C2572B;
-  --color-teal: #1A535C;
+  /* Default skin, as "r g b". useSkin() overrides these per trip. */
+  --c-primary: 26 83 92;
+  --c-primary-light: 78 205 196;
+  --c-accent: 194 87 43;
+  --c-highlight: 232 168 56;
   --color-cream: #FFF5E6;
-  --color-marigold: #E8A838;
   --color-charcoal: #2D2D2D;
-  --color-light-teal: #4ECDC4;
-  --color-warm-gray: #F0EBE3;
   --radius-card: 16px;
   --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
   --tap-target-min: 44px;

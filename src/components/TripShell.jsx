@@ -9,6 +9,7 @@ import ScheduleTab from '../pages/ScheduleTab'
 import PhrasesTab from '../pages/PhrasesTab'
 import MoneyTab from '../pages/MoneyTab'
 import ExploreTab from '../pages/ExploreTab'
+import { useSkin } from '../hooks/useSkin'
 import { canShowInstallGuide, dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
 
 const TAB_COMPONENTS = {
@@ -24,6 +25,7 @@ const TAB_COMPONENTS = {
 // to their home screen; `editHref` shows organisers a way back to the editor.
 export function TripShell({ data, banner, installable = false, editHref }) {
   const [activeTab, setActiveTab] = useState('home')
+  useSkin(data.trip.skin)
   const [installOpen, setInstallOpen] = useState(() => installable && shouldAutoShowInstallGuide())
   const [canInstall] = useState(() => installable && canShowInstallGuide())
 

@@ -4,11 +4,16 @@ import { inputClass } from '../Page'
 import { SelectField, TextField } from './fields'
 import { ToolsCards } from './ToolsCards'
 import { DestinationField } from '../DestinationField'
-import { CURRENCIES, LANGUAGES, reconcileItinerary } from '../../../shared/tripSchema'
+import { SkinToast } from '../SkinToast'
+import { sameSkin } from '../../../shared/skins'
+import { CURRENCIES, LANGUAGES, reconcileItinerary, suggestLocale } from '../../../shared/tripSchema'
 
 export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onImport, onShowInstall }) {
   const { trip } = doc
   const [passcode, setPasscode] = useState('')
+  const [greeting, setGreeting] = useState(null)
+  const known = suggestLocale(trip.destination)
+  const wearingFlag = Boolean(known) && sameSkin(trip.skin, known.skin)
 
   // Moving the dates reshapes the schedule, so warn before plans are dropped.
   function changeDates(start, end) {
@@ -39,7 +44,10 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
         <DestinationField
           value={trip.destination}
           onType={(v) => change((d) => { d.trip.destination = v })}
-          onPick={(match) => change((d) => { applyLocale(d, match); d.trip.destination = match.label })}
+          onPick={(match) => {
+            change((d) => { applyLocale(d, match); d.trip.destination = match.label; d.trip.skin = match.skin })
+            setGreeting(match)
+          }}
         />
         <TextField label="Flag" value={trip.emoji} onChange={(v) => change((d) => { d.trip.emoji = v })} maxLength={8} />
       </div>
@@ -58,6 +66,41 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
         options={languageOptions}
         onChange={(v) => change((d) => { d.trip.language = { code: v, name: LANGUAGES.find((l) => l.code === v)?.name || '' } })}
       />
+
+      <Card>
+        <h3 className="font-bold text-charcoal">Colours</h3>
+        <p className="text-sm text-charcoal/60 mt-0.5">
+          {!known
+            ? 'Pick a destination we recognise and the trip can wear the colours of its flag.'
+            : wearingFlag
+              ? `Wearing the colours of ${known.place}’s flag ${known.emoji}. Guests see them too.`
+              : `Using the original colours. ${known.place}’s flag colours are available.`}
+        </p>
+        {known && (
+          <button
+            type="button"
+            onClick={() => { setGreeting(null); change((d) => { d.trip.skin = wearingFlag ? null : known.skin }) }}
+            className="min-h-[44px] text-terracotta font-bold"
+          >
+            {wearingFlag ? 'Back to the original colours' : `Use ${known.place}’s colours ${known.emoji}`}
+          </button>
+        )}
+        {!known && trip.skin && (
+          <button type="button" onClick={() => change((d) => { d.trip.skin = null })} className="min-h-[44px] text-terracotta font-bold">
+            Back to the original colours
+          </button>
+        )}
+      </Card>
+
+      {greeting && trip.skin && (
+        <SkinToast
+          hello={greeting.hello}
+          emoji={greeting.emoji}
+          place={greeting.place}
+          onKeep={() => setGreeting(null)}
+          onRevert={() => { setGreeting(null); change((d) => { d.trip.skin = null }) }}
+        />
+      )}
 
       <Card>
         <h3 className="font-bold text-charcoal">Guest passcode</h3>

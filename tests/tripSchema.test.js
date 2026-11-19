@@ -61,7 +61,8 @@ test('changing dates keeps planned days and adds empty ones', () => {
 })
 
 test('destinations suggest a currency and language', () => {
-  assert.deepEqual(suggestLocale('Mexico City'), { emoji: '🇲🇽', currency: 'MXN', language: 'es-MX' })
+  const mexico = suggestLocale('Mexico City')
+  assert.deepEqual([mexico.emoji, mexico.currency, mexico.language, mexico.hello], ['🇲🇽', 'MXN', 'es-MX', '¡Hola!'])
   assert.equal(suggestLocale('São Paulo').language, 'pt-BR')
   assert.equal(suggestLocale('Lagos, Portugal').currency, 'EUR')
   assert.equal(suggestLocale('a week in new york').emoji, '🇺🇸')
@@ -91,4 +92,40 @@ test('events remember which part of the day they fill', () => {
   const doc = createBlankTrip(basics)
   doc.itinerary[0].events = [{ time: '19:30', name: 'Dinner', slot: 'dinner' }, { time: '09:00', name: 'Pickup', slot: 'brunch' }]
   assert.deepEqual(normalizeTrip(doc).itinerary[0].events.map((e) => e.slot), ['', 'dinner'])
+})
+
+test('US states are destinations with their own cities, colours and greetings', async () => {
+  const { searchDestinations } = await import('../shared/destinations.js')
+  assert.deepEqual(searchDestinations('tex').map((d) => d.label).slice(0, 2), ['Texas, USA', 'Austin, Texas'])
+  assert.equal(suggestLocale('Maui').hello, 'Aloha!')
+  assert.equal(suggestLocale('Maui').currency, 'USD')
+  assert.equal(suggestLocale('Georgia').place, 'Georgia') // the state wins a tie with the country
+  assert.equal(suggestLocale('Tbilisi').place, 'Georgia (country)')
+  assert.equal(suggestLocale('Aruba').hello, 'Bon dia!')
+})
+
+test('every destination skin is readable', async () => {
+  const { searchDestinations } = await import('../shared/destinations.js')
+  const { contrast } = await import('../shared/skins.js')
+  const seen = new Set()
+  for (const letter of 'abcdefghijklmnopqrstuvwxyz') {
+    for (const place of searchDestinations(letter, 1000)) {
+      seen.add(place.place)
+      assert.ok(contrast(place.skin.primary, '#FFFFFF') >= 4.5, `${place.place} primary`)
+      assert.ok(contrast(place.skin.accent, '#FFF5E6') >= 4, `${place.place} accent`)
+      assert.ok(contrast(place.skin.highlight, '#FFF5E6') >= 1.7, `${place.place} highlight`)
+      assert.ok(place.hello, `${place.place} hello`)
+    }
+  }
+  assert.ok(seen.size >= 150, `only ${seen.size} places`)
+})
+
+test('skins are stored only as three real colours', () => {
+  const doc = createBlankTrip({ ...basics, skin: suggestLocale('Lisbon').skin })
+  assert.match(doc.trip.skin.primary, /^#[0-9A-F]{6}$/)
+  assert.equal(createBlankTrip({ ...basics, skin: { primary: 'red', accent: '#000000', highlight: '#FFFFFF' } }).trip.skin, null)
+  assert.equal(createBlankTrip(basics).trip.skin, null)
+  // A skin that would be unreadable is darkened on the way in.
+  const pale = createBlankTrip({ ...basics, skin: { primary: '#FFFF00', accent: '#FFFFFF', highlight: '#FFFFFF' } }).trip.skin
+  assert.notEqual(pale.primary, '#FFFF00')
 })

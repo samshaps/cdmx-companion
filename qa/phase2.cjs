@@ -9,6 +9,9 @@ const day = (offset) => {
 }
 const visible = (page, text) => page.getByText(text, { exact: false }).first().waitFor({ timeout: 4000 })
 const tab = (page, label) => page.getByRole('navigation').getByRole('button', { name: label })
+const ORIGINAL_TEAL = '26 83 92'
+const PORTUGAL_GREEN = '0 104 71'
+const primaryColour = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-primary').trim())
 const api = (id) => `${BASE_URL}/api/trips?id=${encodeURIComponent(id)}`
 
 async function organiser() {
@@ -36,6 +39,27 @@ async function organiser() {
     assert((await page.getByLabel('Local currency').inputValue()) === 'EUR', 'local currency should be EUR')
     assert((await page.getByLabel('Local language').inputValue()) === 'pt-PT', 'language should be Portuguese')
   })
+  await run.step('The page changes into Portugal’s flag colours and says “Olá!”', async () => {
+    await page.getByRole('status', { name: 'Trip colours changed' }).waitFor()
+    await visible(page, 'Olá!')
+    await visible(page, 'wearing the colours of Portugal’s flag')
+    assert((await primaryColour(page)) === PORTUGAL_GREEN, `primary colour was ${await primaryColour(page)}`)
+  })
+  await run.step('US states work too: Texas says “Howdy!”, and “Back to the original” undoes its colours', async () => {
+    await page.getByLabel('Destination').fill('Tex')
+    await page.getByRole('option', { name: /Texas, USA/ }).click()
+    await visible(page, 'Howdy!')
+    assert((await page.getByLabel('Local currency').inputValue()) === 'USD', 'Texas should use dollars')
+    await page.getByRole('button', { name: 'Back to the original' }).click()
+    assert((await primaryColour(page)) === ORIGINAL_TEAL, 'colours should revert')
+  })
+  await run.step('Back to Lisbon, and this time keep the colours', async () => {
+    await page.getByLabel('Destination').fill('Lisb')
+    await page.getByRole('option', { name: /Lisbon, Portugal/ }).click()
+    await page.getByRole('button', { name: 'Keep them' }).click()
+    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'Portugal colours should be back')
+    assert((await page.getByRole('status', { name: 'Trip colours changed' }).count()) === 0, 'popup should be gone')
+  })
   await run.step('Pick dates and set a guest passcode', async () => {
     await page.getByLabel('First day').fill(day(-1))
     await page.getByLabel('Last day').fill(day(1))
@@ -61,6 +85,14 @@ async function organiser() {
     await page.getByRole('button', { name: 'Copy guest link' }).click()
     assert((await page.evaluate(() => navigator.clipboard.readText())) === links.guest, 'clipboard should hold the guest link')
     await page.getByRole('dialog').getByRole('button', { name: 'Close' }).last().click()
+  })
+  await run.step('Basics has a Colours switch: original and back to the flag', async () => {
+    await page.getByRole('button', { name: 'Back to the original colours' }).scrollIntoViewIfNeeded()
+    await page.getByRole('button', { name: 'Back to the original colours' }).click()
+    assert((await primaryColour(page)) === ORIGINAL_TEAL, 'editor should return to the original colours')
+    await page.getByRole('button', { name: /Use Portugal’s colours/ }).click()
+    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'editor should wear the flag colours again')
+    await page.getByRole('status').filter({ hasText: 'All changes saved' }).waitFor()
   })
   await run.step('Share stays at the bottom of every section', async () => {
     for (const name of ['Stay', 'Schedule', 'Places', 'Phrases']) {
@@ -108,6 +140,7 @@ async function guest(links) {
     await page.getByRole('button', { name: 'Open trip' }).click()
     await visible(page, 'Day 2 of 3!')
     await visible(page, 'Stay details have not been added yet')
+    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'guests should see the flag colours')
   })
   await run.step('Schedule has one day per date, ready to be filled in', async () => {
     await tab(page, 'Schedule').click()

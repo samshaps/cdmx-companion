@@ -7,6 +7,7 @@ import { PlacesSection } from '../components/editor/PlacesSection'
 import { ScheduleSection } from '../components/editor/ScheduleSection'
 import { ShareSheet } from '../components/editor/ShareSheet'
 import { StaySection } from '../components/editor/StaySection'
+import { useSkin } from '../hooks/useSkin'
 import { fetchTrip, saveTrip } from '../lib/api'
 import { forgetMyTrip, getEditToken, rememberMyTrip } from '../lib/localTrips'
 import { dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
@@ -33,6 +34,7 @@ export default function ManageTrip({ id }) {
   const [save, setSave] = useState({ state: 'saved', error: '' })
   const [installOpen, setInstallOpen] = useState(shouldAutoShowInstallGuide)
   const latest = useRef(null)
+  useSkin(doc?.trip.skin)
   const timer = useRef(null)
 
   useEffect(() => {

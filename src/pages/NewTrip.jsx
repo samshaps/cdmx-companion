@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { DestinationField } from '../components/DestinationField'
 import { Field, Link, Page, buttonPrimary, inputClass } from '../components/Page'
+import { SkinToast } from '../components/SkinToast'
+import { useSkin } from '../hooks/useSkin'
 import { createTrip } from '../lib/api'
 import { rememberMyTrip } from '../lib/localTrips'
 import { navigate } from '../lib/router'
@@ -18,7 +20,14 @@ export default function NewTrip() {
     localCurrency: 'EUR',
     languageCode: 'es-ES',
     passcode: '',
+    skin: null,
   })
+  // The recognised place whose colours are on offer, and the one (if any)
+  // the organiser has already said no to.
+  const [offer, setOffer] = useState(null)
+  const [declined, setDeclined] = useState('')
+  const [greeted, setGreeted] = useState('')
+  useSkin(form.skin)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
 
@@ -29,13 +38,30 @@ export default function NewTrip() {
   // Picking from the list sets flag, currency and language. Free typing does
   // too when it names a place we know; otherwise the flag is cleared and the
   // currency and language are left for the organiser to choose.
-  function handleDestinationTyped(destination) {
-    const guess = suggestLocale(destination)
-    setForm((f) => ({ ...f, destination, ...(guess ? applyLocale(guess) : { emoji: '' }) }))
+  // A newly recognised place also puts the trip in its flag's colours and
+  // says hello; a place the organiser already declined is left alone.
+  function recognise(destination, match) {
+    const wear = match && match.place !== declined
+    setForm((f) => ({
+      ...f,
+      destination,
+      ...(match ? applyLocale(match) : { emoji: '' }),
+      skin: wear ? match.skin : null,
+    }))
+    if (wear && match.place !== greeted) {
+      setOffer(match)
+      setGreeted(match.place)
+    }
+    if (!match) setOffer(null)
   }
 
-  function handleDestinationPicked(match) {
-    setForm((f) => ({ ...f, destination: match.label, ...applyLocale(match) }))
+  const handleDestinationTyped = (destination) => recognise(destination, suggestLocale(destination))
+  const handleDestinationPicked = (match) => recognise(match.label, match)
+
+  function revertSkin() {
+    setDeclined(offer.place)
+    setOffer(null)
+    setForm((f) => ({ ...f, skin: null }))
   }
 
   async function handleSubmit(e) {
@@ -102,6 +128,9 @@ export default function NewTrip() {
           {saving ? 'Creating…' : 'Create trip'}
         </button>
       </form>
+      {offer && form.skin && (
+        <SkinToast hello={offer.hello} emoji={offer.emoji} place={offer.place} onKeep={() => setOffer(null)} onRevert={revertSkin} />
+      )}
     </Page>
   )
 }

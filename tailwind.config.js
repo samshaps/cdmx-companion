@@ -7,13 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        terracotta: '#C2572B',
+        // The three brand colours are CSS variables so a trip can wear the
+        // colours of its destination's flag (see shared/skins.js). The names
+        // describe the default skin: teal = primary, terracotta = accent,
+        // marigold = highlight.
+        terracotta: 'rgb(var(--c-accent) / <alpha-value>)',
         teal: {
-          DEFAULT: '#1A535C',
-          light: '#4ECDC4',
+          DEFAULT: 'rgb(var(--c-primary) / <alpha-value>)',
+          light: 'rgb(var(--c-primary-light) / <alpha-value>)',
         },
         cream: '#FFF5E6',
-        marigold: '#E8A838',
+        marigold: 'rgb(var(--c-highlight) / <alpha-value>)',
         charcoal: '#2D2D2D',
         'warm-gray': '#F0EBE3',
       },

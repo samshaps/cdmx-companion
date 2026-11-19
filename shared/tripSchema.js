@@ -1,6 +1,7 @@
 // The trip document: its shape, limits and defaults. Shared by the browser
 // (forms) and the server (validation), so both agree on what a trip is.
 import { starterPhrases } from './phrasePacks.js'
+import { normalizeSkin } from './skins.js'
 
 export { searchDestinations, suggestLocale } from './destinations.js'
 
@@ -150,6 +151,8 @@ export function normalizeTrip(input) {
         local: currencyCode(t.currency?.local, 'USD'),
       },
       language: { code: langCode, name: text(t.language?.name, 40) },
+      // Flag-colour skin, or null for the original colours.
+      skin: normalizeSkin(t.skin),
       stay: {
         name: text(stay.name, 100),
         address: text(stay.address, 200),
@@ -219,7 +222,7 @@ export function reconcileItinerary(itinerary, start, end) {
 
 // A new trip: the basics from the create form, one empty day per date, and
 // a starter phrase book when we have one for the language.
-export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode }) {
+export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode, skin }) {
   const language = LANGUAGES.find((l) => l.code === languageCode) || { code: languageCode, name: '' }
   const dates = ISO_DATE.test(start || '') && ISO_DATE.test(end || '') && end >= start ? datesBetween(start, end) : []
   return normalizeTrip({
@@ -230,6 +233,7 @@ export function createBlankTrip({ name, emoji, destination, start, end, homeCurr
       dates: { start, end },
       currency: { home: homeCurrency, local: localCurrency },
       language,
+      skin,
       stay: {},
     },
     itinerary: dates.length ? reconcileItinerary([], start, end) : [],
