@@ -55,8 +55,23 @@ export async function assertPublicUrl(urlString, lookup = dns.lookup) {
   return url
 }
 
+// Search and browse pages describe many places (or none), so anything read
+// from them would be a guess. Ask for the listing's own page instead.
+const NOT_A_LISTING = [
+  [/(^|\.)airbnb\.[a-z.]+$/, /^\/(rooms|h|luxury\/listing)\//, 'That is an Airbnb search page. Open the listing itself and paste that link (it has /rooms/ in it).'],
+  [/(^|\.)vrbo\.com$/, /^\/(\d|[a-z-]+\/p\d)/, 'That is a Vrbo search page. Open the listing itself and paste that link.'],
+  [/(^|\.)booking\.com$/, /^\/hotel\//, 'That is a Booking.com search page. Open the hotel’s own page and paste that link.'],
+]
+
+export function assertListingUrl(url) {
+  for (const [host, listingPath, message] of NOT_A_LISTING) {
+    if (host.test(url.hostname) && !listingPath.test(url.pathname)) throw new PreviewError(message)
+  }
+}
+
 async function fetchPage(urlString) {
   let url = await assertPublicUrl(urlString)
+  assertListingUrl(url)
   for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
     const res = await fetch(url, {
       redirect: 'manual',
@@ -107,8 +122,8 @@ function metaContent(html, name) {
 const LODGING_TYPES = /^(Hotel|Motel|Hostel|Resort|BedAndBreakfast|LodgingBusiness|VacationRental|Apartment|House|Accommodation|SingleFamilyResidence|Campground)$/
 
 // Structured data ("JSON-LD") is how listing sites describe a place to
-// search engines. Returns the first block that describes somewhere to stay.
-function lodgingData(html) {
+// search engines. Returns every block that describes somewhere to stay.
+function lodgingNodes(html) {
   const nodes = []
   for (const match of html.matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
     try {
@@ -117,7 +132,7 @@ function lodgingData(html) {
     } catch { /* malformed block: skip it */ }
   }
   const typesOf = (node) => [].concat(node?.['@type'] || [])
-  return nodes.find((node) => typesOf(node).some((type) => LODGING_TYPES.test(type))) || null
+  return nodes.filter((node) => typesOf(node).some((type) => LODGING_TYPES.test(type)))
 }
 
 function clock(value) {
@@ -137,7 +152,12 @@ function firstImage(image) {
 }
 
 export function extractStay(html) {
-  const data = lodgingData(html) || {}
+  const places = lodgingNodes(html)
+  // Several different places on one page means a list, not a listing.
+  if (new Set(places.map((p) => p.name).filter(Boolean)).size > 1) {
+    throw new PreviewError('That page lists several places. Open the one you booked and paste that link.')
+  }
+  const data = places[0] || {}
   const address = data.address && typeof data.address === 'object' ? data.address : {}
   const street = text(address.streetAddress, 120)
   const country = typeof address.addressCountry === 'object' ? address.addressCountry?.name : address.addressCountry

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
-import { assertPublicUrl, extractStay, handlePreview, isPublicAddress, PreviewError } from '../server/linkPreview.js'
+import { assertListingUrl, assertPublicUrl, extractStay, handlePreview, isPublicAddress, PreviewError } from '../server/linkPreview.js'
 import { handleTrips } from '../server/trips.js'
 
 const page = (jsonLd, head = '') =>
@@ -55,6 +55,19 @@ test('falls back to the page’s share title and image', () => {
   )
   assert.equal(extractStay('<meta property="og:image" content="http://insecure.example/a.jpg">').photo, '')
   assert.equal(extractStay('<script type="application/ld+json">{not json</script>').name, '')
+})
+
+test('search pages are turned away with a pointer to the listing', () => {
+  const search = 'https://www.airbnb.com/s/Big-Sky--MT/homes?checkin=2026-12-10'
+  assert.throws(() => assertListingUrl(new URL(search)), /Open the listing itself/)
+  assert.throws(() => assertListingUrl(new URL('https://www.booking.com/searchresults.html?ss=Lisbon')), PreviewError)
+  assert.doesNotThrow(() => assertListingUrl(new URL('https://www.airbnb.com/rooms/20669368')))
+  assert.doesNotThrow(() => assertListingUrl(new URL('https://www.airbnb.co.uk/rooms/20669368?adults=2')))
+  assert.doesNotThrow(() => assertListingUrl(new URL('https://www.booking.com/hotel/pt/memmo-alfama.html')))
+  assert.doesNotThrow(() => assertListingUrl(new URL('https://www.some-hotel.example/rooms')))
+  // A page describing several different places is a list, whatever its address.
+  const list = [{ '@type': 'Hotel', name: 'Deluxe King' }, { '@type': 'Hotel', name: 'Lodge Suite' }]
+  assert.throws(() => extractStay(page(list)), /lists several places/)
 })
 
 test('only public https addresses may be fetched', async () => {

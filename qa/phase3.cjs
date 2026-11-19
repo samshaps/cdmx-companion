@@ -45,6 +45,16 @@ async function organiserBuilds(links) {
     assert((await field(page, 'Name of the place').inputValue()) === 'Alfama Rooftop Flat', 'name should come from the listing')
     assert((await field(page, 'Photo link (optional)').inputValue()) === '/images/demo-stay.svg', 'photo should come from the listing')
   })
+  await run.step('The photo shows as a thumbnail; “Remove photo” clears it, and it can be put back', async () => {
+    const preview = page.getByAltText('Preview of the stay photo')
+    await preview.scrollIntoViewIfNeeded()
+    assert(await preview.evaluate((img) => img.complete && img.naturalWidth > 0), 'thumbnail should have loaded')
+    await page.getByRole('button', { name: 'Remove photo' }).click()
+    assert((await field(page, 'Photo link (optional)').inputValue()) === '', 'photo link should be cleared')
+    assert((await preview.count()) === 0, 'thumbnail should be gone')
+    await field(page, 'Photo link (optional)').fill('/images/demo-stay.svg')
+    await preview.waitFor()
+  })
   await run.step('Type in the rest: address, wifi and check-in times', async () => {
     await field(page, 'Address').fill('Rua Exemplo 12, Alfama, Lisbon')
     await field(page, 'Wifi network').fill('AlfamaGuest')

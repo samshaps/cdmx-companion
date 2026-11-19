@@ -1,5 +1,26 @@
+import { useState } from 'react'
 import { AddButton, ItemCard, LocationField, TextArea, TextField } from './fields'
 import { StayLinkField } from './StayLinkField'
+
+// Shows the photo as guests will see it at the top of Home, so a broken or
+// wrong link is obvious, with a one-tap way to clear it.
+function PhotoPreview({ src, onRemove }) {
+  const [broken, setBroken] = useState(false)
+  return (
+    <div className="relative -mt-2 rounded-card overflow-hidden bg-teal/20 h-36 flex items-center justify-center">
+      {broken
+        ? <p className="text-sm text-charcoal/70 px-4 text-center">This link does not load as a picture, so guests will not see a photo.</p>
+        : <img src={src} alt="Preview of the stay photo" className="w-full h-full object-cover" onError={() => setBroken(true)} />}
+      <button
+        type="button"
+        onClick={onRemove}
+        className="absolute top-2 right-2 bg-white/90 text-terracotta text-sm font-bold rounded-full shadow-card px-3 min-h-[36px]"
+      >
+        Remove photo
+      </button>
+    </div>
+  )
+}
 
 export function StaySection({ doc, change, id, token }) {
   const { stay } = doc.trip
@@ -31,6 +52,7 @@ export function StaySection({ doc, change, id, token }) {
       />
       <LocationField lat={stay.lat} lng={stay.lng} onChange={({ lat, lng }) => change((d) => { d.trip.stay.lat = lat; d.trip.stay.lng = lng })} />
       <TextField label="Photo link (optional)" hint="A web address starting with https:// of a photo of the place." value={stay.photo} onChange={set('photo')} placeholder="https://…" maxLength={500} />
+      {stay.photo && <PhotoPreview key={stay.photo} src={stay.photo} onRemove={() => set('photo')('')} />}
 
       <div className="grid grid-cols-2 gap-3">
         <TextField label="Wifi network" value={stay.wifi.network} onChange={(v) => change((d) => { d.trip.stay.wifi.network = v })} maxLength={100} autoCapitalize="none" />
