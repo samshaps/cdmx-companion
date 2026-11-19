@@ -1,7 +1,9 @@
 // Colour skins. The app has three brand colours; a skin swaps them for the
-// colours of a destination's flag. Background, cards and text never change,
-// and every skin is nudged darker until it is readable, so no flag can
-// produce an unusable screen.
+// colours of a destination's flag, and washes the page and its cards in a
+// pale tint of the third one so the change is obvious at a glance. Text
+// colour never changes, surfaces always stay light, and every skin is nudged
+// darker until it is readable on them, so no flag can produce an unusable
+// screen.
 //
 //   primary    buttons, selected pills, headings' accents (white text sits on it)
 //   accent     links and secondary actions (sits on the cream background)
@@ -10,6 +12,7 @@
 export const DEFAULT_SKIN = { primary: '#1A535C', accent: '#C2572B', highlight: '#E8A838' }
 
 const BACKGROUND = '#FFF5E6'
+const CARD = '#F0EBE3'
 
 // Flag colours by name, so the destination table stays readable.
 const NAMED = {
@@ -47,12 +50,22 @@ function darkenUntil(hex, against, ratio) {
 
 const mix = (hex, other, amount) => toHex(channels(hex).map((c, i) => c + (channels(other)[i] - c) * amount))
 
-// Makes three colours safe to use as a skin.
+// The page background and card colour a skin produces: white with a little
+// of the highlight colour stirred in (cards get more, as in the original).
+export function skinSurfaces(skin) {
+  if (!skin) return { background: BACKGROUND, card: CARD }
+  return { background: mix('#FFFFFF', skin.highlight, 0.22), card: mix('#FFFFFF', skin.highlight, 0.36) }
+}
+
+// Makes three colours safe to use as a skin: readable on the surfaces they
+// will sit on.
 export function makeSkin(primary, accent, highlight) {
+  const safeHighlight = darkenUntil(highlight, '#FFFFFF', 1.8)
+  const { card } = skinSurfaces({ highlight: safeHighlight })
   return {
-    primary: darkenUntil(primary, BACKGROUND, 4.5),
-    accent: darkenUntil(accent, BACKGROUND, 4),
-    highlight: darkenUntil(highlight, BACKGROUND, 1.7),
+    primary: darkenUntil(primary, card, 4.5),
+    accent: darkenUntil(accent, card, 4),
+    highlight: safeHighlight,
   }
 }
 
@@ -76,7 +89,10 @@ export const sameSkin = (a, b) =>
 export function skinCssVars(skin) {
   const s = skin || DEFAULT_SKIN
   const rgb = (hex) => channels(hex).join(' ')
+  const surfaces = skinSurfaces(skin)
   return {
+    '--c-background': rgb(surfaces.background),
+    '--c-card': rgb(surfaces.card),
     '--c-primary': rgb(s.primary),
     '--c-primary-light': rgb(skin ? mix(s.primary, '#FFFFFF', 0.45) : '#4ECDC4'),
     '--c-accent': rgb(s.accent),

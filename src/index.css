@@ -8,7 +8,8 @@
   --c-primary-light: 78 205 196;
   --c-accent: 194 87 43;
   --c-highlight: 232 168 56;
-  --color-cream: #FFF5E6;
+  --c-background: 255 245 230;
+  --c-card: 240 235 227;
   --color-charcoal: #2D2D2D;
   --radius-card: 16px;
   --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
@@ -29,7 +30,8 @@
 
 body {
   margin: 0;
-  background-color: var(--color-cream);
+  background-color: rgb(var(--c-background));
+  transition: background-color 300ms ease;
   color: var(--color-charcoal);
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;

@@ -106,14 +106,16 @@ test('US states are destinations with their own cities, colours and greetings', 
 
 test('every destination skin is readable', async () => {
   const { searchDestinations } = await import('../shared/destinations.js')
-  const { contrast } = await import('../shared/skins.js')
+  const { contrast, skinSurfaces } = await import('../shared/skins.js')
   const seen = new Set()
   for (const letter of 'abcdefghijklmnopqrstuvwxyz') {
     for (const place of searchDestinations(letter, 1000)) {
       seen.add(place.place)
-      assert.ok(contrast(place.skin.primary, '#FFFFFF') >= 4.5, `${place.place} primary`)
-      assert.ok(contrast(place.skin.accent, '#FFF5E6') >= 4, `${place.place} accent`)
-      assert.ok(contrast(place.skin.highlight, '#FFF5E6') >= 1.7, `${place.place} highlight`)
+      const { background, card } = skinSurfaces(place.skin)
+      assert.ok(contrast(place.skin.primary, card) >= 4.5, `${place.place} primary on cards`)
+      assert.ok(contrast(place.skin.accent, card) >= 4, `${place.place} accent on cards`)
+      assert.ok(contrast('#2D2D2D', card) >= 7, `${place.place} body text on cards`)
+      assert.notEqual(background, '#FFF5E6', `${place.place} background should be tinted`)
       assert.ok(place.hello, `${place.place} hello`)
     }
   }

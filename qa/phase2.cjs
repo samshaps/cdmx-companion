@@ -11,6 +11,8 @@ const visible = (page, text) => page.getByText(text, { exact: false }).first().w
 const tab = (page, label) => page.getByRole('navigation').getByRole('button', { name: label })
 const ORIGINAL_TEAL = '26 83 92'
 const PORTUGAL_GREEN = '0 104 71'
+const backgroundColour = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-background').trim())
+const ORIGINAL_CREAM = '255 245 230'
 const primaryColour = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-primary').trim())
 const api = (id) => `${BASE_URL}/api/trips?id=${encodeURIComponent(id)}`
 
@@ -44,6 +46,7 @@ async function organiser() {
     await visible(page, 'Olá!')
     await visible(page, 'wearing the colours of Portugal’s flag')
     assert((await primaryColour(page)) === PORTUGAL_GREEN, `primary colour was ${await primaryColour(page)}`)
+    assert((await backgroundColour(page)) !== ORIGINAL_CREAM, 'the page background should be tinted too')
   })
   await run.step('US states work too: Texas says “Howdy!”, and “Back to the original” undoes its colours', async () => {
     await page.getByLabel('Destination').fill('Tex')
@@ -52,6 +55,7 @@ async function organiser() {
     assert((await page.getByLabel('Local currency').inputValue()) === 'USD', 'Texas should use dollars')
     await page.getByRole('button', { name: 'Back to the original' }).click()
     assert((await primaryColour(page)) === ORIGINAL_TEAL, 'colours should revert')
+    assert((await backgroundColour(page)) === ORIGINAL_CREAM, 'the background should revert too')
   })
   await run.step('Back to Lisbon, and this time keep the colours', async () => {
     await page.getByLabel('Destination').fill('Lisb')
