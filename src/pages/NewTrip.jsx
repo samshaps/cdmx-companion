@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { DestinationField } from '../components/DestinationField'
 import { Field, Link, Page, buttonPrimary, inputClass } from '../components/Page'
 import { createTrip } from '../lib/api'
 import { rememberMyTrip } from '../lib/localTrips'
@@ -18,22 +19,23 @@ export default function NewTrip() {
     languageCode: 'es-ES',
     passcode: '',
   })
-  const [suggested, setSuggested] = useState(false)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
-  // Typing a destination we recognise prefills currency, language and flag.
-  function handleDestination(e) {
-    const destination = e.target.value
+  const applyLocale = (locale) => ({ localCurrency: locale.currency, languageCode: locale.language, emoji: locale.emoji })
+
+  // Picking from the list sets flag, currency and language. Free typing does
+  // too when it names a place we know; otherwise the flag is cleared and the
+  // currency and language are left for the organiser to choose.
+  function handleDestinationTyped(destination) {
     const guess = suggestLocale(destination)
-    setSuggested(Boolean(guess))
-    setForm((f) => ({
-      ...f,
-      destination,
-      ...(guess && { localCurrency: guess.currency, languageCode: guess.language, emoji: guess.emoji }),
-    }))
+    setForm((f) => ({ ...f, destination, ...(guess ? applyLocale(guess) : { emoji: '' }) }))
+  }
+
+  function handleDestinationPicked(match) {
+    setForm((f) => ({ ...f, destination: match.label, ...applyLocale(match) }))
   }
 
   async function handleSubmit(e) {
@@ -64,9 +66,7 @@ export default function NewTrip() {
         <Field label="Trip name">
           <input className={inputClass} value={form.name} onChange={set('name')} placeholder="Lisbon with the crew" maxLength={60} required />
         </Field>
-        <Field label="Destination" hint={suggested ? `${form.emoji} Currency and language filled in for you.` : 'City or country.'}>
-          <input className={inputClass} value={form.destination} onChange={handleDestination} placeholder="Lisbon" maxLength={80} required />
-        </Field>
+        <DestinationField value={form.destination} onType={handleDestinationTyped} onPick={handleDestinationPicked} />
         <div className="grid grid-cols-2 gap-3">
           <Field label="First day">
             <input type="date" className={inputClass} value={form.start} onChange={set('start')} required />

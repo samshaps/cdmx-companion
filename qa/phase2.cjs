@@ -23,10 +23,16 @@ async function organiser() {
     await page.getByRole('link', { name: 'Create a trip' }).click()
     await page.getByRole('heading', { name: 'Create a trip' }).waitFor()
   })
-  await run.step('Type a name and "Lisbon": currency and language fill themselves in', async () => {
+  await run.step('Type "Lis" in Destination: a picklist narrows to matching places', async () => {
     await page.getByLabel('Trip name').fill('Lisbon Crew')
-    await page.getByLabel('Destination').pressSequentially('Lisbon', { delay: 60 })
-    await visible(page, 'Currency and language filled in for you')
+    await page.getByLabel('Destination').pressSequentially('Lis', { delay: 120 })
+    await page.getByRole('option', { name: /Lisbon, Portugal/ }).waitFor()
+    await page.getByRole('option', { name: /Use “Lis”/ }).waitFor()
+  })
+  await run.step('Pick Lisbon: flag, currency and language are set, with a phrase book to come', async () => {
+    await page.getByRole('option', { name: /Lisbon, Portugal/ }).click()
+    assert((await page.getByLabel('Destination').inputValue()) === 'Lisbon, Portugal', 'destination should be the picked place')
+    await visible(page, 'Your trip starts with a phrase book in this language')
     assert((await page.getByLabel('Local currency').inputValue()) === 'EUR', 'local currency should be EUR')
     assert((await page.getByLabel('Local language').inputValue()) === 'pt-PT', 'language should be Portuguese')
   })
@@ -36,10 +42,16 @@ async function organiser() {
     await page.getByLabel(/Guest passcode/).fill('sardine')
     await page.getByLabel(/Guest passcode/).scrollIntoViewIfNeeded()
   })
-  await run.step('Tap "Create trip": the organiser page shows a guest link and a private edit link', async () => {
+  await run.step('Tap "Create trip": the editor opens on Basics, flag and all', async () => {
     await page.getByRole('button', { name: 'Create trip' }).click()
-    await page.getByRole('heading', { name: /Lisbon Crew/ }).waitFor()
+    await page.getByRole('heading', { name: /🇵🇹 Lisbon Crew/ }).waitFor()
     await visible(page, 'passcode on')
+    assert((await page.getByLabel('Trip name').inputValue()) === 'Lisbon Crew', 'Basics should be the first tab')
+  })
+  await run.step('Tap Share at the bottom: guest link and edit link, each explained', async () => {
+    await page.getByRole('button', { name: 'Share', exact: true }).click()
+    await visible(page, 'For everyone on the trip')
+    await visible(page, 'For you and co-organisers only')
     links.guest = (await page.getByTestId('guest-link').textContent()).trim()
     links.edit = (await page.getByTestId('edit-link').textContent()).trim()
     assert(/\/t\/lisbon-crew-[\w-]+$/.test(links.guest), `guest link was ${links.guest}`)
@@ -48,6 +60,13 @@ async function organiser() {
   await run.step('Tap "Copy guest link": it is on the clipboard, ready for the group chat', async () => {
     await page.getByRole('button', { name: 'Copy guest link' }).click()
     assert((await page.evaluate(() => navigator.clipboard.readText())) === links.guest, 'clipboard should hold the guest link')
+    await page.getByRole('dialog').getByRole('button', { name: 'Close' }).last().click()
+  })
+  await run.step('Share stays at the bottom of every section', async () => {
+    for (const name of ['Stay', 'Schedule', 'Places', 'Phrases']) {
+      await page.getByRole('button', { name, exact: true }).click()
+      await page.getByRole('button', { name: 'Share', exact: true }).waitFor()
+    }
   })
 
   run.story('Story 2 · Organiser comes back later')
@@ -58,6 +77,7 @@ async function organiser() {
   })
   await run.step('It reopens the organiser page without needing the edit link again', async () => {
     await page.getByRole('heading', { name: /Lisbon Crew/ }).waitFor()
+    await page.getByRole('button', { name: 'Share', exact: true }).click()
     assert((await page.getByTestId('edit-link').textContent()).trim() === links.edit, 'edit link should be unchanged')
   })
 

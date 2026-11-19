@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { Card } from '../Card'
 import { inputClass } from '../Page'
 import { SelectField, TextField } from './fields'
+import { ToolsCards } from './ToolsCards'
+import { DestinationField } from '../DestinationField'
 import { CURRENCIES, LANGUAGES, reconcileItinerary } from '../../../shared/tripSchema'
 
-export function BasicsSection({ doc, change, hasPasscode, onSetPasscode }) {
+export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onImport, onShowInstall }) {
   const { trip } = doc
   const [passcode, setPasscode] = useState('')
 
@@ -21,14 +23,25 @@ export function BasicsSection({ doc, change, hasPasscode, onSetPasscode }) {
     })
   }
 
+  // Picking a known place also updates flag, currency and language.
+  function applyLocale(d, locale) {
+    d.trip.emoji = locale.emoji
+    d.trip.currency.local = locale.currency
+    d.trip.language = { code: locale.language, name: LANGUAGES.find((l) => l.code === locale.language)?.name || '' }
+  }
+
   const languageOptions = LANGUAGES.map((l) => ({ value: l.code, label: l.name }))
 
   return (
     <div className="flex flex-col gap-4">
       <TextField label="Trip name" value={trip.name} onChange={(v) => change((d) => { d.trip.name = v })} maxLength={60} />
       <div className="grid grid-cols-[1fr_5rem] gap-3">
-        <TextField label="Destination" value={trip.destination} onChange={(v) => change((d) => { d.trip.destination = v })} maxLength={80} />
-        <TextField label="Emoji" value={trip.emoji} onChange={(v) => change((d) => { d.trip.emoji = v })} maxLength={8} />
+        <DestinationField
+          value={trip.destination}
+          onType={(v) => change((d) => { d.trip.destination = v })}
+          onPick={(match) => change((d) => { applyLocale(d, match); d.trip.destination = match.label })}
+        />
+        <TextField label="Flag" value={trip.emoji} onChange={(v) => change((d) => { d.trip.emoji = v })} maxLength={8} />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <TextField label="First day" type="date" value={trip.dates.start} onChange={(v) => changeDates(v, trip.dates.end < v ? v : trip.dates.end)} />
@@ -79,6 +92,8 @@ export function BasicsSection({ doc, change, hasPasscode, onSetPasscode }) {
           </button>
         )}
       </Card>
+
+      <ToolsCards id={id} doc={doc} onImport={onImport} onShowInstall={onShowInstall} />
     </div>
   )
 }

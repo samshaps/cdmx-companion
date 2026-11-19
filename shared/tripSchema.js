@@ -2,7 +2,7 @@
 // (forms) and the server (validation), so both agree on what a trip is.
 import { starterPhrases } from './phrasePacks.js'
 
-export { suggestLocale } from './destinations.js'
+export { searchDestinations, suggestLocale } from './destinations.js'
 
 export const LIMITS = {
   docBytes: 200_000,
@@ -28,11 +28,15 @@ export const DAY_SLOTS = [
 ]
 const SLOT_KEYS = DAY_SLOTS.map((slot) => slot.key)
 
+// The three most common first, then alphabetical.
 export const CURRENCIES = [
-  'USD', 'EUR', 'GBP', 'CAD', 'AUD', 'MXN', 'JPY', 'CHF', 'SEK', 'NOK', 'DKK',
-  'NZD', 'BRL', 'ARS', 'COP', 'PEN', 'CLP', 'THB', 'VND', 'IDR', 'INR', 'KRW',
-  'CNY', 'HKD', 'SGD', 'TRY', 'ZAR', 'MAD', 'EGP', 'AED', 'ILS', 'CZK', 'PLN',
-  'HUF', 'ISK', 'CRC', 'TWD', 'PHP', 'MYR', 'JOD', 'KES', 'DOP', 'CUP',
+  'USD', 'EUR', 'GBP', 'AED', 'ARS', 'AUD', 'AWG', 'BBD', 'BGN', 'BMD', 'BOB',
+  'BRL', 'BSD', 'BZD', 'CAD', 'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK',
+  'DKK', 'DOP', 'EGP', 'FJD', 'GEL', 'GTQ', 'HKD', 'HTG', 'HUF', 'IDR', 'ILS',
+  'INR', 'ISK', 'JMD', 'JOD', 'JPY', 'KES', 'KHR', 'KRW', 'KYD', 'LKR', 'MAD',
+  'MUR', 'MVR', 'MXN', 'MYR', 'NOK', 'NPR', 'NZD', 'PAB', 'PEN', 'PHP', 'PLN',
+  'QAR', 'RON', 'SAR', 'SCR', 'SEK', 'SGD', 'THB', 'TRY', 'TTD', 'TWD', 'TZS',
+  'UYU', 'VND', 'XCD', 'XCG', 'XPF', 'ZAR',
 ]
 
 export const LANGUAGES = [

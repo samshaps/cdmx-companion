@@ -25,7 +25,11 @@ async function createViaApi() {
 
 async function organiserBuilds(links) {
   const run = await createRun('phase3-a')
-  const { page } = run
+  const { page, context } = run
+  // The listing site is stood in for here; reading real pages is covered by unit tests.
+  await context.route('**/api/preview**', (route) => route.fulfill({
+    json: { stay: { name: 'Alfama Rooftop Flat', photo: '/images/demo-stay.svg', address: '', area: 'Lisbon', lat: null, lng: null, checkIn: '', checkOut: '' } },
+  }))
 
   run.story('Story 1 · Organiser adds the stay')
   await run.step('Open the private edit link and go to Stay', async () => {
@@ -33,8 +37,15 @@ async function organiserBuilds(links) {
     await page.getByRole('heading', { name: /Lisbon Crew/ }).waitFor()
     await section(page, 'Stay')
   })
-  await run.step('Fill in the place, address, wifi and check-in times', async () => {
-    await field(page, 'Name of the place').fill('Alfama Rooftop Flat')
+  await run.step('Paste the Airbnb link: name and photo are filled in from the listing', async () => {
+    await page.getByLabel('Link to the place').fill('https://www.airbnb.com/rooms/12345')
+    await page.getByRole('button', { name: 'Fill in from link' }).click()
+    await visible(page, 'Filled in the name, photo')
+    await visible(page, 'paste that below from your booking confirmation')
+    assert((await field(page, 'Name of the place').inputValue()) === 'Alfama Rooftop Flat', 'name should come from the listing')
+    assert((await field(page, 'Photo link (optional)').inputValue()) === '/images/demo-stay.svg', 'photo should come from the listing')
+  })
+  await run.step('Type in the rest: address, wifi and check-in times', async () => {
     await field(page, 'Address').fill('Rua Exemplo 12, Alfama, Lisbon')
     await field(page, 'Wifi network').fill('AlfamaGuest')
     await field(page, 'Wifi password').fill('pastel-de-nata')
@@ -175,7 +186,8 @@ async function organiserChanges(links) {
     await visible(page, 'passcode on')
   })
   await run.step('Organiser downloads a backup of the trip', async () => {
-    await section(page, 'Share')
+    await section(page, 'Basics')
+    await page.getByRole('button', { name: 'Export trip' }).scrollIntoViewIfNeeded()
     const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export trip' }).click()])
     const exported = JSON.parse(fs.readFileSync(await download.path(), 'utf8'))
     assert(exported.trip.stay.wifi.network === 'AlfamaGuest' && exported.itinerary.length === 4, 'backup should hold the full trip')

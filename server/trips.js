@@ -115,6 +115,15 @@ async function saveTrip(request, store, id) {
   return json(200, { doc, updatedAt: updated.updatedAt, canEdit: true, hasPasscode: Boolean(hash) })
 }
 
+// For other endpoints that only organisers may use.
+export async function isOrganiser(store, id, token) {
+  if (!id || !token) return false
+  const record = await store.get(`trip:${id}`)
+  return Boolean(record) && sameHash(sha256(token), record.editHash)
+}
+
+export { bearerToken, clientIp, json }
+
 export async function handleTrips(request, env = process.env) {
   try {
     const store = getStore(env)

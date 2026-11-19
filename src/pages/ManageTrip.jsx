@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { InstallGuide } from '../components/InstallGuide'
-import { Link, Page } from '../components/Page'
+import { Link, Page, buttonPrimary, buttonSecondary } from '../components/Page'
 import { BasicsSection } from '../components/editor/BasicsSection'
 import { PhrasesSection } from '../components/editor/PhrasesSection'
 import { PlacesSection } from '../components/editor/PlacesSection'
 import { ScheduleSection } from '../components/editor/ScheduleSection'
-import { ShareSection } from '../components/editor/ShareSection'
+import { ShareSheet } from '../components/editor/ShareSheet'
 import { StaySection } from '../components/editor/StaySection'
 import { fetchTrip, saveTrip } from '../lib/api'
 import { forgetMyTrip, getEditToken, rememberMyTrip } from '../lib/localTrips'
 import { dismissInstallGuide, shouldAutoShowInstallGuide } from '../utils/platform'
 
-const SECTIONS = ['Share', 'Basics', 'Stay', 'Schedule', 'Places', 'Phrases']
+const SECTIONS = ['Basics', 'Stay', 'Schedule', 'Places', 'Phrases']
 const SAVE_DELAY_MS = 800
 
 const SAVE_LABEL = {
@@ -28,7 +28,8 @@ export default function ManageTrip({ id }) {
   const [status, setStatus] = useState(token ? 'loading' : 'denied')
   const [doc, setDoc] = useState(null)
   const [hasPasscode, setHasPasscode] = useState(false)
-  const [section, setSection] = useState('Share')
+  const [section, setSection] = useState('Basics')
+  const [shareOpen, setShareOpen] = useState(false)
   const [save, setSave] = useState({ state: 'saved', error: '' })
   const [installOpen, setInstallOpen] = useState(shouldAutoShowInstallGuide)
   const latest = useRef(null)
@@ -160,14 +161,35 @@ export default function ManageTrip({ id }) {
         </p>
       </div>
 
-      <div className="mt-4 pb-16">
-        {section === 'Share' && <ShareSection id={id} token={token} doc={doc} onImport={replaceDoc} onShowInstall={() => setInstallOpen(true)} />}
-        {section === 'Basics' && <BasicsSection doc={doc} change={change} hasPasscode={hasPasscode} onSetPasscode={(p) => flush(p)} />}
-        {section === 'Stay' && <StaySection doc={doc} change={change} />}
+      <div className="mt-4 pb-28">
+        {section === 'Basics' && (
+          <BasicsSection
+            id={id}
+            doc={doc}
+            change={change}
+            hasPasscode={hasPasscode}
+            onSetPasscode={(p) => flush(p)}
+            onImport={replaceDoc}
+            onShowInstall={() => setInstallOpen(true)}
+          />
+        )}
+        {section === 'Stay' && <StaySection doc={doc} change={change} id={id} token={token} />}
         {section === 'Schedule' && <ScheduleSection doc={doc} change={change} />}
         {section === 'Places' && <PlacesSection doc={doc} change={change} />}
         {section === 'Phrases' && <PhrasesSection doc={doc} change={change} />}
       </div>
+
+      {/* Always within reach, whichever section is open. */}
+      <div
+        className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-charcoal/10"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
+        <div className="max-w-md mx-auto px-5 py-3 grid grid-cols-2 gap-3">
+          <button onClick={() => setShareOpen(true)} className={buttonPrimary}>Share</button>
+          <Link to={`/t/${id}`} className={buttonSecondary}>Preview</Link>
+        </div>
+      </div>
+      {shareOpen && <ShareSheet id={id} token={token} hasPasscode={hasPasscode} onClose={() => setShareOpen(false)} />}
     </Page>
   )
 }

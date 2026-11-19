@@ -28,5 +28,7 @@ const tripUrl = (id) => `/api/trips?id=${encodeURIComponent(id)}`
 
 export const createTrip = (basics) => request('/api/trips', { method: 'POST', body: basics })
 export const fetchTrip = (id, { token, passcode } = {}) => request(tripUrl(id), { token, passcode })
+export const previewStayLink = (id, token, url) =>
+  request(`/api/preview?id=${encodeURIComponent(id)}`, { method: 'POST', token, body: { url } })
 export const saveTrip = (id, token, doc, passcode) =>
   request(tripUrl(id), { method: 'PUT', token, body: passcode === undefined ? { doc } : { doc, passcode } })

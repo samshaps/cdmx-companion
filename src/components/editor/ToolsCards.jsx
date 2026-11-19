@@ -1,36 +1,13 @@
 import { useRef, useState } from 'react'
 import { Card } from '../Card'
-import { Link, buttonPrimary } from '../Page'
-import { editUrl, guestUrl } from '../../lib/router'
-import { copyToClipboard } from '../../utils/clipboard'
 import { getInstallPlatform } from '../../utils/platform'
 
-function ShareLink({ label, description, url, testId }) {
-  const [copied, setCopied] = useState(false)
-
-  async function handleCopy() {
-    if (await copyToClipboard(url)) {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
-
-  return (
-    <Card>
-      <h3 className="font-bold text-charcoal">{label}</h3>
-      <p className="text-sm text-charcoal/60 mt-0.5">{description}</p>
-      <p data-testid={testId} className="font-mono text-xs text-teal bg-white rounded-lg px-3 py-2 mt-3 break-all">{url}</p>
-      <button onClick={handleCopy} className="mt-2 min-h-[44px] text-terracotta font-bold">
-        {copied ? 'Copied!' : `Copy ${label.toLowerCase()}`}
-      </button>
-    </Card>
-  )
-}
-
-export function ShareSection({ id, token, doc, onImport, onShowInstall }) {
-  const [platform] = useState(getInstallPlatform)
+// The less-used extras at the bottom of Basics: installing the app on the
+// organiser's own phone, and backing the trip up to a file.
+export function ToolsCards({ id, doc, onImport, onShowInstall }) {
   const fileInput = useRef(null)
   const [importError, setImportError] = useState('')
+  const [platform] = useState(getInstallPlatform)
 
   function handleExport() {
     const blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' })
@@ -56,24 +33,8 @@ export function ShareSection({ id, token, doc, onImport, onShowInstall }) {
   }
 
   return (
-    <div className="flex flex-col gap-3">
-      <ShareLink
-        label="Guest link"
-        description="Send this to everyone on the trip. They open it and add it to their home screen."
-        url={guestUrl(id)}
-        testId="guest-link"
-      />
-      <ShareLink
-        label="Edit link"
-        description="Keep this private. Anyone with it can change the trip. It is the only way back to this page from another device."
-        url={editUrl(id, token)}
-        testId="edit-link"
-      />
-      <Link to={`/t/${id}`} className={`${buttonPrimary} mt-2`}>
-        Open the guest view
-      </Link>
-
-      <Card className="mt-4">
+    <>
+      <Card>
         <h3 className="font-bold text-charcoal">📲 On your home screen</h3>
         {platform === 'installed' ? (
           <p className="text-sm text-charcoal/60 mt-0.5">You are using the installed app. Guests are shown how to install it when they first open their link.</p>
@@ -89,7 +50,7 @@ export function ShareSection({ id, token, doc, onImport, onShowInstall }) {
         )}
       </Card>
 
-      <Card className="mt-4">
+      <Card>
         <h3 className="font-bold text-charcoal">Backup</h3>
         <p className="text-sm text-charcoal/60 mt-0.5">
           Download the whole trip as a file, or load one to replace everything here.
@@ -101,6 +62,6 @@ export function ShareSection({ id, token, doc, onImport, onShowInstall }) {
         </div>
         {importError && <p role="alert" className="text-terracotta text-sm">{importError}</p>}
       </Card>
-    </div>
+    </>
   )
 }

@@ -110,7 +110,7 @@ async function organiser(links) {
     await visible(page, 'Put Lisbon Crew on your home screen')
     await page.getByRole('button', { name: 'Not now' }).click()
   })
-  await run.step('The Share tab keeps a “Show me how” for later', async () => {
+  await run.step('Basics keeps a “Show me how” for later', async () => {
     await page.getByText('On your home screen').scrollIntoViewIfNeeded()
     await page.getByRole('button', { name: 'Show me how' }).click()
     await guide(page).waitFor()
@@ -140,10 +140,10 @@ async function organiser(links) {
     await app.page.getByRole('link', { name: /Edit/ }).waitFor()
     assert(!app.page.url().includes('k='), 'edit key should be removed from the address')
   })
-  await app.step('Edit opens the editor; “Open the guest view” goes back, all inside the app', async () => {
+  await app.step('Edit opens the editor; “Preview” goes back, all inside the app', async () => {
     await app.page.getByRole('link', { name: /Edit/ }).click()
     await app.page.getByRole('button', { name: 'Stay', exact: true }).waitFor()
-    await app.page.getByRole('link', { name: 'Open the guest view' }).click()
+    await app.page.getByRole('link', { name: 'Preview' }).click()
     await visible(app.page, 'Day 2 of 3!')
   })
   return [first, await app.finish()]

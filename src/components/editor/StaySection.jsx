@@ -1,11 +1,26 @@
 import { AddButton, ItemCard, LocationField, TextArea, TextField } from './fields'
+import { StayLinkField } from './StayLinkField'
 
-export function StaySection({ doc, change }) {
+export function StaySection({ doc, change, id, token }) {
   const { stay } = doc.trip
   const set = (key) => (value) => change((d) => { d.trip.stay[key] = value })
 
+  // Fill in what the listing page gave us, leaving anything it did not have.
+  function applyFromLink(found) {
+    change((d) => {
+      const s = d.trip.stay
+      if (found.name) s.name = found.name
+      if (found.photo) s.photo = found.photo
+      if (found.address) { s.address = found.address; s.navigationAddress = '' }
+      if (found.lat != null) { s.lat = found.lat; s.lng = found.lng }
+      if (found.checkIn) s.checkIn = found.checkIn
+      if (found.checkOut) s.checkOut = found.checkOut
+    })
+  }
+
   return (
     <div className="flex flex-col gap-4">
+      <StayLinkField id={id} token={token} onFound={applyFromLink} />
       <TextField label="Name of the place" value={stay.name} onChange={set('name')} placeholder="Casa Jacaranda" maxLength={100} />
       <TextField
         label="Address"
