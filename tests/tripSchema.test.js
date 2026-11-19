@@ -94,7 +94,7 @@ test('events remember which part of the day they fill', () => {
   assert.deepEqual(normalizeTrip(doc).itinerary[0].events.map((e) => e.slot), ['', 'dinner'])
 })
 
-test('US states are destinations with their own cities, colours and greetings', async () => {
+test('US states are destinations with their own cities, colors and greetings', async () => {
   const { searchDestinations } = await import('../shared/destinations.js')
   assert.deepEqual(searchDestinations('tex').map((d) => d.label).slice(0, 2), ['Texas, USA', 'Austin, Texas'])
   assert.equal(suggestLocale('Maui').hello, 'Aloha!')
@@ -122,7 +122,7 @@ test('every destination skin is readable', async () => {
   assert.ok(seen.size >= 150, `only ${seen.size} places`)
 })
 
-test('skins are stored only as three real colours', () => {
+test('skins are stored only as three real colors', () => {
   const doc = createBlankTrip({ ...basics, skin: suggestLocale('Lisbon').skin })
   assert.match(doc.trip.skin.primary, /^#[0-9A-F]{6}$/)
   assert.equal(createBlankTrip({ ...basics, skin: { primary: 'red', accent: '#000000', highlight: '#FFFFFF' } }).trip.skin, null)
@@ -137,7 +137,7 @@ test('a trip remembers its interface language and is set up in it', () => {
   assert.equal(doc.trip.locale, 'fr')
   assert.equal(createBlankTrip(basics).trip.locale, 'en')
   assert.equal(createBlankTrip({ ...basics, locale: 'klingon' }).trip.locale, 'en')
-  // The phrase book pairs the traveller's language with the destination's.
+  // The phrase book pairs the traveler's language with the destination's.
   assert.deepEqual([doc.phrases[1].english, doc.phrases[1].translation], ['Merci', 'Obrigado / Obrigada'])
   // …and there is nothing to learn when they are the same language.
   assert.deepEqual(createBlankTrip({ ...basics, languageCode: 'fr-FR', locale: 'fr' }).phrases, [])

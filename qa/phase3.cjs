@@ -1,4 +1,4 @@
-// Phase 3 QA: the organiser fills in a trip with the editor, guests see it,
+// Phase 3 QA: the organizer fills in a trip with the editor, guests see it,
 // and later edits (time change, extra day, passcode) reach them.
 const fs = require('node:fs')
 const { startServer, createRun, joinVideos, assert, field, BASE_URL } = require('./lib.cjs')
@@ -23,7 +23,7 @@ async function createViaApi() {
   return { id, guest: `${BASE_URL}/t/${id}`, edit: `${BASE_URL}/t/${id}/edit#${editToken}` }
 }
 
-async function organiserBuilds(links) {
+async function organizerBuilds(links) {
   const run = await createRun('phase3-a')
   const { page, context } = run
   // The listing site is stood in for here; reading real pages is covered by unit tests.
@@ -31,7 +31,7 @@ async function organiserBuilds(links) {
     json: { stay: { name: 'Alfama Rooftop Flat', photo: '/images/demo-stay.svg', address: '', area: 'Lisbon', lat: null, lng: null, checkIn: '', checkOut: '' } },
   }))
 
-  run.story('Story 1 · Organiser adds the stay')
+  run.story('Story 1 · Organizer adds the stay')
   await run.step('Open the private edit link and go to Stay', async () => {
     await page.goto(links.edit)
     await page.getByRole('heading', { name: /Lisbon Crew/ }).waitFor()
@@ -73,7 +73,7 @@ async function organiserBuilds(links) {
     await saved(page)
   })
 
-  run.story('Story 2 · Organiser plans a day')
+  run.story('Story 2 · Organizer plans a day')
   await run.step('Go to Schedule, pick today and give the day a title', async () => {
     await section(page, 'Schedule')
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
@@ -99,13 +99,13 @@ async function organiserBuilds(links) {
     await saved(page)
   })
 
-  run.story('Story 3 · Organiser adds a place and a phrase')
+  run.story('Story 3 · Organizer adds a place and a phrase')
   await run.step('Add a bar to Places, with a map pin', async () => {
     await section(page, 'Places')
     await page.getByRole('button', { name: '+ Add a place' }).click()
     await field(page, 'Name').fill('Miradouro Bar')
     await field(page, 'Type').selectOption('drink')
-    await field(page, 'Address or neighbourhood').fill('Graça')
+    await field(page, 'Address or neighborhood').fill('Graça')
     await field(page, 'Why go (optional)').fill('Sunset over the river.')
     await page.getByLabel('Map pin').fill('38.7164, -9.1315')
     await saved(page)
@@ -154,7 +154,7 @@ async function guestSees(links) {
     await visible(page, 'Pastéis at the corner café')
     assert((await page.getByText('Nothing planned').count()) === 0, 'empty blanks should not reach guests')
   })
-  await run.step('Phrases has the starter book plus the organiser’s own phrase', async () => {
+  await run.step('Phrases has the starter book plus the organizer’s own phrase', async () => {
     await tab(page, 'Phrases').click()
     await visible(page, 'Obrigado / Obrigada')
     await visible(page, 'Saúde!')
@@ -167,12 +167,12 @@ async function guestSees(links) {
   return run.finish()
 }
 
-async function organiserChanges(links) {
+async function organizerChanges(links) {
   const run = await createRun('phase3-c')
   const { page } = run
 
   run.story('Story 5 · Plans change mid-trip')
-  await run.step('Organiser moves dinner to 9pm', async () => {
+  await run.step('Organizer moves dinner to 9pm', async () => {
     await page.goto(links.edit)
     await section(page, 'Schedule')
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
@@ -180,7 +180,7 @@ async function organiserChanges(links) {
     await field(page, 'Time').fill('21:00')
     await saved(page)
   })
-  await run.step('Organiser extends the trip by a day: the schedule gains a day, plans are kept', async () => {
+  await run.step('Organizer extends the trip by a day: the schedule gains a day, plans are kept', async () => {
     await section(page, 'Basics')
     await field(page, 'Last day').fill(day(2))
     await saved(page)
@@ -189,13 +189,13 @@ async function organiserChanges(links) {
     await page.locator('button.rounded-full', { hasText: /\w{3}, \w{3} \d+/ }).nth(1).click()
     assert((await page.getByLabel('Dinner', { exact: true }).inputValue()) === 'Dinner: Tasca Exemplo', 'dinner should survive the date change')
   })
-  await run.step('Organiser turns on a guest passcode', async () => {
+  await run.step('Organizer turns on a guest passcode', async () => {
     await section(page, 'Basics')
     await page.getByLabel('New passcode').fill('sardine')
     await page.getByRole('button', { name: 'Set', exact: true }).click()
     await visible(page, 'passcode on')
   })
-  await run.step('Organiser downloads a backup of the trip', async () => {
+  await run.step('Organizer downloads a backup of the trip', async () => {
     await section(page, 'Basics')
     await page.getByRole('button', { name: 'Export trip' }).scrollIntoViewIfNeeded()
     const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export trip' }).click()])
@@ -266,7 +266,7 @@ async function longTrip() {
   let failed = 1
   try {
     const links = await createViaApi()
-    const runs = [await organiserBuilds(links), await guestSees(links), await organiserChanges(links), await guestSeesChanges(links), await longTrip()]
+    const runs = [await organizerBuilds(links), await guestSees(links), await organizerChanges(links), await guestSeesChanges(links), await longTrip()]
     failed = runs.reduce((n, r) => n + r.failed, 0)
     joinVideos('phase3', runs.map((r) => r.mp4))
   } finally {

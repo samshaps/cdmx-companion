@@ -26,7 +26,7 @@ export function PlacesSection({ doc, change }) {
             <TextField label={t('Name')} value={place.name} onChange={set(i, 'name')} maxLength={100} />
             <SelectField label={t('Type')} value={place.category} options={categoryOptions} onChange={set(i, 'category')} />
           </div>
-          <TextField label={t('Address or neighbourhood')} value={place.address} onChange={set(i, 'address')} maxLength={200} />
+          <TextField label={t('Address or neighborhood')} value={place.address} onChange={set(i, 'address')} maxLength={200} />
           <TextField label={t('Why go (optional)')} value={place.note} onChange={set(i, 'note')} maxLength={300} />
           <LocationField lat={place.lat} lng={place.lng} onChange={({ lat, lng }) => change((d) => { d.places[i].lat = lat; d.places[i].lng = lng })} />
         </ItemCard>

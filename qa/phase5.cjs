@@ -10,7 +10,7 @@ const day = (offset) => {
 }
 const visible = (page, text) => page.getByText(text, { exact: false }).first().waitFor({ timeout: 4000 })
 
-async function frenchOrganiser(fr) {
+async function frenchOrganizer(fr) {
   const run = await createRun('phase5-a', { contextOptions: { locale: 'fr-FR' } })
   const { page } = run
   const links = {}
@@ -65,7 +65,7 @@ async function englishGuest(fr, links) {
   const { page, context } = run
   await context.route('https://open.er-api.com/**', (route) => route.fulfill({ json: { result: 'success', rates: { EUR: 0.9 } } }))
 
-  run.story('Story 2 · Guests see the trip in the organiser’s language')
+  run.story('Story 2 · Guests see the trip in the organizer’s language')
   await run.step('Tabs, day counter and empty states are in French', async () => {
     await page.goto(links.guest)
     await visible(page, fr['Day {day} of {total}!'].replace('{day}', '2').replace('{total}', '3'))
@@ -92,7 +92,7 @@ async function englishGuest(fr, links) {
   const stop = await startServer()
   let failed = 1
   try {
-    const a = await frenchOrganiser(fr)
+    const a = await frenchOrganizer(fr)
     const b = await englishGuest(fr, a.links)
     failed = a.failed + b.failed
     joinVideos('phase5', [a.mp4, b.mp4])

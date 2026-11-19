@@ -1,4 +1,4 @@
-// Pulls a latitude/longitude out of whatever the organiser pastes: a plain
+// Pulls a latitude/longitude out of whatever the organizer pastes: a plain
 // "19.41, -99.17" pair or a full Google/Apple Maps link. Returns null when
 // nothing usable is found (short share links carry no coordinates).
 const PATTERNS = [

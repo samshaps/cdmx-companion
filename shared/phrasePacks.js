@@ -1,6 +1,6 @@
 // Starter phrase books. Every pack translates the same seventeen phrases, so
 // a new trip opens with a useful Phrases tab instead of an empty one.
-// Organisers can edit, delete or add to them like any other phrase.
+// Organizers can edit, delete or add to them like any other phrase.
 //
 // Each entry is [translation, how it sounds]. Rows line up with STARTER_PHRASES.
 
@@ -360,9 +360,9 @@ export function hasStarterPhrases(languageCode) {
 }
 
 // The phrase book for a trip to somewhere that speaks `languageCode`, written
-// for a traveller who reads `baseLocale`. Every pack translates the same
+// for a traveler who reads `baseLocale`. Every pack translates the same
 // phrases, so any two can be paired. (The field is still called `english`
-// in the trip document; it holds the traveller's own language.)
+// in the trip document; it holds the traveler's own language.)
 export function starterPhrases(languageCode, baseLocale = 'en') {
   const target = (languageCode || '').split('-')[0]
   const base = (baseLocale || 'en').split('-')[0]

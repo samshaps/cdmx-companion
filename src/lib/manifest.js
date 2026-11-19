@@ -4,7 +4,7 @@ import { getEditToken } from './localTrips'
 // "Add to Home Screen" installs the trip being viewed (its name, its link)
 // instead of the generic landing page.
 //
-// An organiser's manifest also carries their edit key, because on iPhone an
+// An organizer's manifest also carries their edit key, because on iPhone an
 // installed app starts with empty storage and would otherwise forget that
 // this person can edit.
 export function syncManifestLink(route) {
@@ -24,7 +24,7 @@ export function syncManifestLink(route) {
   if (link.getAttribute('href') !== href) link.setAttribute('href', href)
 }
 
-// The other half: an installed organiser app opens at /t/:id?k=<edit key>.
+// The other half: an installed organizer app opens at /t/:id?k=<edit key>.
 // Remember the key on this device and take it back out of the address.
 export function adoptEditKeyFromUrl(rememberMyTrip) {
   const match = /^\/t\/([^/]+)/.exec(window.location.pathname)

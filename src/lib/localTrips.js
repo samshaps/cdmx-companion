@@ -1,7 +1,7 @@
 // What this device remembers, all in localStorage:
 // - the last copy of each trip it opened, so the app works offline
 // - the passcode a guest entered, so they are asked once
-// - edit links for trips created here, so the organiser can find them again
+// - edit links for trips created here, so the organizer can find them again
 
 function read(key, fallback) {
   try {

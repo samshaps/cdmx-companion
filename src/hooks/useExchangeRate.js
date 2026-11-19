@@ -25,7 +25,7 @@ export function useExchangeRate(home, local) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    let cancelled = false
+    let canceled = false
 
     async function fetchRate() {
       const cacheKey = `exchange_rate_${home}_${local}`
@@ -33,7 +33,7 @@ export function useExchangeRate(home, local) {
 
       // Use cache if fresh
       if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-        if (!cancelled) {
+        if (!canceled) {
           setRate(cached.rate)
           setLastUpdated(cached.timestamp)
           setLoading(false)
@@ -48,7 +48,7 @@ export function useExchangeRate(home, local) {
         if (data.result === 'success' && data.rates?.[local]) {
           const fresh = data.rates[local]
           setCache(cacheKey, fresh)
-          if (!cancelled) {
+          if (!canceled) {
             setRate(fresh)
             setLastUpdated(Date.now())
             setLoading(false)
@@ -61,7 +61,7 @@ export function useExchangeRate(home, local) {
 
       // Fallback to stale cache
       if (cached) {
-        if (!cancelled) {
+        if (!canceled) {
           setRate(cached.rate)
           setLastUpdated(cached.timestamp)
           setLoading(false)
@@ -70,14 +70,14 @@ export function useExchangeRate(home, local) {
       }
 
       // No cache, no network
-      if (!cancelled) {
+      if (!canceled) {
         setError('No exchange rate available')
         setLoading(false)
       }
     }
 
     fetchRate()
-    return () => { cancelled = true }
+    return () => { canceled = true }
   }, [home, local])
 
   return { rate, lastUpdated, loading, error }

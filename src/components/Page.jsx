@@ -1,6 +1,6 @@
 import { navigate } from '../lib/router'
 
-// Shared chrome for the non-trip screens (landing, create, organiser).
+// Shared chrome for the non-trip screens (landing, create, organizer).
 export function Page({ children }) {
   return (
     <div className="min-h-screen bg-cream">

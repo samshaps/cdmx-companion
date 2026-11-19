@@ -78,13 +78,13 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
       />
 
       <Card>
-        <h3 className="font-bold text-charcoal">{t('Colours')}</h3>
+        <h3 className="font-bold text-charcoal">{t('Colors')}</h3>
         <p className="text-sm text-charcoal/60 mt-0.5">
           {!known
-            ? t('Pick a destination we recognise and the trip can wear the colours of its flag.')
+            ? t('Pick a destination we recognize and the trip can wear the colors of its flag.')
             : wearingFlag
-              ? t('Wearing the colours of {place}’s flag {emoji}. Guests see them too.', { place: known.place, emoji: known.emoji })
-              : t('Using the original colours. {place}’s flag colours are available.', { place: known.place })}
+              ? t('Wearing the colors of {place}’s flag {emoji}. Guests see them too.', { place: known.place, emoji: known.emoji })
+              : t('Using the original colors. {place}’s flag colors are available.', { place: known.place })}
         </p>
         {known && (
           <button
@@ -92,12 +92,12 @@ export function BasicsSection({ id, doc, change, hasPasscode, onSetPasscode, onI
             onClick={() => { setGreeting(null); change((d) => { d.trip.skin = wearingFlag ? null : known.skin }) }}
             className="min-h-[44px] text-terracotta font-bold"
           >
-            {wearingFlag ? t('Back to the original colours') : t('Use {place}’s colours {emoji}', { place: known.place, emoji: known.emoji })}
+            {wearingFlag ? t('Back to the original colors') : t('Use {place}’s colors {emoji}', { place: known.place, emoji: known.emoji })}
           </button>
         )}
         {!known && trip.skin && (
           <button type="button" onClick={() => change((d) => { d.trip.skin = null })} className="min-h-[44px] text-terracotta font-bold">
-            {t('Back to the original colours')}
+            {t('Back to the original colors')}
           </button>
         )}
       </Card>

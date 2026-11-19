@@ -1,10 +1,10 @@
 // Known destinations for the create form's picklist: choosing one fills in
-// the flag, local currency and phrase-book language, and offers a colour
+// the flag, local currency and phrase-book language, and offers a color
 // skin taken from the flag. Anything not listed can still be typed freely.
 //
 // Each row: [flag, currency, language, name, cities, other spellings,
-//            flag colours (primary accent highlight), hello, region?]
-// US states carry the region "USA" and their state flag's colours.
+//            flag colors (primary accent highlight), hello, region?]
+// US states carry the region "USA" and their state flag's colors.
 import { skinFromNames } from './skins.js'
 
 const DESTINATIONS = [
@@ -167,20 +167,20 @@ const DESTINATIONS = [
 // Lowercase and strip accents so "São Paulo", "sao paulo" and "SAO PAULO" match.
 const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
 
-// Every pickable place, cities labelled with where they are. `keys` are the
+// Every pickable place, cities labeled with where they are. `keys` are the
 // spellings that find it; other spellings ("CDMX", "St Barts") lead to the
 // country or state itself.
-const PLACES = DESTINATIONS.flatMap(([emoji, currency, language, name, cities, aliases, colours, hello, region]) => {
-  const locale = { emoji, currency, language, hello, place: name, colours }
+const PLACES = DESTINATIONS.flatMap(([emoji, currency, language, name, cities, aliases, colors, hello, region]) => {
+  const locale = { emoji, currency, language, hello, place: name, colors }
   return [
     { label: region ? `${name}, ${region}` : name, keys: [name, ...aliases].map(plain), ...locale },
     ...cities.map((city) => ({ label: `${city}, ${name}`, keys: [plain(city.replace(/ \(.*\)$/, ''))], ...locale })),
   ]
 })
 
-// What the rest of the app gets for a recognised place.
-const describe = ({ label, emoji, currency, language, hello, place, colours }) => ({
-  label, emoji, currency, language, hello, place, skin: skinFromNames(colours),
+// What the rest of the app gets for a recognized place.
+const describe = ({ label, emoji, currency, language, hello, place, colors }) => ({
+  label, emoji, currency, language, hello, place, skin: skinFromNames(colors),
 })
 
 const hasWord = (haystack, word) => {

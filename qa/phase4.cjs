@@ -98,12 +98,12 @@ async function otherPhones(links) {
   return [a, b]
 }
 
-async function organiser(links) {
+async function organizer(links) {
   const run = await createRun('phase4-d', { contextOptions: { userAgent: IPHONE } })
   const { page } = run
   let startUrl
 
-  run.story('Story 4 · Organiser on their iPhone')
+  run.story('Story 4 · Organizer on their iPhone')
   await run.step('Opening the edit link shows the same walkthrough', async () => {
     await page.goto(links.edit)
     await guide(page).waitFor()
@@ -116,7 +116,7 @@ async function organiser(links) {
     await guide(page).waitFor()
     await page.getByRole('button', { name: 'Not now' }).click()
   })
-  await run.step('The app an organiser installs remembers that they can edit', async () => {
+  await run.step('The app an organizer installs remembers that they can edit', async () => {
     const href = await page.locator('link[rel="manifest"]').getAttribute('href')
     const manifest = await (await fetch(BASE_URL + href)).json()
     startUrl = manifest.start_url
@@ -132,7 +132,7 @@ async function organiser(links) {
   // The installed app: launched from the home screen with empty storage.
   const app = await createRun('phase4-e', { contextOptions: { userAgent: IPHONE } })
   await app.context.addInitScript(() => Object.defineProperty(navigator, 'standalone', { value: true }))
-  app.story('Story 5 · Organiser opens the installed app')
+  app.story('Story 5 · Organizer opens the installed app')
   await app.step('It opens on the trip with no walkthrough, and an Edit button', async () => {
     await app.page.goto(BASE_URL + startUrl)
     await visible(app.page, 'Day 2 of 3!')
@@ -154,7 +154,7 @@ async function organiser(links) {
   let failed = 1
   try {
     const links = await createViaApi()
-    const runs = [await iphoneGuest(links), ...(await otherPhones(links)), ...(await organiser(links))]
+    const runs = [await iphoneGuest(links), ...(await otherPhones(links)), ...(await organizer(links))]
     failed = runs.reduce((n, r) => n + r.failed, 0)
     joinVideos('phase4', runs.map((r) => r.mp4))
   } finally {

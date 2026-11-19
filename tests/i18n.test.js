@@ -8,14 +8,14 @@ const placeholders = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1])
 
 for (const { code, name } of UI_LANGUAGES.filter((l) => l.code !== 'en')) {
   test(`${name}: every string in the app is translated`, async () => {
-    const catalogue = (await import(`../shared/i18n/${code}.js`)).default
-    const missing = keys.filter((key) => !catalogue[key])
+    const catalog = (await import(`../shared/i18n/${code}.js`)).default
+    const missing = keys.filter((key) => !catalog[key])
     assert.deepEqual(missing, [], `${missing.length} untranslated`)
   })
 
   test(`${name}: translations keep their {placeholders}`, async () => {
-    const catalogue = (await import(`../shared/i18n/${code}.js`)).default
-    for (const [key, value] of Object.entries(catalogue)) {
+    const catalog = (await import(`../shared/i18n/${code}.js`)).default
+    for (const [key, value] of Object.entries(catalog)) {
       assert.deepEqual(placeholders(value), placeholders(key), key)
     }
   })

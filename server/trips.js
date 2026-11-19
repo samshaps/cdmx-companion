@@ -6,7 +6,7 @@
 //
 // There are no accounts. Creating a trip returns a secret edit token; whoever
 // holds it can edit. Guests read with the trip id alone, plus the trip's
-// passcode if the organiser set one. Only hashes of secrets are stored.
+// passcode if the organizer set one. Only hashes of secrets are stored.
 import crypto from 'node:crypto'
 import { createBlankTrip, normalizeTrip, TripValidationError } from '../shared/tripSchema.js'
 import { getStore, StoreNotConfiguredError } from './store.js'
@@ -115,8 +115,8 @@ async function saveTrip(request, store, id) {
   return json(200, { doc, updatedAt: updated.updatedAt, canEdit: true, hasPasscode: Boolean(hash) })
 }
 
-// For other endpoints that only organisers may use.
-export async function isOrganiser(store, id, token) {
+// For other endpoints that only organizers may use.
+export async function isOrganizer(store, id, token) {
   if (!id || !token) return false
   const record = await store.get(`trip:${id}`)
   return Boolean(record) && sameHash(sha256(token), record.editHash)
@@ -148,7 +148,7 @@ export async function handleManifest(request, env = process.env) {
   const key = params.get('k') || ''
   let name = 'Trip Companion'
   let startUrl = '/'
-  let isOrganiser = false
+  let isOrganizer = false
   let themeColor = '#1A535C'
   try {
     const record = id ? await getStore(env).get(`trip:${id}`) : null
@@ -156,10 +156,10 @@ export async function handleManifest(request, env = process.env) {
       name = record.doc.trip.name
       themeColor = record.doc.trip.skin?.primary || themeColor
       startUrl = `/t/${encodeURIComponent(id)}`
-      // An organiser's installed app starts with their edit key, since an
+      // An organizer's installed app starts with their edit key, since an
       // installed app on iPhone does not share the browser's storage.
       if (key && sameHash(sha256(key), record.editHash)) {
-        isOrganiser = true
+        isOrganizer = true
         startUrl += `?k=${encodeURIComponent(key)}`
       }
     }
@@ -180,7 +180,7 @@ export async function handleManifest(request, env = process.env) {
   return new Response(JSON.stringify(manifest), {
     headers: {
       'Content-Type': 'application/manifest+json',
-      'Cache-Control': isOrganiser ? 'private, no-store' : 'public, max-age=300',
+      'Cache-Control': isOrganizer ? 'private, no-store' : 'public, max-age=300',
     },
   })
 }

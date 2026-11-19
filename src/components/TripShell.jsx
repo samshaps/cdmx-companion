@@ -23,7 +23,7 @@ const TAB_COMPONENTS = {
 
 // The companion app itself: five tabs over one trip document.
 // `installable` trips walk first-time phone visitors through adding the app
-// to their home screen; `editHref` shows organisers a way back to the editor.
+// to their home screen; `editHref` shows organizers a way back to the editor.
 export function TripShell({ data, banner, installable = false, editHref }) {
   const t = useT()
   const [activeTab, setActiveTab] = useState('home')

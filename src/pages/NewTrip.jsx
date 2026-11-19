@@ -24,8 +24,8 @@ export default function NewTrip() {
     passcode: '',
     skin: null,
   })
-  // The recognised place whose colours are on offer, and the one (if any)
-  // the organiser has already said no to.
+  // The recognized place whose colors are on offer, and the one (if any)
+  // the organizer has already said no to.
   const [offer, setOffer] = useState(null)
   const [declined, setDeclined] = useState('')
   const [greeted, setGreeted] = useState('')
@@ -39,10 +39,10 @@ export default function NewTrip() {
 
   // Picking from the list sets flag, currency and language. Free typing does
   // too when it names a place we know; otherwise the flag is cleared and the
-  // currency and language are left for the organiser to choose.
-  // A newly recognised place also puts the trip in its flag's colours and
-  // says hello; a place the organiser already declined is left alone.
-  function recognise(destination, match) {
+  // currency and language are left for the organizer to choose.
+  // A newly recognized place also puts the trip in its flag's colors and
+  // says hello; a place the organizer already declined is left alone.
+  function recognize(destination, match) {
     const wear = match && match.place !== declined
     setForm((f) => ({
       ...f,
@@ -57,8 +57,8 @@ export default function NewTrip() {
     if (!match) setOffer(null)
   }
 
-  const handleDestinationTyped = (destination) => recognise(destination, suggestLocale(destination))
-  const handleDestinationPicked = (match) => recognise(match.label, match)
+  const handleDestinationTyped = (destination) => recognize(destination, suggestLocale(destination))
+  const handleDestinationPicked = (match) => recognize(match.label, match)
 
   function revertSkin() {
     setDeclined(offer.place)

@@ -10,7 +10,7 @@ export function getDemoTrip(today = localISODate()) {
     ...demoTrip,
     trip: {
       ...demoTrip.trip,
-      // The demo wears its destination's flag colours.
+      // The demo wears its destination's flag colors.
       skin: suggestLocale(demoTrip.trip.destination)?.skin || null,
       dates: {
         start: addDays(demoTrip.trip.dates.start, shift),

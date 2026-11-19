@@ -152,9 +152,9 @@ export function normalizeTrip(input) {
         local: currencyCode(t.currency?.local, 'USD'),
       },
       language: { code: langCode, name: text(t.language?.name, 40) },
-      // Interface language for this trip's organiser and guests.
+      // Interface language for this trip's organizer and guests.
       locale: isUiLanguage(t.locale) ? t.locale : 'en',
-      // Flag-colour skin, or null for the original colours.
+      // Flag-color skin, or null for the original colors.
       skin: normalizeSkin(t.skin),
       stay: {
         name: text(stay.name, 100),

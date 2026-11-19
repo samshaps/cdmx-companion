@@ -83,7 +83,7 @@ test('only public https addresses may be fetched', async () => {
   assert.equal((await assertPublicUrl('https://example.com/rooms/1', resolvesTo('93.184.216.34'))).hostname, 'example.com')
 })
 
-test('only the organiser can look up a link', async () => {
+test('only the organizer can look up a link', async () => {
   const env = { LOCAL_STORE_PATH: path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'trips-')), 'store.json') }
   const created = await (await handleTrips(new Request('http://test/api/trips', {
     method: 'POST',

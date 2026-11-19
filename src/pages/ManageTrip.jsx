@@ -25,7 +25,7 @@ const SAVE_LABEL = {
   saving: tx('Saving…'),
 }
 
-// The organiser's page for one trip. Reached through the private edit link;
+// The organizer's page for one trip. Reached through the private edit link;
 // the token in the #hash (or remembered on this device) proves they may edit.
 // Every change is saved automatically a moment after typing stops.
 export default function ManageTrip({ id }) {
@@ -45,10 +45,10 @@ export default function ManageTrip({ id }) {
 
   useEffect(() => {
     if (!token) return
-    let cancelled = false
+    let canceled = false
     fetchTrip(id, { token })
       .then((res) => {
-        if (cancelled) return
+        if (canceled) return
         rememberMyTrip(id, res.doc.trip.name, token)
         latest.current = res.doc
         setDoc(res.doc)
@@ -56,12 +56,12 @@ export default function ManageTrip({ id }) {
         setStatus('ready')
       })
       .catch((error) => {
-        if (cancelled) return
+        if (canceled) return
         if (error.status === 404) forgetMyTrip(id)
         setStatus(error.status === 403 ? 'denied' : error.status === 404 ? 'notfound' : 'error')
       })
     return () => {
-      cancelled = true
+      canceled = true
       clearTimeout(timer.current)
     }
   }, [id, token])
@@ -117,7 +117,7 @@ export default function ManageTrip({ id }) {
       <Page>
         <div className="text-center mt-16">
           <div className="text-5xl">🔒</div>
-          <h1 className="font-display text-2xl font-bold text-charcoal mt-4">{t('Can’t open the organiser page')}</h1>
+          <h1 className="font-display text-2xl font-bold text-charcoal mt-4">{t('Can’t open the organizer page')}</h1>
           <p className="text-charcoal/70 mt-2">{message}</p>
           <Link to="/" className="inline-block mt-6 text-teal font-bold">{t('Go to the home page')}</Link>
         </div>

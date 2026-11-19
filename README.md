@@ -8,7 +8,7 @@ It started as a hand-built page for one family trip to Mexico City. This is the 
   <img src="docs/landing.png" width="19%" alt="Landing page" />
   <img src="docs/guest-home.png" width="19%" alt="Guest view: the stay" />
   <img src="docs/guest-schedule.png" width="19%" alt="Guest view: the schedule" />
-  <img src="docs/editor.png" width="19%" alt="Organiser's editor" />
+  <img src="docs/editor.png" width="19%" alt="Organizer's editor" />
   <img src="docs/install-guide.png" width="19%" alt="Add-to-home-screen walkthrough" />
 </p>
 
@@ -33,15 +33,15 @@ It started as a hand-built page for one family trip to Mexico City. This is the 
 
 The edit link *is* the credential: it contains a long random key, and whoever has the link can edit. The server stores only a hash of it. The browser that created a trip remembers it under "Your trips"; from any other device you need the edit link, and if it is lost there is no recovery. That trade keeps the whole thing free of sign-ups, passwords and email.
 
-Organisers can also set a **guest passcode**. Without it, anyone holding the guest link can read the trip, so set one before adding a door code.
+Organizers can also set a **guest passcode**. Without it, anyone holding the guest link can read the trip, so set one before adding a door code.
 
 Trips are **deleted automatically 30 days after their end date**.
 
 ### Languages
 
-The interface comes in English, Spanish, French, German and Portuguese. A visitor's language is taken from their browser and can be changed from the corner of the landing page; a trip then keeps its organiser's language, so guests see it that way too. The starter phrase book pairs that language with the destination's (French → Portuguese, say).
+The interface comes in English, Spanish, French, German and Portuguese. A visitor's language is taken from their browser and can be changed from the corner of the landing page; a trip then keeps its organizer's language, so guests see it that way too. The starter phrase book pairs that language with the destination's (French → Portuguese, say).
 
-To add a language, copy `shared/i18n/es.js`, translate the values, and list it in `shared/i18n/index.js`. `npm test` fails if any string in the app is missing from a catalogue.
+To add a language, copy `shared/i18n/es.js`, translate the values, and list it in `shared/i18n/index.js`. `npm test` fails if any string in the app is missing from a catalog.
 
 ## Run it locally
 
@@ -78,7 +78,7 @@ shared/
   tripSchema.js      The trip document: shape, limits, validation, defaults
 src/
   App.jsx            Five routes, no router library
-  pages/             Landing, create, organiser editor, guest view, the five tabs
+  pages/             Landing, create, organizer editor, guest view, the five tabs
   components/        Trip shell, editor sections, install walkthrough
   lib/               API client, routing, offline cache
   data/              The bundled demo trip

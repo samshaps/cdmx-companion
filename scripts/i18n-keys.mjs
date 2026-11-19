@@ -28,7 +28,7 @@ const PATTERNS = [
   new RegExp(String.raw`\bjson\(\s*4\d\d,\s*\{\s*error:\s*(?:${LITERAL})`, 'g'),
 ]
 const unescape = (raw) => raw.replace(/\\(['"\\])/g, '$1').replace(/\\n/g, '\n')
-const capitalise = (word) => word.charAt(0).toUpperCase() + word.slice(1)
+const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1)
 
 export function collectKeys() {
   const keys = new Set()
@@ -44,7 +44,7 @@ export function collectKeys() {
   }
   // Text that reaches t() through data rather than a literal.
   for (const slot of DAY_SLOTS) keys.add(slot.label)
-  for (const [category] of STARTER_PHRASES) keys.add(capitalise(category))
+  for (const [category] of STARTER_PHRASES) keys.add(capitalize(category))
   keys.add('Greetings')
   keys.add('basics') // the default phrase-group name, shown as a placeholder
   return [...keys].sort()

@@ -37,7 +37,7 @@ export function SelectField({ label, hint, value, onChange, options }) {
   )
 }
 
-// Coordinates power the Uber button and "sorted by distance". Organisers
+// Coordinates power the Uber button and "sorted by distance". Organizers
 // paste a maps link rather than typing numbers.
 export function LocationField({ lat, lng, onChange }) {
   const t = useT()

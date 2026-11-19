@@ -66,7 +66,7 @@ export function ShareSheet({ id, token, hasPasscode, onClose }) {
             emoji="🔑"
             title={t('Edit link')}
             copyLabel={t('Copy edit link')}
-            who={t('For you and co-organisers only')}
+            who={t('For you and co-organizers only')}
             explainer={t('Anyone with this link can change the trip, so share it only with people helping you plan. Keep a copy somewhere safe: it is the only way back to this page from another device.')}
             url={editUrl(id, token)}
             testId="edit-link"

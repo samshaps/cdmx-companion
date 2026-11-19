@@ -1,7 +1,7 @@
-// Colour skins. The app has three brand colours; a skin swaps them for the
-// colours of a destination's flag, and washes the page and its cards in a
+// Color skins. The app has three brand colors; a skin swaps them for the
+// colors of a destination's flag, and washes the page and its cards in a
 // pale tint of the third one so the change is obvious at a glance. Text
-// colour never changes, surfaces always stay light, and every skin is nudged
+// color never changes, surfaces always stay light, and every skin is nudged
 // darker until it is readable on them, so no flag can produce an unusable
 // screen.
 //
@@ -14,7 +14,7 @@ export const DEFAULT_SKIN = { primary: '#1A535C', accent: '#C2572B', highlight: 
 const BACKGROUND = '#FFF5E6'
 const CARD = '#F0EBE3'
 
-// Flag colours by name, so the destination table stays readable.
+// Flag colors by name, so the destination table stays readable.
 const NAMED = {
   red: '#C8102E', crimson: '#9E1B32', darkred: '#8A1116', coral: '#E8616D', maroon: '#7B1C2E',
   orange: '#E35205', saffron: '#FF9933', copper: '#B8621B', brown: '#6A4A3C', buff: '#D9B77A',
@@ -50,14 +50,14 @@ function darkenUntil(hex, against, ratio) {
 
 const mix = (hex, other, amount) => toHex(channels(hex).map((c, i) => c + (channels(other)[i] - c) * amount))
 
-// The page background and card colour a skin produces: white with a little
-// of the highlight colour stirred in (cards get more, as in the original).
+// The page background and card color a skin produces: white with a little
+// of the highlight color stirred in (cards get more, as in the original).
 export function skinSurfaces(skin) {
   if (!skin) return { background: BACKGROUND, card: CARD }
   return { background: mix('#FFFFFF', skin.highlight, 0.22), card: mix('#FFFFFF', skin.highlight, 0.36) }
 }
 
-// Makes three colours safe to use as a skin: readable on the surfaces they
+// Makes three colors safe to use as a skin: readable on the surfaces they
 // will sit on.
 export function makeSkin(primary, accent, highlight) {
   const safeHighlight = darkenUntil(highlight, '#FFFFFF', 1.8)
@@ -76,7 +76,7 @@ export function skinFromNames(names) {
 }
 
 // For skins arriving from outside (a saved trip, an import): null unless it
-// is three real colours, and re-checked for readability either way.
+// is three real colors, and re-checked for readability either way.
 export function normalizeSkin(input) {
   if (!input || ![input.primary, input.accent, input.highlight].every((c) => typeof c === 'string' && HEX.test(c))) return null
   return makeSkin(input.primary, input.accent, input.highlight)

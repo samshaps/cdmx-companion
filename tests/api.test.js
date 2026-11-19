@@ -68,7 +68,7 @@ test('a passcode hides the trip until it is supplied', async () => {
   assert.equal((await call('GET', { id, passcode: ' sardine ' })).status, 200) // forgiving of case and spaces
   assert.equal((await call('GET', { id, token: editToken })).body.hasPasscode, true)
 
-  // The organiser can remove it again.
+  // The organizer can remove it again.
   assert.equal((await call('PUT', { id, token: editToken, body: { doc, passcode: '' } })).body.hasPasscode, false)
   assert.equal((await call('GET', { id })).status, 200)
 })

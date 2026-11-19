@@ -5,7 +5,7 @@ const LocaleContext = createContext('en')
 
 // Sets the interface language for everything inside it. The landing and
 // create pages use the visitor's own language; inside a trip, the language
-// the organiser chose for that trip applies to organiser and guests alike.
+// the organizer chose for that trip applies to organizer and guests alike.
 export function LocaleProvider({ locale, children }) {
   return <LocaleContext.Provider value={isUiLanguage(locale) ? locale : 'en'}>{children}</LocaleContext.Provider>
 }

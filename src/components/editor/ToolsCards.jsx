@@ -4,7 +4,7 @@ import { getInstallPlatform } from '../../utils/platform'
 import { useT } from '../../i18n/LocaleContext'
 
 // The less-used extras at the bottom of Basics: installing the app on the
-// organiser's own phone, and backing the trip up to a file.
+// organizer's own phone, and backing the trip up to a file.
 export function ToolsCards({ id, doc, onImport, onShowInstall }) {
   const t = useT()
   const fileInput = useRef(null)

@@ -1,12 +1,12 @@
 // Interface languages. The English text in the code is the key: t('Create a
-// trip') looks that sentence up in the chosen language's catalogue and falls
+// trip') looks that sentence up in the chosen language's catalog and falls
 // back to the English itself, so a missing translation is never a blank.
 import de from './de.js'
 import es from './es.js'
 import fr from './fr.js'
 import pt from './pt.js'
 
-const CATALOGUES = { de, es, fr, pt }
+const CATALOGS = { de, es, fr, pt }
 
 export const UI_LANGUAGES = [
   { code: 'en', name: 'English' },
@@ -28,12 +28,12 @@ export function closestUiLanguage(tag) {
 
 // {name} placeholders are filled from `vars`.
 export function translate(locale, text, vars) {
-  const template = CATALOGUES[locale]?.[text] ?? text
+  const template = CATALOGS[locale]?.[text] ?? text
   return vars ? template.replace(/\{(\w+)\}/g, (whole, key) => (key in vars ? String(vars[key]) : whole)) : template
 }
 
 // For Date#toLocaleDateString and friends. English stays US-style, as before.
 export const dateLocale = (locale) => (locale && locale !== 'en' ? locale : 'en-US')
 
-// Americans think in miles; everyone else here in kilometres.
+// Americans think in miles; everyone else here in kilometers.
 export const usesMiles = (locale) => !locale || locale === 'en'

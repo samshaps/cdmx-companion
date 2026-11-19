@@ -33,7 +33,7 @@ function PasscodeGate({ trip, wrong, onSubmit }) {
       >
         <div className="text-5xl">{trip?.emoji || '🔑'}</div>
         <h1 className="font-display text-2xl font-bold text-charcoal mt-4">{trip?.name || t('This trip')}</h1>
-        <p className="text-charcoal/70 mt-2 mb-6">{t('Enter the passcode from your trip organiser.')}</p>
+        <p className="text-charcoal/70 mt-2 mb-6">{t('Enter the passcode from your trip organizer.')}</p>
         <Field label={t('Passcode')}>
           <input className={inputClass} value={passcode} onChange={(e) => setPasscode(e.target.value)} autoCapitalize="none" autoFocus />
         </Field>
@@ -51,7 +51,7 @@ export default function GuestTrip({ id }) {
   if (trip.status === 'loading') return <Page><p className="text-center text-charcoal/50 mt-20">{t('Loading trip…')}</p></Page>
   if (trip.status === 'passcode') return <PasscodeGate trip={trip.lockedTrip} wrong={trip.wrong} onSubmit={trip.submitPasscode} />
   if (trip.status === 'notfound') {
-    return <Message emoji="🧭" title={t('Trip not found')}>{t('Check the link, or ask your organiser for a new one. Trips are deleted 30 days after they end.')}</Message>
+    return <Message emoji="🧭" title={t('Trip not found')}>{t('Check the link, or ask your organizer for a new one. Trips are deleted 30 days after they end.')}</Message>
   }
   if (trip.status === 'error') {
     return <Message emoji="📡" title={t('Can’t load the trip')}>{trip.message ? t(trip.message) : t('Connect to the internet and open the link again. After the first load it works offline.')}</Message>

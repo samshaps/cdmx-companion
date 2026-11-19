@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useT } from '../../i18n/LocaleContext'
 import { dateLocale } from '../../../shared/i18n/index.js'
 
-// One pill per day. Short trips sit centred; long ones scroll sideways, with
+// One pill per day. Short trips sit centered; long ones scroll sideways, with
 // the selected day kept in view.
 export function DaySelector({ days, selectedIndex, onSelect }) {
   const selected = useRef(null)

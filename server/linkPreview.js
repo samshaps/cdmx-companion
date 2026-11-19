@@ -1,8 +1,8 @@
 // "Paste a link to your Airbnb, Vrbo or hotel": fetches that page and pulls
 // out what it publishes about the place (name, photo, sometimes the address
-// and check-in times) so the organiser does not have to retype it.
+// and check-in times) so the organizer does not have to retype it.
 //
-//   POST /api/preview?id=<trip>   { url }   (organisers only)
+//   POST /api/preview?id=<trip>   { url }   (organizers only)
 //
 // Fetching a URL a user supplies is the classic way to get a server to poke
 // at things it should not, so the target must be a public https address,
@@ -10,13 +10,13 @@
 import dns from 'node:dns/promises'
 import net from 'node:net'
 import { getStore, StoreNotConfiguredError } from './store.js'
-import { bearerToken, clientIp, isOrganiser, json } from './trips.js'
+import { bearerToken, clientIp, isOrganizer, json } from './trips.js'
 
 const MAX_BYTES = 2_000_000
 const TIMEOUT_MS = 8000
 const MAX_REDIRECTS = 4
 const PREVIEWS_PER_HOUR = 30
-const USER_AGENT = 'TripCompanion/1.0 (link preview for a trip organiser)'
+const USER_AGENT = 'TripCompanion/1.0 (link preview for a trip organizer)'
 
 export class PreviewError extends Error {}
 
@@ -192,7 +192,7 @@ export async function handlePreview(request, env = process.env, fetcher = fetchP
     if (request.method !== 'POST') return json(405, { error: 'method_not_allowed' })
     const store = getStore(env)
     const id = new URL(request.url).searchParams.get('id')
-    if (!(await isOrganiser(store, id, bearerToken(request)))) return json(403, { error: 'wrong_edit_link' })
+    if (!(await isOrganizer(store, id, bearerToken(request)))) return json(403, { error: 'wrong_edit_link' })
 
     const hour = Math.floor(Date.now() / (3600 * 1000))
     const count = await store.increment(`rl:preview:${clientIp(request)}:${hour}`, 3600)

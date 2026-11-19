@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 //   /demo            the demo trip
 //   /new             create a trip
 //   /t/:id           a trip, as guests see it
-//   /t/:id/edit      the organiser's page (edit token travels in the #hash,
+//   /t/:id/edit      the organizer's page (edit token travels in the #hash,
 //                    which browsers never send to a server)
 export function parseRoute(pathname) {
   const trip = /^\/t\/([^/]+)(\/edit)?\/?$/.exec(pathname)

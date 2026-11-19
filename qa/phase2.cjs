@@ -1,4 +1,4 @@
-// Phase 2 QA: an organiser creates a trip and gets two links; a guest on a
+// Phase 2 QA: an organizer creates a trip and gets two links; a guest on a
 // different phone opens the guest link. Also checks the access rules.
 const { startServer, createRun, joinVideos, assert, BASE_URL } = require('./lib.cjs')
 
@@ -11,17 +11,17 @@ const visible = (page, text) => page.getByText(text, { exact: false }).first().w
 const tab = (page, label) => page.getByRole('navigation').getByRole('button', { name: label })
 const ORIGINAL_TEAL = '26 83 92'
 const PORTUGAL_GREEN = '0 104 71'
-const backgroundColour = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-background').trim())
+const backgroundColor = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-background').trim())
 const ORIGINAL_CREAM = '255 245 230'
-const primaryColour = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-primary').trim())
+const primaryColor = (page) => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-primary').trim())
 const api = (id) => `${BASE_URL}/api/trips?id=${encodeURIComponent(id)}`
 
-async function organiser() {
-  const run = await createRun('phase2-a-organiser', { contextOptions: { permissions: ['clipboard-read', 'clipboard-write'] } })
+async function organizer() {
+  const run = await createRun('phase2-a-organizer', { contextOptions: { permissions: ['clipboard-read', 'clipboard-write'] } })
   const { page } = run
   const links = {}
 
-  run.story('Story 1 · Organiser creates a trip')
+  run.story('Story 1 · Organizer creates a trip')
   await run.step('Open the site and tap "Create a trip"', async () => {
     await page.goto(BASE_URL)
     await visible(page, 'Trip Companion')
@@ -41,28 +41,28 @@ async function organiser() {
     assert((await page.getByLabel('Local currency').inputValue()) === 'EUR', 'local currency should be EUR')
     assert((await page.getByLabel('Local language').inputValue()) === 'pt-PT', 'language should be Portuguese')
   })
-  await run.step('The page changes into Portugal’s flag colours and says “Olá!”', async () => {
-    await page.getByRole('status', { name: 'Trip colours changed' }).waitFor()
+  await run.step('The page changes into Portugal’s flag colors and says “Olá!”', async () => {
+    await page.getByRole('status', { name: 'Trip colors changed' }).waitFor()
     await visible(page, 'Olá!')
-    await visible(page, 'wearing the colours of Portugal’s flag')
-    assert((await primaryColour(page)) === PORTUGAL_GREEN, `primary colour was ${await primaryColour(page)}`)
-    assert((await backgroundColour(page)) !== ORIGINAL_CREAM, 'the page background should be tinted too')
+    await visible(page, 'wearing the colors of Portugal’s flag')
+    assert((await primaryColor(page)) === PORTUGAL_GREEN, `primary color was ${await primaryColor(page)}`)
+    assert((await backgroundColor(page)) !== ORIGINAL_CREAM, 'the page background should be tinted too')
   })
-  await run.step('US states work too: Texas says “Howdy!”, and “Back to the original” undoes its colours', async () => {
+  await run.step('US states work too: Texas says “Howdy!”, and “Back to the original” undoes its colors', async () => {
     await page.getByLabel('Destination').fill('Tex')
     await page.getByRole('option', { name: /Texas, USA/ }).click()
     await visible(page, 'Howdy!')
     assert((await page.getByLabel('Local currency').inputValue()) === 'USD', 'Texas should use dollars')
     await page.getByRole('button', { name: 'Back to the original' }).click()
-    assert((await primaryColour(page)) === ORIGINAL_TEAL, 'colours should revert')
-    assert((await backgroundColour(page)) === ORIGINAL_CREAM, 'the background should revert too')
+    assert((await primaryColor(page)) === ORIGINAL_TEAL, 'colors should revert')
+    assert((await backgroundColor(page)) === ORIGINAL_CREAM, 'the background should revert too')
   })
-  await run.step('Back to Lisbon, and this time keep the colours', async () => {
+  await run.step('Back to Lisbon, and this time keep the colors', async () => {
     await page.getByLabel('Destination').fill('Lisb')
     await page.getByRole('option', { name: /Lisbon, Portugal/ }).click()
     await page.getByRole('button', { name: 'Keep them' }).click()
-    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'Portugal colours should be back')
-    assert((await page.getByRole('status', { name: 'Trip colours changed' }).count()) === 0, 'popup should be gone')
+    assert((await primaryColor(page)) === PORTUGAL_GREEN, 'Portugal colors should be back')
+    assert((await page.getByRole('status', { name: 'Trip colors changed' }).count()) === 0, 'popup should be gone')
   })
   await run.step('Pick dates and set a guest passcode', async () => {
     await page.getByLabel('First day').fill(day(-1))
@@ -79,7 +79,7 @@ async function organiser() {
   await run.step('Tap Share at the bottom: guest link and edit link, each explained', async () => {
     await page.getByRole('button', { name: 'Share', exact: true }).click()
     await visible(page, 'For everyone on the trip')
-    await visible(page, 'For you and co-organisers only')
+    await visible(page, 'For you and co-organizers only')
     links.guest = (await page.getByTestId('guest-link').textContent()).trim()
     links.edit = (await page.getByTestId('edit-link').textContent()).trim()
     assert(/\/t\/lisbon-crew-[\w-]+$/.test(links.guest), `guest link was ${links.guest}`)
@@ -90,12 +90,12 @@ async function organiser() {
     assert((await page.evaluate(() => navigator.clipboard.readText())) === links.guest, 'clipboard should hold the guest link')
     await page.getByRole('dialog').getByRole('button', { name: 'Close' }).last().click()
   })
-  await run.step('Basics has a Colours switch: original and back to the flag', async () => {
-    await page.getByRole('button', { name: 'Back to the original colours' }).scrollIntoViewIfNeeded()
-    await page.getByRole('button', { name: 'Back to the original colours' }).click()
-    assert((await primaryColour(page)) === ORIGINAL_TEAL, 'editor should return to the original colours')
-    await page.getByRole('button', { name: /Use Portugal’s colours/ }).click()
-    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'editor should wear the flag colours again')
+  await run.step('Basics has a Colors switch: original and back to the flag', async () => {
+    await page.getByRole('button', { name: 'Back to the original colors' }).scrollIntoViewIfNeeded()
+    await page.getByRole('button', { name: 'Back to the original colors' }).click()
+    assert((await primaryColor(page)) === ORIGINAL_TEAL, 'editor should return to the original colors')
+    await page.getByRole('button', { name: /Use Portugal’s colors/ }).click()
+    assert((await primaryColor(page)) === PORTUGAL_GREEN, 'editor should wear the flag colors again')
     await page.getByRole('status').filter({ hasText: 'All changes saved' }).waitFor()
   })
   await run.step('Share stays at the bottom of every section', async () => {
@@ -105,13 +105,13 @@ async function organiser() {
     }
   })
 
-  run.story('Story 2 · Organiser comes back later')
+  run.story('Story 2 · Organizer comes back later')
   await run.step('Back on the home page, "Your trips" remembers the trip on this device', async () => {
     await page.goto(BASE_URL)
     await visible(page, 'Your trips')
     await page.getByRole('link', { name: /Lisbon Crew/ }).click()
   })
-  await run.step('It reopens the organiser page without needing the edit link again', async () => {
+  await run.step('It reopens the organizer page without needing the edit link again', async () => {
     await page.getByRole('heading', { name: /Lisbon Crew/ }).waitFor()
     await page.getByRole('button', { name: 'Share', exact: true }).click()
     assert((await page.getByTestId('edit-link').textContent()).trim() === links.edit, 'edit link should be unchanged')
@@ -144,7 +144,7 @@ async function guest(links) {
     await page.getByRole('button', { name: 'Open trip' }).click()
     await visible(page, 'Day 2 of 3!')
     await visible(page, 'Stay details have not been added yet')
-    assert((await primaryColour(page)) === PORTUGAL_GREEN, 'guests should see the flag colours')
+    assert((await primaryColor(page)) === PORTUGAL_GREEN, 'guests should see the flag colors')
   })
   await run.step('Schedule has one day per date, ready to be filled in', async () => {
     await tab(page, 'Schedule').click()
@@ -158,7 +158,7 @@ async function guest(links) {
   })
 
   run.story('Story 4 · Changes reach guests')
-  await run.step('Organiser saves wifi details and a dinner (via the API, editor comes in phase 3)', async () => {
+  await run.step('Organizer saves wifi details and a dinner (via the API, editor comes in phase 3)', async () => {
     const current = await (await fetch(api(id), { headers: { Authorization: `Bearer ${token}` } })).json()
     const doc = current.doc
     doc.trip.stay.wifi = { network: 'AlfamaGuest', password: 'pastel-de-nata' }
@@ -198,9 +198,9 @@ async function guest(links) {
     const fake = await fetch(api(id), { method: 'PUT', body, headers: { Authorization: 'Bearer not-the-real-token' } })
     assert(none.status === 401 && fake.status === 403, `statuses were ${none.status} and ${fake.status}`)
   })
-  await run.step('A guest who guesses the organiser page address is locked out', async () => {
+  await run.step('A guest who guesses the organizer page address is locked out', async () => {
     await page.goto(`${links.guest}/edit`)
-    await visible(page, 'Can’t open the organiser page')
+    await visible(page, 'Can’t open the organizer page')
   })
   await run.step('A mistyped trip link says so plainly', async () => {
     await page.goto(`${BASE_URL}/t/not-a-real-trip`)
@@ -221,7 +221,7 @@ async function guest(links) {
   const stop = await startServer()
   let failed = 1
   try {
-    const a = await organiser()
+    const a = await organizer()
     const b = await guest(a.links)
     failed = a.failed + b.failed
     joinVideos('phase2', [a.mp4, b.mp4])

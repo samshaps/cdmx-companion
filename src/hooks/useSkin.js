@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { DEFAULT_SKIN, skinCssVars } from '../../shared/skins'
 
-// Dresses the whole page in a skin (or the original colours for null) for
+// Dresses the whole page in a skin (or the original colors for null) for
 // as long as the calling screen is shown.
 export function useSkin(skin) {
   const key = skin ? `${skin.primary}${skin.accent}${skin.highlight}` : ''
@@ -13,5 +13,5 @@ export function useSkin(skin) {
     }
     apply(skin)
     return () => apply(null)
-  }, [key]) // eslint-disable-line react-hooks/exhaustive-deps -- key captures the skin's colours
+  }, [key]) // eslint-disable-line react-hooks/exhaustive-deps -- key captures the skin's colors
 }
