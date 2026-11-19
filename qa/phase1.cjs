@@ -33,6 +33,8 @@ async function demoTrip() {
     await visible(page, 'Day 2 of 5!')
     await visible(page, 'Calle Ejemplo 123')
     assert((await page.title()) === 'Amigos en CDMX', 'page title should be the trip name')
+    const primary = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--c-primary').trim())
+    assert(primary === '0 104 71', `demo should wear Mexico’s green, got ${primary}`)
   })
   await run.step('Tap Copy on the wifi card: password lands on the clipboard', async () => {
     await page.getByRole('button', { name: 'Copy' }).click()
