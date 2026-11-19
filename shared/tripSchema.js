@@ -1,5 +1,6 @@
 // The trip document: its shape, limits and defaults. Shared by the browser
 // (forms) and the server (validation), so both agree on what a trip is.
+import { closestUiLanguage, isUiLanguage, translate } from './i18n/index.js'
 import { starterPhrases } from './phrasePacks.js'
 import { normalizeSkin } from './skins.js'
 
@@ -151,6 +152,8 @@ export function normalizeTrip(input) {
         local: currencyCode(t.currency?.local, 'USD'),
       },
       language: { code: langCode, name: text(t.language?.name, 40) },
+      // Interface language for this trip's organiser and guests.
+      locale: isUiLanguage(t.locale) ? t.locale : 'en',
       // Flag-colour skin, or null for the original colours.
       skin: normalizeSkin(t.skin),
       stay: {
@@ -210,19 +213,24 @@ export function normalizeTrip(input) {
   return doc
 }
 
-const defaultDayTitle = (i, count) => (i === 0 ? 'Arrival' : i === count - 1 ? 'Departure' : `Day ${i + 1}`)
+function defaultDayTitle(i, count, locale) {
+  if (i === 0) return translate(locale, 'Arrival')
+  if (i === count - 1) return translate(locale, 'Departure')
+  return translate(locale, 'Day {n}', { n: i + 1 })
+}
 
 // Fits the itinerary to a (possibly changed) date range: days already
 // planned are kept, new dates get an empty day, dates outside the range go.
-export function reconcileItinerary(itinerary, start, end) {
+export function reconcileItinerary(itinerary, start, end, locale = 'en') {
   const dates = datesBetween(start, end).slice(0, LIMITS.tripDays)
   return dates.map((date, i) =>
-    itinerary.find((day) => day.date === date) || { date, dayTitle: defaultDayTitle(i, dates.length), events: [] })
+    itinerary.find((day) => day.date === date) || { date, dayTitle: defaultDayTitle(i, dates.length, locale), events: [] })
 }
 
 // A new trip: the basics from the create form, one empty day per date, and
 // a starter phrase book when we have one for the language.
-export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode, skin }) {
+export function createBlankTrip({ name, emoji, destination, start, end, homeCurrency, localCurrency, languageCode, skin, locale }) {
+  const uiLocale = closestUiLanguage(locale)
   const language = LANGUAGES.find((l) => l.code === languageCode) || { code: languageCode, name: '' }
   const dates = ISO_DATE.test(start || '') && ISO_DATE.test(end || '') && end >= start ? datesBetween(start, end) : []
   return normalizeTrip({
@@ -233,11 +241,12 @@ export function createBlankTrip({ name, emoji, destination, start, end, homeCurr
       dates: { start, end },
       currency: { home: homeCurrency, local: localCurrency },
       language,
+      locale: uiLocale,
       skin,
       stay: {},
     },
-    itinerary: dates.length ? reconcileItinerary([], start, end) : [],
+    itinerary: dates.length ? reconcileItinerary([], start, end, uiLocale) : [],
     places: [],
-    phrases: starterPhrases(language.code),
+    phrases: starterPhrases(language.code, uiLocale),
   })
 }

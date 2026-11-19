@@ -129,3 +129,14 @@ test('skins are stored only as three real colours', () => {
   const pale = createBlankTrip({ ...basics, skin: { primary: '#FFFF00', accent: '#FFFFFF', highlight: '#FFFFFF' } }).trip.skin
   assert.notEqual(pale.primary, '#FFFF00')
 })
+
+test('a trip remembers its interface language and is set up in it', () => {
+  const doc = createBlankTrip({ ...basics, locale: 'fr-CA' })
+  assert.equal(doc.trip.locale, 'fr')
+  assert.equal(createBlankTrip(basics).trip.locale, 'en')
+  assert.equal(createBlankTrip({ ...basics, locale: 'klingon' }).trip.locale, 'en')
+  // The phrase book pairs the traveller's language with the destination's.
+  assert.deepEqual([doc.phrases[1].english, doc.phrases[1].translation], ['Merci', 'Obrigado / Obrigada'])
+  // …and there is nothing to learn when they are the same language.
+  assert.deepEqual(createBlankTrip({ ...basics, languageCode: 'fr-FR', locale: 'fr' }).phrases, [])
+})

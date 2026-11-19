@@ -359,12 +359,18 @@ export function hasStarterPhrases(languageCode) {
   return Boolean(PACKS[(languageCode || '').split('-')[0]])
 }
 
-export function starterPhrases(languageCode) {
-  const pack = PACKS[(languageCode || '').split('-')[0]]
-  if (!pack) return []
+// The phrase book for a trip to somewhere that speaks `languageCode`, written
+// for a traveller who reads `baseLocale`. Every pack translates the same
+// phrases, so any two can be paired. (The field is still called `english`
+// in the trip document; it holds the traveller's own language.)
+export function starterPhrases(languageCode, baseLocale = 'en') {
+  const target = (languageCode || '').split('-')[0]
+  const base = (baseLocale || 'en').split('-')[0]
+  const pack = PACKS[target]
+  if (!pack || target === base) return [] // nothing to learn in your own language
   const overrides = REGIONAL[languageCode] || {}
   return STARTER_PHRASES.map(([category, english], i) => {
     const [translation, phonetic] = overrides[i] || pack[i]
-    return { category, english, translation, phonetic }
+    return { category, english: PACKS[base]?.[i][0] || english, translation, phonetic }
   })
 }
